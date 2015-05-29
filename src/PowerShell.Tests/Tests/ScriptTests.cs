@@ -44,7 +44,7 @@ namespace Cake.Powershell.Tests
             Collection<PSObject> results = CakeHelper.CreatePowershellRunner().Start("Get-Service", 
                 new PowershellSettings()
                 {
-                    ComputerName = "srv-test"
+                    ComputerName = "localhost"
                 });
 
             Assert.True((results != null) && (results.Count > 0), "Check Rights");

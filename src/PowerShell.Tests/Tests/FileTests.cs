@@ -44,11 +44,10 @@ namespace Cake.Powershell.Tests
         [Fact]
         public void File_Remote()
         {
-            Collection<PSObject> results = CakeHelper.CreatePowershellRunner().Start(new FilePath(@"C:\Test.ps1"), 
+            Collection<PSObject> results = CakeHelper.CreatePowershellRunner().Start(new FilePath("../../Scripts/Test.ps1"), 
                 new PowershellSettings()
                 {
-                    WorkingDirectory = @"C:\",
-                    ComputerName = "srv-web-mon"
+                    ComputerName = "localhost"
                 });
 
             Assert.True((results != null) && (results.Count > 0), "Check Rights");

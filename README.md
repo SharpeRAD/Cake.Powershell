@@ -1,4 +1,5 @@
 # Cake.Powershell
+
 Cake Addon that extends Cake with Powershell commands
 [![Build status](https://ci.appveyor.com/api/projects/status/5g0u2757tix9se6f?svg=true)](https://ci.appveyor.com/project/PhillipSharpe/cake-powershell)
 
@@ -46,3 +47,9 @@ Task("Powershell-Download")
 
 RunTarget("Powershell-Script");
 ```
+
+
+
+## TroubleShooting
+
+A few pointers for correctly enabling powershell scripts can be found [here](https://github.com/SharpeRAD/Cake.Powershell/blob/master/TroubleShooting.md)
