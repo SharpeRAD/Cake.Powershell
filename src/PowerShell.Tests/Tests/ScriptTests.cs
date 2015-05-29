@@ -38,16 +38,20 @@ namespace Cake.Powershell.Tests
             Assert.True((results != null) && (results.Count > 0), "Check Rights");
         }
 
+
+
+        /*
         [Fact]
         public void Script_Remote()
         {
             Collection<PSObject> results = CakeHelper.CreatePowershellRunner().Start("Get-Service", 
                 new PowershellSettings()
                 {
-                    ComputerName = "localhost"
+                    ComputerName = "remote-machine"
                 });
 
             Assert.True((results != null) && (results.Count > 0), "Check Rights");
         }
+        */
     }
 }
