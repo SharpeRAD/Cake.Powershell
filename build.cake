@@ -103,7 +103,8 @@ Task("Patch-Assembly-Info")
 {
     var file = "./src/SolutionInfo.cs";
 
-    CreateAssemblyInfo(file, new AssemblyInfoSettings {
+    CreateAssemblyInfo(file, new AssemblyInfoSettings 
+	{
 		Product = appName,
         Version = version,
         FileVersion = version,
@@ -134,7 +135,8 @@ Task("Run-Unit-Tests")
     .IsDependentOn("Build")
     .Does(() =>
 {
-    XUnit2("./src/**/bin/" + configuration + "/*.Tests.dll", new XUnit2Settings {
+    XUnit2("./src/**/bin/" + configuration + "/*.Tests.dll", new XUnit2Settings 
+	{
         OutputDirectory = testResultsDir,
         XmlReportV1 = true
     });
@@ -171,7 +173,8 @@ Task("Create-NuGet-Packages")
     .IsDependentOn("Zip-Files")
     .Does(() =>
 {
-    NuGetPack("./nuspec/Cake.Powershell.nuspec", new NuGetPackSettings {
+    NuGetPack("./nuspec/Cake.Powershell.nuspec", new NuGetPackSettings 
+	{
         Version = semVersion,
         ReleaseNotes = releaseNotes.Notes.ToArray(),
         BasePath = binDir,
@@ -201,24 +204,25 @@ Task("Upload-AppVeyor-Artifacts")
 
 
 
-Task("Publish-MyGet")
+Task("Publish-Nuget")
 	.IsDependentOn("Create-NuGet-Packages")
     .WithCriteria(() => !local)
     .WithCriteria(() => !isPullRequest) 
     .Does(() =>
 {
     // Resolve the API key.
-    var apiKey = EnvironmentVariable("MYGET_API_KEY");
-    if(string.IsNullOrEmpty(apiKey)) {
-        throw new InvalidOperationException("Could not resolve MyGet API key.");
+    var apiKey = EnvironmentVariable("NUGET_API_KEY");
+    if(string.IsNullOrEmpty(apiKey)) 
+	{
+        throw new InvalidOperationException("Could not resolve Nuget API key.");
     }
 
     // Get the path to the package.
     var package = nugetRoot + "/Cake.Powershell." + semVersion + ".nupkg";
 
     // Push the package.
-    NuGetPush(package, new NuGetPushSettings {
-        Source = "https://www.myget.org/F/cake.powershell/api/v2/package",
+    NuGetPush(package, new NuGetPushSettings 
+	{
         ApiKey = apiKey
     }); 
 });
@@ -230,7 +234,7 @@ Task("Slack")
     .Does(() =>
 {
 	var token = EnvironmentVariable("SLACK_TOKEN");
-	var channel = "#systems";
+	var channel = "#code";
 	var text = "Finished building version " + semVersion + " of " + appName;
 	
 	// Post the message.
@@ -267,7 +271,7 @@ Task("Default")
 Task("AppVeyor")
     .IsDependentOn("Update-AppVeyor-Build-Number")
     .IsDependentOn("Upload-AppVeyor-Artifacts")
-    .IsDependentOn("Publish-MyGet");
+    .IsDependentOn("Publish-Nuget");
 
 
 
