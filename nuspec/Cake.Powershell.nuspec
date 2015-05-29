@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <metadata xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <id>Cake.Powershell</id>
+    <version>0.0.0</version>
+    <authors>Phillip Sharpe</authors>
+    <owners>Phillip Sharpe</owners>
+    <description>Cake Build Powershell addin.</description>
+    <summary>Powershell addin for cake build.</summary>
+    <licenseUrl>https://github.com/SharpeRAD/Cake.Powershell/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/SharpeRAD/Cake.Powershell</projectUrl>
+    <iconUrl>https://raw.githubusercontent.com/cake-build/graphics/master/png/cake-medium.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <copyright>Copyright (c) Phillip Sharpe 2015</copyright>
+    <releaseNotes>Initial Release</releaseNotes>
+    <tags>Cake Script Build Powershell</tags>
+  </metadata>
+  <files>
+    <file src="System.Management.Automation.dll" target="lib/net45" />
+    <file src="Cake.Powershell.dll" target="lib/net45" />
+    <file src="LICENSE" />
+  </files>
+</package>
