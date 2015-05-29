@@ -28,6 +28,10 @@ namespace Cake.Powershell
             {
                 throw new ArgumentNullException("settings");
             }
+            if (arguments == null)
+            {
+                throw new ArgumentNullException("arguments");
+            }
 
             if (settings.Arguments == null)
             {

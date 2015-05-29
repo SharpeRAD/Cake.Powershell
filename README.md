@@ -23,14 +23,18 @@ Task("Powershell-Script")
     .Description("Run an example powershell call with parameters")
     .Does(() =>
 {
-    PowershellScript("Write-Host", new PowershellSettings().Append("Testing..."));
+    PowershellScript("Write-Host", new PowershellSettings().WithArguments(args => { args.Append("Testing..."); });
 });
 
 Task("Powershell-File")
     .Description("Run an example powershell script file with parameters")
     .Does(() =>
 {
-    PowershellFile("../Scripts/Install.ps1", new PowershellSettings().AppendNamed("Username", "admin").AppendNamed("Password", "pass1"));
+    PowershellFile("../Scripts/Install.ps1", new PowershellSettings().WithArguments(args => 
+	{ 
+		args.Append("Username", "admin")
+			.Append("Password", "pass1");
+	}
 });
 
 Task("Powershell-Download")
