@@ -2537,45 +2537,30 @@
             and functionality related to tooling.
             </summary>
         </member>
-        <member name="T:Cake.Core.Scripting.CodeGen.MethodAliasGenerator">
-            <summary>
-            Responsible for generating script method aliases.
-            </summary>
-        </member>
-        <member name="M:Cake.Core.Scripting.CodeGen.MethodAliasGenerator.Generate(System.Reflection.MethodInfo)">
-            <summary>
-            Generates a script method alias from the specified method.
-            The provided method must be an extension method for <see cref="T:Cake.Core.ICakeContext"/>
-            and it must be decorated with the <see cref="T:Cake.Core.Annotations.CakeMethodAliasAttribute"/>.
-            </summary>
-            <param name="method">The method to generate the code for.</param>
-            <returns>The generated code.</returns>
-        </member>
-        <member name="T:Cake.Core.Scripting.CodeGen.PropertyAliasGenerator">
-            <summary>
-            Responsible for generating script property aliases.
-            </summary>
-        </member>
-        <member name="M:Cake.Core.Scripting.CodeGen.PropertyAliasGenerator.Generate(System.Reflection.MethodInfo)">
-            <summary>
-            Generates a script property alias from the specified method.
-            The provided method must be an extension method for <see cref="T:Cake.Core.ICakeContext"/>
-            and it must be decorated with the <see cref="T:Cake.Core.Annotations.CakePropertyAliasAttribute"/>.
-            </summary>
-            <param name="method">The method to generate the code for.</param>
-            <returns>The generated code.</returns>
-        </member>
-        <member name="T:Cake.Core.Scripting.IScriptAliasGenerator">
+        <member name="T:Cake.Core.Scripting.IScriptAliasFinder">
             <summary>
             Represents a script alias generator.
             </summary>
         </member>
-        <member name="M:Cake.Core.Scripting.IScriptAliasGenerator.GenerateScriptAliases(Cake.Core.Scripting.ScriptProcessorContext,System.Collections.Generic.IEnumerable{System.Reflection.Assembly})">
+        <member name="M:Cake.Core.Scripting.IScriptAliasFinder.FindAliases(System.Collections.Generic.IEnumerable{System.Reflection.Assembly})">
             <summary>
-            Generates script aliases and adds them to the specified session.
+            Finds script aliases in the provided assemblies.
             </summary>
-            <param name="context">The context.</param>
             <param name="assemblies">The assemblies to find script aliases in.</param>
+            <returns>The script aliases that were found.</returns>
+        </member>
+        <member name="T:Cake.Core.Scripting.IScriptEngine">
+            <summary>
+            Represents a script engine.
+            </summary>
+        </member>
+        <member name="M:Cake.Core.Scripting.IScriptEngine.CreateSession(Cake.Core.Scripting.IScriptHost,System.Collections.Generic.IDictionary{System.String,System.String})">
+            <summary>
+            Creates a new script session.
+            </summary>
+            <param name="host">The host.</param>
+            <param name="arguments">The script arguments.</param>
+            <returns>A new script session.</returns>
         </member>
         <member name="T:Cake.Core.Scripting.IScriptHost">
             <summary>
@@ -2644,7 +2629,7 @@
             Runs the script using the specified script host.
             </summary>
             <param name="host">The script host.</param>
-            <param name="script">The script.</param>
+            <param name="scriptPath">The script path.</param>
             <param name="arguments">The arguments.</param>
         </member>
         <member name="T:Cake.Core.Scripting.IScriptSession">
@@ -2652,7 +2637,7 @@
             Represents a script session.
             </summary>
         </member>
-        <member name="M:Cake.Core.Scripting.IScriptSession.AddReferencePath(Cake.Core.IO.FilePath)">
+        <member name="M:Cake.Core.Scripting.IScriptSession.AddReference(Cake.Core.IO.FilePath)">
             <summary>
             Adds a reference path to the session.
             </summary>
@@ -2670,24 +2655,11 @@
             </summary>
             <param name="namespace">The namespace to import.</param>
         </member>
-        <member name="M:Cake.Core.Scripting.IScriptSession.Execute(System.String)">
+        <member name="M:Cake.Core.Scripting.IScriptSession.Execute(Cake.Core.Scripting.Script)">
             <summary>
-            Executes the specified script code.
+            Executes the specified script.
             </summary>
-            <param name="code">The script code to execute.</param>
-        </member>
-        <member name="T:Cake.Core.Scripting.IScriptSessionFactory">
-            <summary>
-            Represents a script session factory.
-            </summary>
-        </member>
-        <member name="M:Cake.Core.Scripting.IScriptSessionFactory.CreateSession(Cake.Core.Scripting.IScriptHost,System.Collections.Generic.IDictionary{System.String,System.String})">
-            <summary>
-            Creates a new script session.
-            </summary>
-            <param name="host">The host.</param>
-            <param name="arguments">The script arguments.</param>
-            <returns>A new script session.</returns>
+            <param name="script">The script to execute.</param>
         </member>
         <member name="T:Cake.Core.Scripting.LineProcessor">
             <summary>
@@ -2825,101 +2797,6 @@
               <c>true</c> if the processor handled the line; otherwise <c>false</c>.
             </returns>
         </member>
-        <member name="T:Cake.Core.Scripting.ScriptProcessor">
-            <summary>
-            Responsible for processing script files.
-            </summary>
-        </member>
-        <member name="M:Cake.Core.Scripting.ScriptProcessor.#ctor(Cake.Core.IO.IFileSystem,Cake.Core.ICakeEnvironment,Cake.Core.Diagnostics.ICakeLog,Cake.Core.IO.NuGet.INuGetToolResolver)">
-            <summary>
-            Initializes a new instance of the <see cref="T:Cake.Core.Scripting.ScriptProcessor"/> class.
-            </summary>
-            <param name="fileSystem">The file system.</param>
-            <param name="environment">The environment.</param>
-            <param name="log">The log.</param>
-            <param name="nugetToolResolver">Nuget tool resolver</param>
-        </member>
-        <member name="M:Cake.Core.Scripting.ScriptProcessor.Process(Cake.Core.IO.FilePath,Cake.Core.Scripting.ScriptProcessorContext)">
-            <summary>
-            Processes the specified script.
-            </summary>
-            <param name="path">The script path.</param>
-            <param name="context">The context.</param>
-        </member>
-        <member name="T:Cake.Core.Scripting.ScriptProcessorContext">
-            <summary>
-            Acts as a context, keeping track of loaded scripts,
-            references and namespaces to add and script content.
-            </summary>
-        </member>
-        <member name="M:Cake.Core.Scripting.ScriptProcessorContext.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:Cake.Core.Scripting.ScriptProcessorContext"/> class.
-            </summary>
-        </member>
-        <member name="M:Cake.Core.Scripting.ScriptProcessorContext.HasScriptBeenProcessed(System.String)">
-            <summary>
-            Determines whether the specified script has been processed.
-            </summary>
-            <param name="script">The script.</param>
-            <returns><c>true</c> if the script has been processed; else <c>false</c>.</returns>
-        </member>
-        <member name="M:Cake.Core.Scripting.ScriptProcessorContext.MarkScriptAsProcessed(System.String)">
-            <summary>
-            Marks the script as processed.
-            </summary>
-            <param name="script">The script to mark as processed.</param>
-        </member>
-        <member name="M:Cake.Core.Scripting.ScriptProcessorContext.AddReference(System.String)">
-            <summary>
-            Adds an assembly reference to be loaded later.
-            </summary>
-            <param name="reference">The assembly reference.</param>
-        </member>
-        <member name="M:Cake.Core.Scripting.ScriptProcessorContext.AddNamespace(System.String)">
-            <summary>
-            Adds a namespace to be loaded later.
-            </summary>
-            <param name="namespace">The namespace.</param>
-        </member>
-        <member name="M:Cake.Core.Scripting.ScriptProcessorContext.AddScriptAliasCode(System.String)">
-            <summary>
-            Adds the code for a script alias.
-            </summary>
-            <param name="code">The code to add.</param>
-        </member>
-        <member name="M:Cake.Core.Scripting.ScriptProcessorContext.AppendScriptLine(System.String)">
-            <summary>
-            Appends a line to the script.
-            </summary>
-            <param name="line">The line to add.</param>
-        </member>
-        <member name="M:Cake.Core.Scripting.ScriptProcessorContext.GetScriptCode">
-            <summary>
-            Gets the script code.
-            </summary>
-            <returns>The script code.</returns>
-        </member>
-        <member name="P:Cake.Core.Scripting.ScriptProcessorContext.References">
-            <summary>
-            Gets the script's assembly references 
-            referenced via the <c>#r</c> directive.
-            </summary>
-            <value>The references.</value>
-        </member>
-        <member name="P:Cake.Core.Scripting.ScriptProcessorContext.Namespaces">
-            <summary>
-            Gets the script's namespaces imported
-            via the <c>using</c> statement.
-            </summary>
-            <value>The namespaces.</value>
-        </member>
-        <member name="P:Cake.Core.Scripting.ScriptProcessorContext.ProcessedScripts">
-            <summary>
-            Gets the scripts that has been processed so far.
-            </summary>
-            <value>The processed scripts.</value>
-        </member>
         <member name="T:Cake.Core.Scripting.Processors.UsingStatementProcessor">
             <summary>
             Processor for using statements.
@@ -2943,35 +2820,166 @@
               <c>true</c> if the processor handled the line; otherwise <c>false</c>.
             </returns>
         </member>
+        <member name="T:Cake.Core.IO.ProcessArgumentBuilder">
+            <summary>
+            Utility for building process arguments.
+            </summary>
+        </member>
+        <member name="M:Cake.Core.IO.ProcessArgumentBuilder.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Cake.Core.IO.ProcessArgumentBuilder"/> class.
+            </summary>
+        </member>
+        <member name="M:Cake.Core.IO.ProcessArgumentBuilder.Append(Cake.Core.IO.IProcessArgument)">
+            <summary>
+            Appends an argument.
+            </summary>
+            <param name="argument">The argument.</param>
+        </member>
+        <member name="M:Cake.Core.IO.ProcessArgumentBuilder.Render">
+            <summary>
+            Renders the arguments as a <see cref="T:System.String"/>.
+            Sensitive information will be included.
+            </summary>
+            <returns>A string representation of the arguments.</returns>
+        </member>
+        <member name="M:Cake.Core.IO.ProcessArgumentBuilder.RenderSafe">
+            <summary>
+            Renders the arguments as a <see cref="T:System.String"/>.
+            Sensitive information will be redacted.
+            </summary>
+            <returns>A safe string representation of the arguments.</returns>
+        </member>
+        <member name="M:Cake.Core.IO.ProcessArgumentBuilder.FilterUnsafe(System.String)">
+            <summary>
+            Tries to filer any unsafe arguments from string
+            </summary>
+            <param name="source">unsafe source string.</param>
+            <returns>Filtered string.</returns>
+        </member>
+        <member name="M:Cake.Core.IO.ProcessArgumentBuilder.op_Implicit(System.String)~Cake.Core.IO.ProcessArgumentBuilder">
+            <summary>
+            Performs an implicit conversion from <see cref="T:System.String"/> to <see cref="T:Cake.Core.IO.ProcessArgumentBuilder"/>.
+            </summary>
+            <param name="value">The text value to convert.</param>
+            <returns>A <see cref="T:Cake.Core.IO.FilePath"/>.</returns>
+        </member>
+        <member name="M:Cake.Core.IO.ProcessArgumentBuilder.FromString(System.String)">
+            <summary>
+            Performs a conversion from <see cref="T:System.String"/> to <see cref="T:Cake.Core.IO.ProcessArgumentBuilder"/>.
+            </summary>
+            <param name="value">The text value to convert.</param>
+            <returns>A <see cref="T:Cake.Core.IO.FilePath"/>.</returns>
+        </member>
+        <member name="T:Cake.Core.Scripting.Script">
+            <summary>
+            Represents a script.
+            </summary>
+        </member>
+        <member name="M:Cake.Core.Scripting.Script.#ctor(System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{Cake.Core.Scripting.ScriptAlias})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Cake.Core.Scripting.Script"/> class.
+            </summary>
+            <param name="namespaces">The namespaces.</param>
+            <param name="lines">The scrip lines.</param>
+            <param name="aliases">The script aliases.</param>
+        </member>
+        <member name="P:Cake.Core.Scripting.Script.Namespaces">
+            <summary>
+            Gets the namespaces imported via the <c>using</c> statement.
+            </summary>
+            <value>The namespaces.</value>
+        </member>
+        <member name="P:Cake.Core.Scripting.Script.Lines">
+            <summary>
+            Gets the script lines.
+            </summary>
+            <value>
+            The lines.
+            </value>
+        </member>
+        <member name="P:Cake.Core.Scripting.Script.Aliases">
+            <summary>
+            Gets the aliases.
+            </summary>
+            <value>The aliases.</value>
+        </member>
+        <member name="T:Cake.Core.Scripting.ScriptAlias">
+            <summary>
+            Represents a script alias.
+            </summary>
+        </member>
+        <member name="M:Cake.Core.Scripting.ScriptAlias.#ctor(System.Reflection.MethodInfo,Cake.Core.Scripting.ScriptAliasType,System.Collections.Generic.ISet{System.String})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Cake.Core.Scripting.ScriptAlias"/> class.
+            </summary>
+            <param name="method">The method associated with the alias.</param>
+            <param name="type">The alias type.</param>
+            <param name="namespaces">The namespaces that the alias need to be imported.</param>
+        </member>
+        <member name="P:Cake.Core.Scripting.ScriptAlias.Name">
+            <summary>
+            Gets the name of the alias.
+            </summary>
+            <value>The name.</value>
+        </member>
+        <member name="P:Cake.Core.Scripting.ScriptAlias.Method">
+            <summary>
+            Gets the method associated with the alias.
+            </summary>
+            <value>The method associated with the alias.</value>
+        </member>
+        <member name="P:Cake.Core.Scripting.ScriptAlias.Type">
+            <summary>
+            Gets the alias type.
+            </summary>
+            <value>The alias type.</value>
+        </member>
+        <member name="P:Cake.Core.Scripting.ScriptAlias.Namespaces">
+            <summary>
+            Gets all namespaces that the alias need to be imported.
+            </summary>
+            <value>
+            The namespaces that the alias need to be imported.
+            </value>
+        </member>
         <member name="T:Cake.Core.Scripting.ScriptAliasFinder">
             <summary>
-            Responsible for finding aliases in assemblies.
+            The script alias finder.
             </summary>
         </member>
-        <member name="M:Cake.Core.Scripting.ScriptAliasFinder.FindAliases(System.Collections.Generic.IEnumerable{System.Reflection.Assembly})">
+        <member name="M:Cake.Core.Scripting.ScriptAliasFinder.#ctor(Cake.Core.Diagnostics.ICakeLog)">
             <summary>
-            Gets all alias extension methods in the list of assemblies.
-            </summary>
-            <param name="assemblies">The assemblies.</param>
-            <returns>A list of methods.</returns>
-        </member>
-        <member name="T:Cake.Core.Scripting.ScriptAliasGenerator">
-            <summary>
-            The script alias generator.
-            </summary>
-        </member>
-        <member name="M:Cake.Core.Scripting.ScriptAliasGenerator.#ctor(Cake.Core.Diagnostics.ICakeLog)">
-            <summary>
-            Initializes a new instance of the <see cref="T:Cake.Core.Scripting.ScriptAliasGenerator"/> class.
+            Initializes a new instance of the <see cref="T:Cake.Core.Scripting.ScriptAliasFinder"/> class.
             </summary>
             <param name="log">The log.</param>
         </member>
-        <member name="M:Cake.Core.Scripting.ScriptAliasGenerator.GenerateScriptAliases(Cake.Core.Scripting.ScriptProcessorContext,System.Collections.Generic.IEnumerable{System.Reflection.Assembly})">
+        <member name="M:Cake.Core.Scripting.ScriptAliasFinder.FindAliases(System.Collections.Generic.IEnumerable{System.Reflection.Assembly})">
             <summary>
-            Generates script aliases and adds them to the specified session.
+            Finds script aliases in the provided assemblies.
             </summary>
-            <param name="context">The script context to add generated code to.</param>
             <param name="assemblies">The assemblies to find script aliases in.</param>
+            <returns>The script aliases that were found.</returns>
+        </member>
+        <member name="T:Cake.Core.Scripting.ScriptAliasType">
+            <summary>
+            Represents a script alias type.
+            </summary>
+        </member>
+        <member name="F:Cake.Core.Scripting.ScriptAliasType.Unknown">
+            <summary>
+            Represents an unknown script alias type.
+            </summary>
+        </member>
+        <member name="F:Cake.Core.Scripting.ScriptAliasType.Method">
+            <summary>
+            Represents a script alias method.
+            </summary>
+        </member>
+        <member name="F:Cake.Core.Scripting.ScriptAliasType.Property">
+            <summary>
+            Represents a script alias property.
+            </summary>
         </member>
         <member name="T:Cake.Core.Scripting.ScriptHost">
             <summary>
@@ -3031,68 +3039,120 @@
             </summary>
             <value>The registered tasks.</value>
         </member>
-        <member name="T:Cake.Core.IO.ProcessArgumentBuilder">
+        <member name="T:Cake.Core.Scripting.ScriptProcessor">
             <summary>
-            Utility for building process arguments.
+            Responsible for processing script files.
             </summary>
         </member>
-        <member name="M:Cake.Core.IO.ProcessArgumentBuilder.#ctor">
+        <member name="M:Cake.Core.Scripting.ScriptProcessor.#ctor(Cake.Core.IO.IFileSystem,Cake.Core.ICakeEnvironment,Cake.Core.Diagnostics.ICakeLog,Cake.Core.IO.NuGet.INuGetToolResolver)">
             <summary>
-            Initializes a new instance of the <see cref="T:Cake.Core.IO.ProcessArgumentBuilder"/> class.
+            Initializes a new instance of the <see cref="T:Cake.Core.Scripting.ScriptProcessor"/> class.
+            </summary>
+            <param name="fileSystem">The file system.</param>
+            <param name="environment">The environment.</param>
+            <param name="log">The log.</param>
+            <param name="nugetToolResolver">Nuget tool resolver</param>
+        </member>
+        <member name="M:Cake.Core.Scripting.ScriptProcessor.Process(Cake.Core.IO.FilePath,Cake.Core.Scripting.ScriptProcessorContext)">
+            <summary>
+            Processes the specified script.
+            </summary>
+            <param name="path">The script path.</param>
+            <param name="context">The context.</param>
+        </member>
+        <member name="T:Cake.Core.Scripting.ScriptProcessorContext">
+            <summary>
+            Acts as a context, keeping track of loaded scripts,
+            references and namespaces to add and script content.
             </summary>
         </member>
-        <member name="M:Cake.Core.IO.ProcessArgumentBuilder.Append(Cake.Core.IO.IProcessArgument)">
+        <member name="M:Cake.Core.Scripting.ScriptProcessorContext.#ctor">
             <summary>
-            Appends an argument.
+            Initializes a new instance of the <see cref="T:Cake.Core.Scripting.ScriptProcessorContext"/> class.
             </summary>
-            <param name="argument">The argument.</param>
         </member>
-        <member name="M:Cake.Core.IO.ProcessArgumentBuilder.Render">
+        <member name="M:Cake.Core.Scripting.ScriptProcessorContext.HasScriptBeenProcessed(System.String)">
             <summary>
-            Renders the arguments as a <see cref="T:System.String"/>.
-            Sensitive information will be included.
+            Determines whether the specified script has been processed.
             </summary>
-            <returns>A string representation of the arguments.</returns>
+            <param name="script">The script.</param>
+            <returns><c>true</c> if the script has been processed; else <c>false</c>.</returns>
         </member>
-        <member name="M:Cake.Core.IO.ProcessArgumentBuilder.RenderSafe">
+        <member name="M:Cake.Core.Scripting.ScriptProcessorContext.MarkScriptAsProcessed(System.String)">
             <summary>
-            Renders the arguments as a <see cref="T:System.String"/>.
-            Sensitive information will be redacted.
+            Marks the script as processed.
             </summary>
-            <returns>A safe string representation of the arguments.</returns>
+            <param name="script">The script to mark as processed.</param>
         </member>
-        <member name="M:Cake.Core.IO.ProcessArgumentBuilder.FilterUnsafe(System.String)">
+        <member name="M:Cake.Core.Scripting.ScriptProcessorContext.AddReference(System.String)">
             <summary>
-            Tries to filer any unsafe arguments from string
+            Adds an assembly reference to be loaded later.
             </summary>
-            <param name="source">unsafe source string.</param>
-            <returns>Filtered string.</returns>
+            <param name="reference">The assembly reference.</param>
         </member>
-        <member name="M:Cake.Core.IO.ProcessArgumentBuilder.op_Implicit(System.String)~Cake.Core.IO.ProcessArgumentBuilder">
+        <member name="M:Cake.Core.Scripting.ScriptProcessorContext.AddNamespace(System.String)">
             <summary>
-            Performs an implicit conversion from <see cref="T:System.String"/> to <see cref="T:Cake.Core.IO.ProcessArgumentBuilder"/>.
+            Adds a namespace to be loaded later.
             </summary>
-            <param name="value">The text value to convert.</param>
-            <returns>A <see cref="T:Cake.Core.IO.FilePath"/>.</returns>
+            <param name="namespace">The namespace.</param>
         </member>
-        <member name="M:Cake.Core.IO.ProcessArgumentBuilder.FromString(System.String)">
+        <member name="M:Cake.Core.Scripting.ScriptProcessorContext.AddScriptAlias(Cake.Core.Scripting.ScriptAlias)">
             <summary>
-            Performs a conversion from <see cref="T:System.String"/> to <see cref="T:Cake.Core.IO.ProcessArgumentBuilder"/>.
+            Adds a script alias.
             </summary>
-            <param name="value">The text value to convert.</param>
-            <returns>A <see cref="T:Cake.Core.IO.FilePath"/>.</returns>
+            <param name="alias">The alias.</param>
+        </member>
+        <member name="M:Cake.Core.Scripting.ScriptProcessorContext.AppendScriptLine(System.String)">
+            <summary>
+            Appends a line to the script.
+            </summary>
+            <param name="line">The line to add.</param>
+        </member>
+        <member name="P:Cake.Core.Scripting.ScriptProcessorContext.References">
+            <summary>
+            Gets the script's assembly references 
+            referenced via the <c>#r</c> directive.
+            </summary>
+            <value>The references.</value>
+        </member>
+        <member name="P:Cake.Core.Scripting.ScriptProcessorContext.Namespaces">
+            <summary>
+            Gets the script's namespaces imported
+            via the <c>using</c> statement.
+            </summary>
+            <value>The namespaces.</value>
+        </member>
+        <member name="P:Cake.Core.Scripting.ScriptProcessorContext.ProcessedScripts">
+            <summary>
+            Gets the scripts that has been processed so far.
+            </summary>
+            <value>The processed scripts.</value>
+        </member>
+        <member name="P:Cake.Core.Scripting.ScriptProcessorContext.Lines">
+            <summary>
+            Gets the script lines.
+            </summary>
+            <value>
+            The lines.
+            </value>
+        </member>
+        <member name="P:Cake.Core.Scripting.ScriptProcessorContext.Aliases">
+            <summary>
+            Gets the aliases.
+            </summary>
+            <value>The aliases.</value>
         </member>
         <member name="T:Cake.Core.Scripting.ScriptRunner">
             <summary>
             Responsible for running scripts.
             </summary>
         </member>
-        <member name="M:Cake.Core.Scripting.ScriptRunner.#ctor(Cake.Core.Scripting.IScriptSessionFactory,Cake.Core.Scripting.IScriptAliasGenerator,Cake.Core.Scripting.IScriptProcessor)">
+        <member name="M:Cake.Core.Scripting.ScriptRunner.#ctor(Cake.Core.Scripting.IScriptEngine,Cake.Core.Scripting.IScriptAliasFinder,Cake.Core.Scripting.IScriptProcessor)">
             <summary>
             Initializes a new instance of the <see cref="T:Cake.Core.Scripting.ScriptRunner"/> class.
             </summary>
-            <param name="sessionFactory">The session factory.</param>
-            <param name="aliasGenerator">The alias generator.</param>
+            <param name="engine">The session factory.</param>
+            <param name="aliasFinder">The alias finder.</param>
             <param name="scriptProcessor">The script processor.</param>
         </member>
         <member name="M:Cake.Core.Scripting.ScriptRunner.Run(Cake.Core.Scripting.IScriptHost,Cake.Core.IO.FilePath,System.Collections.Generic.IDictionary{System.String,System.String})">
@@ -3100,7 +3160,7 @@
             Runs the script using the specified script host.
             </summary>
             <param name="host">The script host.</param>
-            <param name="script">The script.</param>
+            <param name="scriptPath">The script.</param>
             <param name="arguments">The arguments.</param>
         </member>
         <member name="T:Cake.Core.Text.ITextTransformationTemplate">

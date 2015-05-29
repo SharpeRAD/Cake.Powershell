@@ -175,7 +175,7 @@ Task("Create-NuGet-Packages")
 {
     NuGetPack("./nuspec/Cake.Powershell.nuspec", new NuGetPackSettings 
 	{
-        Version = semVersion,
+        Version = version,
         ReleaseNotes = releaseNotes.Notes.ToArray(),
         BasePath = binDir,
         OutputDirectory = nugetRoot,        
@@ -218,7 +218,7 @@ Task("Publish-Nuget")
     }
 
     // Get the path to the package.
-    var package = nugetRoot + "/Cake.Powershell." + semVersion + ".nupkg";
+    var package = nugetRoot + "/Cake.Powershell." + version + ".nupkg";
 
     // Push the package.
     NuGetPush(package, new NuGetPushSettings 
@@ -230,7 +230,6 @@ Task("Publish-Nuget")
 
 
 Task("Slack")
-	.IsDependentOn("Create-NuGet-Packages")
     .Does(() =>
 {
 	var token = EnvironmentVariable("SLACK_TOKEN");

@@ -24,7 +24,7 @@ This is a list of some the currently implemented functionality:
 
 ```csharp
 Task("Powershell-Script")
-    .Description("Run an example powershell call with parameters")
+    .Description("Run an example powershell command with parameters")
     .Does(() =>
 {
     PowershellScript("Write-Host", new PowershellSettings().WithArguments(args => { args.Append("Testing..."); });
@@ -38,7 +38,19 @@ Task("Powershell-File")
 	{ 
 		args.Append("Username", "admin")
 			.Append("Password", "pass1");
-	}
+	});
+});
+
+Task("Powershell-Remote")
+    .Description("Run an example powershell command remotely")
+    .Does(() =>
+{
+    PowershellScript("Get-Services", new PowershellSettings()
+	{
+		ComputerName = "remote-location",
+		Username = "admin",
+		Password = "pass1"
+	});
 });
 
 Task("Powershell-Download")

@@ -2640,6 +2640,19 @@
             </code>
             </example>
         </member>
+        <member name="M:Cake.Common.IO.DirectoryAliases.MakeAbsolute(Cake.Core.ICakeContext,Cake.Core.IO.DirectoryPath)">
+            <summary>
+            Makes the path absolute (if relative) using the current working directory.
+            </summary>
+            <param name="context">The context.</param>
+            <param name="path">The path.</param>
+            <returns>An absolute directory path.</returns>
+            <example>
+            <code>
+            var path = MakeAbsolute(Directory("./resources"));
+            </code>
+            </example>
+        </member>
         <member name="T:Cake.Common.IO.FileAliases">
             <summary>
             Contains functionality related to file operations.
@@ -2839,6 +2852,19 @@
             {
                 Information("File exists!");
             }
+            </code>
+            </example>
+        </member>
+        <member name="M:Cake.Common.IO.FileAliases.MakeAbsolute(Cake.Core.ICakeContext,Cake.Core.IO.FilePath)">
+            <summary>
+            Makes the path absolute (if relative) using the current working directory.
+            </summary>
+            <param name="context">The context.</param>
+            <param name="path">The path.</param>
+            <returns>An absolute file path.</returns>
+            <example>
+            <code>
+            var path = MakeAbsolute(File("./resources"));
             </code>
             </example>
         </member>
@@ -4719,6 +4745,143 @@
             Gets or sets the location that NUnit should write test error output.
             </summary>
             <value>The location that NUnit should write test error output.</value>
+        </member>
+        <member name="T:Cake.Common.Tools.OctopusDeploy.OctopusDeployAliases">
+            <summary>
+            Contains functionality for working with Octopus Deploy.
+            </summary>
+        </member>
+        <member name="M:Cake.Common.Tools.OctopusDeploy.OctopusDeployAliases.OctoCreateRelease(Cake.Core.ICakeContext,System.String,Cake.Common.Tools.OctopusDeploy.CreateReleaseSettings)">
+            <summary>
+            Creates a release for the specified Octopus Deploy Project.
+            </summary>
+            <param name="context">The cake context.</param>
+            <param name="projectName">The name of the project.</param>
+            <param name="settings">The settings.</param>
+        </member>
+        <member name="T:Cake.Common.Tools.OctopusDeploy.CreateReleaseSettings">
+            <summary>
+            Contains settings used by <see cref="M:Cake.Common.Tools.OctopusDeploy.OctopusDeployReleaseCreator.CreateRelease(System.String,Cake.Common.Tools.OctopusDeploy.CreateReleaseSettings)"/>.
+            </summary>
+        </member>
+        <member name="T:Cake.Common.Tools.OctopusDeploy.OctopusDeploySettings">
+            <summary>
+            Contains the common settings used by all commands in <see cref="T:Cake.Common.Tools.OctopusDeploy.OctopusDeployReleaseCreator"/>.
+            </summary>
+        </member>
+        <member name="P:Cake.Common.Tools.OctopusDeploy.OctopusDeploySettings.ToolPath">
+            <summary>
+            Gets or sets the tool path.
+            </summary>
+        </member>
+        <member name="P:Cake.Common.Tools.OctopusDeploy.OctopusDeploySettings.Username">
+            <summary>
+            Gets or sets the username to use when authenticating with the server
+            </summary>
+        </member>
+        <member name="P:Cake.Common.Tools.OctopusDeploy.OctopusDeploySettings.Password">
+            <summary>
+            Gets or sets the password to use when authenticating with the server
+            </summary>
+        </member>
+        <member name="P:Cake.Common.Tools.OctopusDeploy.OctopusDeploySettings.Server">
+            <summary>
+            Gets or sets the octopus server url.
+            </summary>
+        </member>
+        <member name="P:Cake.Common.Tools.OctopusDeploy.OctopusDeploySettings.ApiKey">
+            <summary>
+            Gets or sets the user's API key.
+            </summary>
+        </member>
+        <member name="P:Cake.Common.Tools.OctopusDeploy.OctopusDeploySettings.ConfigurationFile">
+            <summary>
+            Gets or sets the text file of default values
+            </summary>
+        </member>
+        <member name="P:Cake.Common.Tools.OctopusDeploy.OctopusDeploySettings.EnableDebugLogging">
+            <summary>
+            Gets or sets a value indicating whether the enable debug logging flag is set
+            </summary>
+        </member>
+        <member name="P:Cake.Common.Tools.OctopusDeploy.OctopusDeploySettings.IgnoreSslErrors">
+            <summary>
+            Gets or sets a value indicating whether the ignore SSL errors flag is set
+            </summary>
+        </member>
+        <member name="P:Cake.Common.Tools.OctopusDeploy.OctopusDeploySettings.EnableServiceMessages">
+            <summary>
+            Gets or sets a value indicating whether the enable service messages flag is set
+            </summary>
+        </member>
+        <member name="P:Cake.Common.Tools.OctopusDeploy.CreateReleaseSettings.ReleaseNumber">
+            <summary>
+            Gets or sets the release number to use for the new release.
+            </summary>
+        </member>
+        <member name="P:Cake.Common.Tools.OctopusDeploy.CreateReleaseSettings.DefaultPackageVersion">
+            <summary>
+            Gets or sets the default version number of all packages to use the new release.
+            </summary>
+        </member>
+        <member name="P:Cake.Common.Tools.OctopusDeploy.CreateReleaseSettings.Packages">
+            <summary>
+            Gets or sets the version number to use for a package in the release.
+            </summary>
+        </member>
+        <member name="P:Cake.Common.Tools.OctopusDeploy.CreateReleaseSettings.PackagesFolder">
+            <summary>
+            Gets or sets the folder containing NuGet packages.
+            </summary>
+        </member>
+        <member name="P:Cake.Common.Tools.OctopusDeploy.CreateReleaseSettings.ReleaseNotes">
+            <summary>
+            Gets or sets the release notes for the new release.
+            </summary>
+        </member>
+        <member name="P:Cake.Common.Tools.OctopusDeploy.CreateReleaseSettings.ReleaseNotesFile">
+            <summary>
+            Gets or sets the path to a file that contains Release Notes for the new release.
+            </summary>
+        </member>
+        <member name="P:Cake.Common.Tools.OctopusDeploy.CreateReleaseSettings.IgnoreExisting">
+            <summary>
+            Gets or sets a value indicating whether the Ignore Existing flag.
+            </summary>
+        </member>
+        <member name="T:Cake.Common.Tools.OctopusDeploy.OctopusDeployReleaseCreator">
+            <summary>
+            The Octopus Deploy release creator runner
+            </summary>
+        </member>
+        <member name="M:Cake.Common.Tools.OctopusDeploy.OctopusDeployReleaseCreator.#ctor(Cake.Core.IO.IFileSystem,Cake.Core.ICakeEnvironment,Cake.Core.IO.IGlobber,Cake.Core.IO.IProcessRunner)">
+            <summary> 
+            Initializes a new instance of the <see cref="T:Cake.Common.Tools.OctopusDeploy.OctopusDeployReleaseCreator"/> class.
+            </summary>
+            <param name="fileSystem">The file system.</param>
+            <param name="environment">The environment.</param>
+            <param name="globber">The globber.</param>
+            <param name="processRunner">The process runner.</param>
+        </member>
+        <member name="M:Cake.Common.Tools.OctopusDeploy.OctopusDeployReleaseCreator.CreateRelease(System.String,Cake.Common.Tools.OctopusDeploy.CreateReleaseSettings)">
+            <summary>
+            Creates a release for the specified project in OctopusDeploy
+            </summary>
+            <param name="projectName">The target project name</param>
+            <param name="settings">The settings</param>
+        </member>
+        <member name="M:Cake.Common.Tools.OctopusDeploy.OctopusDeployReleaseCreator.GetToolName">
+            <summary>
+            Gets the name of the tool.
+            </summary>
+            <returns>The name of the tool.</returns>
+        </member>
+        <member name="M:Cake.Common.Tools.OctopusDeploy.OctopusDeployReleaseCreator.GetDefaultToolPath(Cake.Common.Tools.OctopusDeploy.CreateReleaseSettings)">
+            <summary>
+            Gets the default tool path.
+            </summary>
+            <param name="settings">The settings.</param>
+            <returns>The default tool path.</returns>
         </member>
         <member name="T:Cake.Common.Tools.SignTool.ISignToolResolver">
             <summary>
