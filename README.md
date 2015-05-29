@@ -1,7 +1,10 @@
 # Cake.Powershell
 
 Cake Addon that extends Cake with Powershell commands
+
 [![Build status](https://ci.appveyor.com/api/projects/status/5g0u2757tix9se6f?svg=true)](https://ci.appveyor.com/project/PhillipSharpe/cake-powershell)
+
+[![Join the chat at https://gitter.im/cake-build/cake](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/cake-build/cake?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 
 
@@ -12,7 +15,7 @@ This is a list of some the currently implemented functionality:
 * Local / remote scripts
 * Script files
 * Download and run remote script file
-* Script Parameters
+* Script parameters
 * Outputing to the cake log
 
 
@@ -52,4 +55,4 @@ RunTarget("Powershell-Script");
 
 ## TroubleShooting
 
-A few pointers for correctly enabling powershell scripts can be found [here](https://github.com/SharpeRAD/Cake.Powershell/blob/master/TroubleShooting.md)
+A few pointers for correctly enabling powershell scripting can be found [here](https://github.com/SharpeRAD/Cake.Powershell/blob/master/TroubleShooting.md)
