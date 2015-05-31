@@ -28,6 +28,15 @@ Task("Powershell-Script")
 			FormatOutput = true,
 			LogOutput = true
 		});
+
+		StartPowershellScript("Stop-Service", new PowershellSettings()
+		{
+			FormatOutput = true,
+			LogOutput = true
+		}.WithArguments(args => 
+		{ 
+			args.AppendQuoted("MpsSvc"); 
+		}));
 	});
 
 

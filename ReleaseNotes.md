@@ -1,5 +1,8 @@
+### New in 0.0.9 (Released 2015/05/31)
+* Output Powershell exceptions to the cake console
+
 ### New in 0.0.8 (Released 2015/05/31)
-* Fixed errors in outputing to the cake console
+* Fixed bug in outputing to the cake console
 
 ### New in 0.0.7 (Released 2015/05/29)
 * Changes to package publishing

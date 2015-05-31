@@ -238,6 +238,7 @@ namespace Cake.Powershell
 
                 using (Pipeline pipeline = runspace.CreatePipeline())
                 {
+                    //Invoke Command
                     pipeline.Commands.AddScript("Set-Location -Path " + settings.WorkingDirectory.FullPath);
 
                     if ((settings.Modules != null) && (settings.Modules.Count > 0))
@@ -253,6 +254,27 @@ namespace Cake.Powershell
                     }
 
                     results = pipeline.Invoke();
+
+
+
+                    //Log Errors
+                    if (pipeline.Error.Count > 0)
+                    {
+                        while (!pipeline.Error.EndOfPipeline)
+                        {
+                            PSObject value = (PSObject)pipeline.Error.Read();
+
+                            if (value != null)
+                            {
+                                ErrorRecord record = (ErrorRecord)value.BaseObject;
+
+                                if (record != null)
+                                {
+                                    _log.Error(Verbosity.Normal, record.Exception.Message);
+                                }
+                            }
+                        }
+                    }
                 }
 
                 runspace.Close();
@@ -260,7 +282,7 @@ namespace Cake.Powershell
 
 
 
-                //Log
+                //Log Results
                 if (settings.LogOutput)
                 {
                     foreach (PSObject res in results)
@@ -269,9 +291,6 @@ namespace Cake.Powershell
                     }
                 }
 
-
-
-                //Return Results
                 return results;
             }
         #endregion

@@ -54,7 +54,6 @@ namespace Cake.Powershell
             {
                 throw new ArgumentNullException("settings");
             }
-
             if (settings.Arguments == null)
             {
                 settings.Arguments = new ProcessArgumentBuilder();
@@ -94,7 +93,7 @@ namespace Cake.Powershell
         /// <param name="settings">The process settings.</param>
         /// <param name="timeout">The timeout duration</param>
         /// <returns>The same <see cref="PowershellSettings"/> instance so that multiple calls can be chained.</returns>
-        public static PowershellSettings SetTimeout(this PowershellSettings settings, int? timeout)
+        public static PowershellSettings SetTimeout(this PowershellSettings settings, int timeout)
         {
             if (settings == null)
             {
@@ -181,7 +180,7 @@ namespace Cake.Powershell
         /// Sets a value indicating whether the output of an application is written to the <see cref="P:System.Diagnostics.Process.StandardOutput"/> stream.
         /// </summary>
         /// <param name="settings">The process settings.</param>
-        /// <param name="redirect">true if output should be written to <see cref="P:System.Diagnostics.Process.StandardOutput"/>; otherwise, false. The default is false.</param>
+        /// <param name="format">true if output should be written to <see cref="P:System.Diagnostics.Process.StandardOutput"/>; otherwise, false. The default is false.</param>
         /// <returns>The same <see cref="PowershellSettings"/> instance so that multiple calls can be chained.</returns>
         public static PowershellSettings SetFormatOutput(this PowershellSettings settings, bool format)
         {
@@ -191,6 +190,23 @@ namespace Cake.Powershell
             }
 
             settings.FormatOutput = format;
+            return settings;
+        }
+
+        /// <summary>
+        /// Sets a value indicating whether the output of an application is written to the <see cref="P:System.Diagnostics.Process.StandardOutput"/> stream.
+        /// </summary>
+        /// <param name="settings">The process settings.</param>
+        /// <param name="log">true if output should be written to <see cref="P:System.Diagnostics.Process.StandardOutput"/>; otherwise, false. The default is false.</param>
+        /// <returns>The same <see cref="PowershellSettings"/> instance so that multiple calls can be chained.</returns>
+        public static PowershellSettings SetLogOutput(this PowershellSettings settings, bool log)
+        {
+            if (settings == null)
+            {
+                throw new ArgumentNullException("settings");
+            }
+
+            settings.LogOutput = log;
             return settings;
         }
     }
