@@ -1,3 +1,6 @@
+### New in 0.0.8 (Released 2015/05/31)
+* Fixed errors in outputing to the cake console
+
 ### New in 0.0.7 (Released 2015/05/29)
 * Changes to package publishing
 

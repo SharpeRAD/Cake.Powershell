@@ -29,28 +29,28 @@ Task("Powershell-Script")
     .Description("Run an example powershell command with parameters")
     .Does(() =>
 {
-    PowershellScript("Write-Host", new PowershellSettings().WithArguments(args => 
+    StartPowershellScript("Write-Host", new PowershellSettings().WithArguments(args => 
 	{ 
 		args.AppendQuoted("Testing..."); 
-	});
+	}));
 });
 
 Task("Powershell-File")
     .Description("Run an example powershell script file with parameters")
     .Does(() =>
 {
-    PowershellFile("../Scripts/Install.ps1", new PowershellSettings().WithArguments(args => 
+    StartPowershellFile("../Scripts/Install.ps1", new PowershellSettings().WithArguments(args => 
 	{ 
 		args.Append("Username", "admin")
 			.AppendSecret("Password", "pass1");
-	});
+	}));
 });
 
 Task("Powershell-Remote")
     .Description("Run an example powershell command remotely")
     .Does(() =>
 {
-    PowershellScript("Get-Services", new PowershellSettings()
+    StartPowershellScript("Get-Services", new PowershellSettings()
 	{
 		ComputerName = "remote-location",
 		Username = "admin",
@@ -62,7 +62,7 @@ Task("Powershell-Download")
     .Description("Run an example powershell script file after downloading its contents to a local directory")
     .Does(() =>
 {
-    PowershellDownload("https://chocolatey.org/install.ps1", "C:/Temp/install.ps1", new PowershellSettings());
+    StartPowershellDownload("https://chocolatey.org/install.ps1", "C:/Temp/install.ps1", new PowershellSettings());
 });
 
 RunTarget("Powershell-Script");

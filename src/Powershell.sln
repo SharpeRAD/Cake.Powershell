@@ -22,6 +22,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cake.Powershell.Tests", "PowerShell.Tests\Cake.Powershell.Tests.csproj", "{DF373DAF-FE62-420F-8AA0-6C18CFF5C665}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{307216F2-D982-4935-8BF1-842114D14545}"
+	ProjectSection(SolutionItems) = preProject
+		..\test\build.cake = ..\test\build.cake
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{23704DC0-E2D6-47C3-9E11-2A1D8E497980}"
 	ProjectSection(SolutionItems) = preProject

@@ -79,7 +79,7 @@ namespace Cake.Powershell
                 //Get Script
                 this.SetWorkingDirectory(settings);
 
-                _log.Verbose(Verbosity.Diagnostic, "Executing: {0}", this.AppendArguments(script, settings.Arguments, true));
+                _log.Debug(Verbosity.Normal, String.Format("Executing: {0}", this.AppendArguments(script, settings.Arguments, true)));
 
 
 
@@ -107,7 +107,7 @@ namespace Cake.Powershell
                 this.SetWorkingDirectory(settings);
                 string script = "&\"" + path.MakeAbsolute(settings.WorkingDirectory).FullPath + "\"";
 
-                _log.Verbose(Verbosity.Diagnostic, "Executing: {0}", this.AppendArguments(script, settings.Arguments, true));
+                _log.Debug(Verbosity.Normal, String.Format("Executing: {0}", this.AppendArguments(script, settings.Arguments, true)));
 
 
 
@@ -143,7 +143,7 @@ namespace Cake.Powershell
                 WebClient client = new WebClient();
                 client.DownloadFile(uri, fullPath);
 
-                _log.Verbose(Verbosity.Diagnostic, "Executing: {0}", this.AppendArguments(script, settings.Arguments, true));
+                _log.Debug(Verbosity.Normal, String.Format("Executing: {0}", this.AppendArguments(script, settings.Arguments, true)));
 
 
 
@@ -257,6 +257,17 @@ namespace Cake.Powershell
 
                 runspace.Close();
                 runspace.Dispose();
+
+
+
+                //Log
+                if (settings.LogOutput)
+                {
+                    foreach (PSObject res in results)
+                    {
+                        _log.Debug(Verbosity.Normal, res.ToString());
+                    }
+                }
 
 
 

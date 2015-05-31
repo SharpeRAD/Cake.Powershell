@@ -157,6 +157,9 @@ Task("Copy-Files")
     CopyFileToDirectory(buildDir + "/Cake.Powershell.pdb", binDir);
 
     CopyFiles(new FilePath[] { "LICENSE", "README.md", "ReleaseNotes.md" }, binDir);
+
+
+	CopyFileToDirectory(buildDir + "/Cake.Powershell.dll", "./test/tools/Addins/Cake.Powershell/lib/net45/");
 });
 
 Task("Zip-Files")

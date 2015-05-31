@@ -69,7 +69,7 @@ namespace Cake.Powershell
             {
                 get
                 {
-                    throw new NotImplementedException();
+                    return new Coordinates(Console.CursorLeft, Console.CursorTop);
                 }
                 set
                 {

@@ -26,7 +26,7 @@ namespace Cake.Powershell.Tests
             Collection<PSObject> results = CakeHelper.CreatePowershellRunner().Start("Write-Host", 
                 new PowershellSettings().WithArguments(args => args.Append("Testing...")));
 
-            Assert.True((DebugLog.Lines != null) && (DebugLog.Lines.Contains("Write-Host Testing...")), "Output not written to the powershell host");
+            Assert.True((DebugLog.Lines != null) && (DebugLog.Lines.Contains("Testing...")), "Output not written to the powershell host");
         }
 
         [Fact]

@@ -49,16 +49,8 @@ namespace Cake.Powershell.Tests
                     DebugLog.Lines = new List<string>();
                 }
 
-                if (args != null)
-                {
-                    foreach (object arg in args)
-                    {
-                        string line = arg.ToString();
-                        DebugLog.Lines.Add(line);
-
-                        Debug.WriteLine(line);
-                    }
-                }
+                DebugLog.Lines.Add(format);
+                Debug.WriteLine(format);
             }
             catch { }
         }

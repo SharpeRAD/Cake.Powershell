@@ -19,6 +19,7 @@ namespace Cake.Powershell
             public PowershellSettings()
             {
                 this.FormatOutput = false;
+                this.LogOutput = false;
             }
         #endregion
 
@@ -64,9 +65,14 @@ namespace Cake.Powershell
 
 
             /// <summary>
-            /// Gets or sets optional timeout for process execution
+            /// If the powershell output should be a formatted string
             /// </summary>
             public bool FormatOutput { get; set; }
+
+            /// <summary>
+            /// Log the powershell output
+            /// </summary>
+            public bool LogOutput { get; set; }
 
 
 
