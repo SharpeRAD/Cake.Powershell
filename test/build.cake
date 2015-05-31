@@ -24,19 +24,14 @@ Task("Powershell-Script")
 		StartPowershellScript("Write-Host 'hello world'");
 
 		StartPowershellScript("Get-Process", new PowershellSettings()
-		{
-			FormatOutput = true,
-			LogOutput = true
-		});
+			.SetFormatOutput()
+			.SetLogOutput());
 
 		StartPowershellScript("Stop-Service", new PowershellSettings()
-		{
-			FormatOutput = true,
-			LogOutput = true
-		}.WithArguments(args => 
-		{ 
-			args.AppendQuoted("MpsSvc"); 
-		}));
+			.WithArguments(args => 
+			{ 
+				args.AppendQuoted("MpsSvc"); 
+			}));
 	});
 
 
