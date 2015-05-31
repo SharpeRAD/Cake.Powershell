@@ -18,15 +18,15 @@ This is a list of some the currently implemented functionality:
 * Script files
 * Download and run remote script file
 * Script parameters
-* Outputing to the cake log
+* Outputing to the cake console
 
 
 
 ## Usage
 
+```csharp
 #addin "Cake.Powershell"
 
-```csharp
 Task("Powershell-Script")
     .Description("Run an example powershell command with parameters")
     .Does(() =>
