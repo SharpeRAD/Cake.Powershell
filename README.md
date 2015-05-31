@@ -24,6 +24,8 @@ This is a list of some the currently implemented functionality:
 
 ## Usage
 
+#addin "Cake.Powershell"
+
 ```csharp
 Task("Powershell-Script")
     .Description("Run an example powershell command with parameters")
@@ -67,6 +69,12 @@ Task("Powershell-Download")
 
 RunTarget("Powershell-Script");
 ```
+
+
+
+## Example
+
+A complete cake build example can be found [here](https://github.com/SharpeRAD/Cake.Powershell/blob/master/test/build.cake)
 
 
 
