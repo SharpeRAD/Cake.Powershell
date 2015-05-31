@@ -21,6 +21,8 @@ Run the following powershell command (as Admin):
 
 Enable-PSRemoting -Force
 
+(enables remote scripts)
+
 
 
 ### Error message
@@ -52,4 +54,4 @@ Run the following powershell command (as Admin):
 
 Set-ExecutionPolicy Unrestricted
 
-(make sure the current user has the required priviledges)
+(enables the execution of all scripts)

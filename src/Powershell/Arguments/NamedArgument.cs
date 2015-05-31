@@ -95,7 +95,7 @@ namespace Cake.Powershell
 
         #region Functions (3)
             /// <summary>
-            /// Render the arguments as a <see cref="string" />.
+            /// Render the arguments as a <see cref="System.String" />.
             /// </summary>
             /// <returns>A string representation of the argument.</returns>
             public string Render()
@@ -104,7 +104,7 @@ namespace Cake.Powershell
             }
 
             /// <summary>
-            /// Renders the argument as a <see cref="string"/>.
+            /// Renders the argument as a <see cref="System.String"/>.
             /// Sensitive information will be redacted.
             /// </summary>
             /// <returns>A safe string representation of the argument.</returns>
@@ -121,7 +121,7 @@ namespace Cake.Powershell
             /// </returns>
             public override string ToString()
             {
-                return this.RenderSafe();
+                return RenderSafe();
             }
         #endregion
     }
