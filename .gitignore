@@ -9,11 +9,8 @@
 
 # Build related
 build/
-tools/Cake/
-tools/Addins/
-tools/logfiles/
-tools/xunit.runner.console/
-tools/nuget.exe
+tools/
+test/tools/
 
 # mstest test results
 src/TestResults
@@ -71,10 +68,4 @@ src/packages
 
 # Windows
 Thumbs.db
-
-
-
-# Cake Tools
-tools/
-test/tools/
 
