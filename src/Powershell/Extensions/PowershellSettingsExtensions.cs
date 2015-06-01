@@ -54,9 +54,9 @@ namespace Cake.Powershell
             {
                 throw new ArgumentNullException("settings");
             }
-            if (settings.Arguments == null)
+            if (String.IsNullOrEmpty(module))
             {
-                settings.Arguments = new ProcessArgumentBuilder();
+                throw new ArgumentNullException("module");
             }
 
             if (settings.Modules == null)

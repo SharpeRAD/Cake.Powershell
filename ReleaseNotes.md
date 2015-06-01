@@ -1,3 +1,6 @@
+### New in 0.1.0 (Released 2015/06/01)
+* Only use the environment locally when setting the working directory
+
 ### New in 0.0.9 (Released 2015/05/31)
 * Output Powershell exceptions to the cake console
 

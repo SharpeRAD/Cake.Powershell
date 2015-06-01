@@ -28,7 +28,7 @@ namespace Cake.Powershell
     {
         #region Fields (2)
             private readonly ICakeEnvironment _environment;
-            private readonly ICakeLog _log;
+            private readonly ICakeLog _Log;
         #endregion
         
 
@@ -53,7 +53,7 @@ namespace Cake.Powershell
                 }
 
                 _environment = environment;
-                _log = log;
+                _Log = log;
             }
         #endregion
 
@@ -79,7 +79,7 @@ namespace Cake.Powershell
                 //Get Script
                 this.SetWorkingDirectory(settings);
 
-                _log.Debug(Verbosity.Normal, String.Format("Executing: {0}", this.AppendArguments(script, settings.Arguments, true)));
+                _Log.Debug(Verbosity.Normal, String.Format("Executing: {0}", this.AppendArguments(script, settings.Arguments, true)));
 
 
 
@@ -107,7 +107,7 @@ namespace Cake.Powershell
                 this.SetWorkingDirectory(settings);
                 string script = "&\"" + path.MakeAbsolute(settings.WorkingDirectory).FullPath + "\"";
 
-                _log.Debug(Verbosity.Normal, String.Format("Executing: {0}", this.AppendArguments(script, settings.Arguments, true)));
+                _Log.Debug(Verbosity.Normal, String.Format("Executing: {0}", this.AppendArguments(script, settings.Arguments, true)));
 
 
 
@@ -143,7 +143,7 @@ namespace Cake.Powershell
                 WebClient client = new WebClient();
                 client.DownloadFile(uri, fullPath);
 
-                _log.Debug(Verbosity.Normal, String.Format("Executing: {0}", this.AppendArguments(script, settings.Arguments, true)));
+                _Log.Debug(Verbosity.Normal, String.Format("Executing: {0}", this.AppendArguments(script, settings.Arguments, true)));
 
 
 
@@ -157,9 +157,16 @@ namespace Cake.Powershell
 
             private void SetWorkingDirectory(PowershellSettings settings)
             {
-                DirectoryPath workingDirectory = settings.WorkingDirectory ?? _environment.WorkingDirectory;
+                if (String.IsNullOrEmpty(settings.ComputerName))
+                {
+                    DirectoryPath workingDirectory = settings.WorkingDirectory ?? _environment.WorkingDirectory;
 
-                settings.WorkingDirectory = workingDirectory.MakeAbsolute(_environment);
+                    settings.WorkingDirectory = workingDirectory.MakeAbsolute(_environment);
+                }
+                else if (settings.WorkingDirectory == null)
+                {
+                    settings.WorkingDirectory = new DirectoryPath("C:/");
+                }
             }
 
             private string AppendArguments(string script, ProcessArgumentBuilder builder, bool safe)
@@ -174,7 +181,7 @@ namespace Cake.Powershell
                     }
                     else
                     {
-                        args = builder.Render();
+                        args = builder.Render().TrimEnd();
                     }
 
                     if (!String.IsNullOrEmpty(args))
@@ -194,17 +201,14 @@ namespace Cake.Powershell
                 if (String.IsNullOrEmpty(settings.ComputerName))
                 {
                     //Local
-                    runspace = RunspaceFactory.CreateRunspace(new CakePSHost(_log));
+                    runspace = RunspaceFactory.CreateRunspace(new CakePSHost(_Log));
                 }
                 else
                 {
                     //Remote
                     WSManConnectionInfo connection = new WSManConnectionInfo();
 
-                    if (!String.IsNullOrEmpty(settings.ComputerName))
-                    {
-                        connection.ComputerName = settings.ComputerName;
-                    }
+                    connection.ComputerName = settings.ComputerName;
 
                     if (settings.Port > 0)
                     {
@@ -226,7 +230,7 @@ namespace Cake.Powershell
                         connection.OpenTimeout = settings.Timeout.Value;
                     }
 
-                    runspace = RunspaceFactory.CreateRunspace(new CakePSHost(_log), connection);
+                    runspace = RunspaceFactory.CreateRunspace(new CakePSHost(_Log), connection);
                 }
 
                 runspace.Open();
@@ -239,7 +243,10 @@ namespace Cake.Powershell
                 using (Pipeline pipeline = runspace.CreatePipeline())
                 {
                     //Invoke Command
-                    pipeline.Commands.AddScript("Set-Location -Path " + settings.WorkingDirectory.FullPath);
+                    if (settings.WorkingDirectory != null)
+                    {
+                        pipeline.Commands.AddScript("Set-Location -Path " + settings.WorkingDirectory.FullPath);
+                    }
 
                     if ((settings.Modules != null) && (settings.Modules.Count > 0))
                     {
@@ -270,7 +277,7 @@ namespace Cake.Powershell
 
                                 if (record != null)
                                 {
-                                    _log.Error(Verbosity.Normal, record.Exception.Message);
+                                    _Log.Error(Verbosity.Normal, record.Exception.Message);
                                 }
                             }
                         }
@@ -287,7 +294,7 @@ namespace Cake.Powershell
                 {
                     foreach (PSObject res in results)
                     {
-                        _log.Debug(Verbosity.Normal, res.ToString());
+                        _Log.Debug(Verbosity.Normal, res.ToString());
                     }
                 }
 
