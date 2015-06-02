@@ -42,12 +42,12 @@ Task("Powershell-Script-Settings")
     .Description("Run an example powershell command with settings and parameters")
     .Does(() =>
 {
-    StartPowershellScript("Write-Host", new PowershellSettings()
+    StartPowershellScript("Get-Process", new PowershellSettings()
 		.SetFormatOutput()
 		.SetLogOutput()
 		.WithArguments(args => 
 		{ 
-			args.AppendQuoted("Testing..."); 
+			args.AppendQuoted("svchost"); 
 		}));
 });
 
@@ -85,7 +85,10 @@ Task("Powershell-Remote")
 	{
 		ComputerName = "remote-location",
 		Username = "admin",
-		Password = "pass1"
+		Password = "pass1",
+
+		FormatOutput = true,
+		LogOutput = true
 	});
 });
 
