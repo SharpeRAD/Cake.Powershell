@@ -1,3 +1,6 @@
+### New in 0.1.1 (Released 2015/06/02)
+* Additional aliases with arguments instead of settings
+
 ### New in 0.1.0 (Released 2015/06/01)
 * Only use the environment locally when setting the working directory
 

@@ -27,26 +27,55 @@ This is a list of some the currently implemented functionality:
 ```csharp
 #addin "Cake.Powershell"
 
+
 Task("Powershell-Script")
     .Description("Run an example powershell command with parameters")
     .Does(() =>
 {
-    StartPowershellScript("Write-Host", new PowershellSettings().WithArguments(args => 
-	{ 
-		args.AppendQuoted("Testing..."); 
-	}));
+    StartPowershellScript("Write-Host", args => 
+		{ 
+			args.AppendQuoted("Testing..."); 
+		}));
 });
+
+Task("Powershell-Script-Settings")
+    .Description("Run an example powershell command with settings and parameters")
+    .Does(() =>
+{
+    StartPowershellScript("Write-Host", new PowershellSettings()
+		.SetFormatOutput()
+		.SetLogOutput()
+		.WithArguments(args => 
+		{ 
+			args.AppendQuoted("Testing..."); 
+		}));
+});
+
 
 Task("Powershell-File")
     .Description("Run an example powershell script file with parameters")
     .Does(() =>
 {
-    StartPowershellFile("../Scripts/Install.ps1", new PowershellSettings().WithArguments(args => 
-	{ 
-		args.Append("Username", "admin")
-			.AppendSecret("Password", "pass1");
-	}));
+    StartPowershellFile("../Scripts/Install.ps1", args => 
+		{ 
+			args.Append("Username", "admin")
+				.AppendSecret("Password", "pass1");
+		}));
 });
+
+Task("Powershell-File-Settings")
+    .Description("Run an example powershell script file with settings and parameters")
+    .Does(() =>
+{
+    StartPowershellFile("../Scripts/sql.ps1", new PowershellSettings()
+		.WithModule("sqlps")
+		.WithArguments(args => 
+		{ 
+			args.Append("Username", "admin")
+				.AppendSecret("Password", "pass1");
+		}));
+});
+
 
 Task("Powershell-Remote")
     .Description("Run an example powershell command remotely")
@@ -60,12 +89,14 @@ Task("Powershell-Remote")
 	});
 });
 
+
 Task("Powershell-Download")
     .Description("Run an example powershell script file after downloading its contents to a local directory")
     .Does(() =>
 {
     StartPowershellDownload("https://chocolatey.org/install.ps1", "C:/Temp/install.ps1", new PowershellSettings());
 });
+
 
 RunTarget("Powershell-Script");
 ```
