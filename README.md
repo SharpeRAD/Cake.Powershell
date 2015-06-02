@@ -35,7 +35,7 @@ Task("Powershell-Script")
     StartPowershellScript("Write-Host", args => 
 		{ 
 			args.AppendQuoted("Testing..."); 
-		}));
+		});
 });
 
 Task("Powershell-Script-Settings")
@@ -60,7 +60,7 @@ Task("Powershell-File")
 		{ 
 			args.Append("Username", "admin")
 				.AppendSecret("Password", "pass1");
-		}));
+		});
 });
 
 Task("Powershell-File-Settings")
