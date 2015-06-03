@@ -1,3 +1,6 @@
+### New in 0.1.2 (Released 2015/06/03)
+* Named argument extensions with format
+
 ### New in 0.1.1 (Released 2015/06/02)
 * Additional aliases with arguments instead of settings
 
