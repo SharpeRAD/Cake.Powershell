@@ -158,7 +158,7 @@ Task("Copy-Files")
 
     CopyFiles(new FilePath[] { "LICENSE", "README.md", "ReleaseNotes.md" }, binDir);
 
-
+	CreateDirectory("./test/tools/Addins/Cake.Powershell/lib/net45/");
 	CopyFileToDirectory(buildDir + "/Cake.Powershell.dll", "./test/tools/Addins/Cake.Powershell/lib/net45/");
 });
 
