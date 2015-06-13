@@ -52,6 +52,12 @@ Setup(() =>
 {
 	//Executed BEFORE the first task.
 	Information("Building version {0} of {1}.", semVersion, appName);
+
+	NuGetInstall("xunit.runner.console", new NuGetInstallSettings 
+	{
+		ExcludeVersion  = true,
+		OutputDirectory = "./tools"
+    });
 });
 
 
