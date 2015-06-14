@@ -1,3 +1,6 @@
+### New in 0.1.3 (Released 2015/06/14)
+* Fix Nuget references
+
 ### New in 0.1.2 (Released 2015/06/03)
 * Named argument extensions with format
 

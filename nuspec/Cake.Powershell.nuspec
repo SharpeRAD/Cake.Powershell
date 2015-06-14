@@ -14,6 +14,10 @@
       <copyright>Copyright (c) Phillip Sharpe 2015</copyright>
       <releaseNotes>Initial Release</releaseNotes>
       <tags>Cake Script Build Powershell</tags>
+
+      <dependencies>
+         <dependency id="Cake.Core" />
+      </dependencies>
    </metadata>
 
    <files>
