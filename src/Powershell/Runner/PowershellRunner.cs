@@ -27,7 +27,7 @@ namespace Cake.Powershell
     public sealed class PowershellRunner : IPowershellRunner
     {
         #region Fields (2)
-            private readonly ICakeEnvironment _environment;
+            private readonly ICakeEnvironment _Environment;
             private readonly ICakeLog _Log;
         #endregion
         
@@ -37,7 +37,7 @@ namespace Cake.Powershell
 
         #region Constructor (1)
             /// <summary>
-            /// Initializes a new instance of the <see cref="ProcessRunner" /> class.
+            /// Initializes a new instance of the <see cref="PowershellRunner" /> class.
             /// </summary>
             /// <param name="environment">The environment.</param>
             /// <param name="log">The log.</param>
@@ -52,7 +52,7 @@ namespace Cake.Powershell
                     throw new ArgumentNullException("log");
                 }
 
-                _environment = environment;
+                _Environment = environment;
                 _Log = log;
             }
         #endregion
@@ -159,9 +159,9 @@ namespace Cake.Powershell
             {
                 if (String.IsNullOrEmpty(settings.ComputerName))
                 {
-                    DirectoryPath workingDirectory = settings.WorkingDirectory ?? _environment.WorkingDirectory;
+                    DirectoryPath workingDirectory = settings.WorkingDirectory ?? _Environment.WorkingDirectory;
 
-                    settings.WorkingDirectory = workingDirectory.MakeAbsolute(_environment);
+                    settings.WorkingDirectory = workingDirectory.MakeAbsolute(_Environment);
                 }
                 else if (settings.WorkingDirectory == null)
                 {
