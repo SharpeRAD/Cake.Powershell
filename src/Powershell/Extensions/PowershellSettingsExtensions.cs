@@ -107,10 +107,10 @@ namespace Cake.Powershell
 
 
         /// <summary>
-        /// Sets the working directory for the process to be started.
+        /// Sets the computer name to connect to
         /// </summary>
         /// <param name="settings">The process settings.</param>
-        /// <param name="path">The working directory for the process to be started.</param>
+        /// <param name="name">The computer name</param>
         /// <returns>The same <see cref="PowershellSettings"/> instance so that multiple calls can be chained.</returns>
         public static PowershellSettings UseComputerName(this PowershellSettings settings, string name)
         {

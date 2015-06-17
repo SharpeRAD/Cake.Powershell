@@ -5,6 +5,7 @@
       <version>0.0.0</version>
       <authors>Phillip Sharpe</authors>
       <owners>Phillip Sharpe</owners>
+      <title>Cake.Powershell</title>
       <description>Cake Build addon for Powershell.</description>
       <summary>Powershell addon for cake build.</summary>
       <licenseUrl>https://github.com/SharpeRAD/Cake.Powershell/LICENSE</licenseUrl>

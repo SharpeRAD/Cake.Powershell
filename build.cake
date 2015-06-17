@@ -166,6 +166,7 @@ Task("Copy-Files")
 
 	CreateDirectory("./test/tools/Addins/Cake.Powershell/lib/net45/");
 	CopyFileToDirectory(buildDir + "/Cake.Powershell.dll", "./test/tools/Addins/Cake.Powershell/lib/net45/");
+	CopyFileToDirectory("./lib/System.Management.Automation.dll", "./test/tools/Addins/Cake.Powershell/lib/net45/");
 });
 
 Task("Zip-Files")
