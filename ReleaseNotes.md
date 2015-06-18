@@ -1,5 +1,6 @@
 ### New in 0.1.4 (Released 2015/06/18)
 * Improved code documentation
+* Copy tools to test folder
 
 ### New in 0.1.3 (Released 2015/06/14)
 * Fix Nuget references
