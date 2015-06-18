@@ -155,6 +155,7 @@ namespace Cake.Powershell
 
 
 
+            //Helpers
             private void SetWorkingDirectory(PowershellSettings settings)
             {
                 if (String.IsNullOrEmpty(settings.ComputerName))

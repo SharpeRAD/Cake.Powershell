@@ -12,6 +12,11 @@ namespace Cake.Powershell
     /// </summary>
     public static class SecureExtensions
     {
+        /// <summary>
+        /// Creates a secure string for storing powershell passwords
+        /// </summary>
+        /// <param name="password">The string to make secure.</param>
+        /// <returns>The secure string.</returns>
         public static SecureString MakeSecure(this string password)
         {
             if (password == null)

@@ -33,6 +33,7 @@ namespace Cake.Powershell
         /// Starts a powershell script using the specified information.
         /// </summary>
         /// <param name="uri">The location of the script file to download and run.</param>
+        /// <param name="path">The temporary path to download the file to.</param>
         /// <param name="settings">The information about the process to start.</param>
         /// <returns>Powershell objects.</returns>
         Collection<PSObject> Start(Uri uri, FilePath path, PowershellSettings settings);

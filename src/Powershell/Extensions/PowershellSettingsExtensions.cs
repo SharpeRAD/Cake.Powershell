@@ -17,9 +17,9 @@ namespace Cake.Powershell
     public static class PowershellSettingsExtensions
     {
         /// <summary>
-        /// Sets the arguments for the process
+        /// Sets the arguments for the powershell command
         /// </summary>
-        /// <param name="settings">The settings.</param>
+        /// <param name="settings">The powershell settings.</param>
         /// <param name="arguments">The arguments to append.</param>
         /// <returns>The same <see cref="PowershellSettings"/> instance so that multiple calls can be chained.</returns>
         public static PowershellSettings WithArguments(this PowershellSettings settings, Action<ProcessArgumentBuilder> arguments)
@@ -45,7 +45,7 @@ namespace Cake.Powershell
         /// <summary>
         /// Adds the specified module to load into the initial state
         /// </summary>
-        /// <param name="settings">The process settings.</param>
+        /// <param name="settings">The powershell settings.</param>
         /// <param name="module">The module to load.</param>
         /// <returns>The same <see cref="PowershellSettings"/> instance so that multiple calls can be chained.</returns>
         public static PowershellSettings WithModule(this PowershellSettings settings, string module)
@@ -73,8 +73,8 @@ namespace Cake.Powershell
         /// <summary>
         /// Sets the working directory for the process to be started.
         /// </summary>
-        /// <param name="settings">The process settings.</param>
-        /// <param name="path">The working directory for the process to be started.</param>
+        /// <param name="settings">The powershell settings.</param>
+        /// <param name="path">The working directory where the powershell command is to be started.</param>
         /// <returns>The same <see cref="PowershellSettings"/> instance so that multiple calls can be chained.</returns>
         public static PowershellSettings UseWorkingDirectory(this PowershellSettings settings, DirectoryPath path)
         {
@@ -88,9 +88,9 @@ namespace Cake.Powershell
         }
 
         /// <summary>
-        /// Sets the optional timeout for process execution
+        /// Sets the optional timeout for powershell command
         /// </summary>
-        /// <param name="settings">The process settings.</param>
+        /// <param name="settings">The powershell settings.</param>
         /// <param name="timeout">The timeout duration</param>
         /// <returns>The same <see cref="PowershellSettings"/> instance so that multiple calls can be chained.</returns>
         public static PowershellSettings SetTimeout(this PowershellSettings settings, int timeout)
@@ -109,7 +109,7 @@ namespace Cake.Powershell
         /// <summary>
         /// Sets the computer name to connect to
         /// </summary>
-        /// <param name="settings">The process settings.</param>
+        /// <param name="settings">The powershell settings.</param>
         /// <param name="name">The computer name</param>
         /// <returns>The same <see cref="PowershellSettings"/> instance so that multiple calls can be chained.</returns>
         public static PowershellSettings UseComputerName(this PowershellSettings settings, string name)
@@ -126,8 +126,8 @@ namespace Cake.Powershell
         /// <summary>
         /// Sets the remote port to connect on.
         /// </summary>
-        /// <param name="settings">The process settings.</param>
-        /// <param name="path">The working directory for the process to be started.</param>
+        /// <param name="settings">The powershell settings.</param>
+        /// <param name="port">The remote port to connext on.</param>
         /// <returns>The same <see cref="PowershellSettings"/> instance so that multiple calls can be chained.</returns>
         public static PowershellSettings UsePort(this PowershellSettings settings, int port)
         {
@@ -143,7 +143,7 @@ namespace Cake.Powershell
         /// <summary>
         /// Gets or sets the credentials to use when connecting
         /// </summary>
-        /// <param name="settings">The process settings.</param>
+        /// <param name="settings">The powershell settings.</param>
         /// <param name="username">The username to connect with.</param>
         /// <returns>The same <see cref="PowershellSettings"/> instance so that multiple calls can be chained.</returns>
         public static PowershellSettings UseUsername(this PowershellSettings settings, string username)
@@ -160,7 +160,7 @@ namespace Cake.Powershell
         /// <summary>
         /// Gets or sets the credentials to use when connecting
         /// </summary>
-        /// <param name="settings">The process settings.</param>
+        /// <param name="settings">The powershell settings.</param>
         /// <param name="password">The password to connect with.</param>
         /// <returns>The same <see cref="PowershellSettings"/> instance so that multiple calls can be chained.</returns>
         public static PowershellSettings UsePassword(this PowershellSettings settings, string password)
@@ -179,7 +179,7 @@ namespace Cake.Powershell
         /// <summary>
         /// Sets a value indicating whether the output of an application should be formatted as text
         /// </summary>
-        /// <param name="settings">The process settings.</param>
+        /// <param name="settings">The powershell settings.</param>
         /// <param name="format">true if output should be written to the cake console; otherwise, false. The default is false.</param>
         /// <returns>The same <see cref="PowershellSettings"/> instance so that multiple calls can be chained.</returns>
         public static PowershellSettings SetFormatOutput(this PowershellSettings settings, bool format = true)
@@ -196,7 +196,7 @@ namespace Cake.Powershell
         /// <summary>
         /// Sets a value indicating whether the output of an application is written to the cake console
         /// </summary>
-        /// <param name="settings">The process settings.</param>
+        /// <param name="settings">The powershell settings.</param>
         /// <param name="log">true if output should be written to the cake console; otherwise, false. The default is false.</param>
         /// <returns>The same <see cref="PowershellSettings"/> instance so that multiple calls can be chained.</returns>
         public static PowershellSettings SetLogOutput(this PowershellSettings settings, bool log = true)
