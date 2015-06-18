@@ -12,7 +12,7 @@
 
 namespace Cake.Powershell
 {
-    public class CakePSHost : PSHost
+    internal class CakePSHost : PSHost
     {
         #region Fields (2)
             private Guid _ID = Guid.NewGuid();
@@ -24,7 +24,7 @@ namespace Cake.Powershell
 
 
         #region Constructor (1)
-            public CakePSHost(ICakeLog log)
+            internal CakePSHost(ICakeLog log)
             {
                 if (log == null)
                 {

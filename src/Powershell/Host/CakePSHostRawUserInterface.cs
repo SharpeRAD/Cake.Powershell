@@ -13,7 +13,7 @@
 
 namespace Cake.Powershell
 {
-    public class CakePSHostRawUserInterface : PSHostRawUserInterface
+    internal class CakePSHostRawUserInterface : PSHostRawUserInterface
     {
         #region Fields (1)
             private readonly ICakeLog _Log;
@@ -24,7 +24,7 @@ namespace Cake.Powershell
 
 
         #region Constructor (1)
-            public CakePSHostRawUserInterface(ICakeLog log)
+            internal CakePSHostRawUserInterface(ICakeLog log)
             {
                 if (log == null)
                 {
