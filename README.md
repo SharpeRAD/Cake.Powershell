@@ -21,6 +21,22 @@ This is a list of some the currently implemented functionality:
 
 
 
+## Referencing
+
+Cake.Powershell is avaiable as a nuget package from the package manager console:
+
+```csharp
+Install-Package Cake.Powershell
+```
+
+or directly in your build script via a cake addin:
+
+```csharp
+#addin "Cake.Powershell"
+```
+
+
+
 ## Usage
 
 ```csharp
