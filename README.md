@@ -1,5 +1,5 @@
 # Cake.Powershell
-Cake Build addon that extends Cake with Powershell commands
+Cake-Build addin that extends Cake with Powershell commands
 
 [![Build status](https://ci.appveyor.com/api/projects/status/5g0u2757tix9se6f?svg=true)](https://ci.appveyor.com/project/PhillipSharpe/cake-powershell)
 
@@ -10,8 +10,6 @@ Cake Build addon that extends Cake with Powershell commands
 
 
 ## Implemented functionality
-
-This is a list of some the currently implemented functionality:
 
 * Local / remote scripts
 * Script files
@@ -123,7 +121,7 @@ RunTarget("Powershell-Script");
 
 ## Example
 
-A complete cake build example can be found [here](https://github.com/SharpeRAD/Cake.Powershell/blob/master/test/build.cake)
+A complete Cake example can be found [here](https://github.com/SharpeRAD/Cake.Powershell/blob/master/test/build.cake)
 
 
 
