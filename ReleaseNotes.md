@@ -1,3 +1,6 @@
+### New in 0.1.5 (Released 2015/07/28)
+* Added namespace imports
+
 ### New in 0.1.4 (Released 2015/06/18)
 * Improved code documentation
 * Copy tools to test folder
