@@ -1,3 +1,6 @@
+### New in 0.1.6 (Released 2015/08/06)
+* Force build
+
 ### New in 0.1.5 (Released 2015/07/28)
 * Added namespace imports
 

@@ -81,6 +81,7 @@ Task("Clean")
 {
     // Clean solution directories.
 	Information("Cleaning old files");
+
 	CleanDirectories(new DirectoryPath[] 
 	{
         buildResultDir, binDir, testResultsDir, nugetRoot
