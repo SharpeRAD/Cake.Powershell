@@ -21,7 +21,7 @@ namespace Cake.Powershell.Tests
     public class ScriptTests
     {
         [Fact]
-        public void Script_Write()
+        public void Should_Start_Write_Script()
         {
             Collection<PSObject> results = CakeHelper.CreatePowershellRunner().Start("Write-Host", 
                 new PowershellSettings().WithArguments(args => args.Append("Testing...")));
@@ -30,7 +30,7 @@ namespace Cake.Powershell.Tests
         }
 
         [Fact]
-        public void Script_Local()
+        public void Should_Start_Service_Script()
         {
             Collection<PSObject> results = CakeHelper.CreatePowershellRunner().Start("Get-Service", 
                 new PowershellSettings());
@@ -42,7 +42,7 @@ namespace Cake.Powershell.Tests
 
         /*
         [Fact]
-        public void Script_Remote()
+        public void Should_Start_Remote_Script()
         {
             Collection<PSObject> results = CakeHelper.CreatePowershellRunner().Start("Get-Service", 
                 new PowershellSettings()

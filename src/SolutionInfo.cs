@@ -6,7 +6,8 @@
 using System.Reflection;
 
 [assembly: AssemblyProduct("Cake Powershell")]
-[assembly: AssemblyVersion("0.1.4")]
-[assembly: AssemblyFileVersion("0.1.4")]
-[assembly: AssemblyInformationalVersion("0.1.4")]
+[assembly: AssemblyVersion("0.1.6")]
+[assembly: AssemblyFileVersion("0.1.6")]
+[assembly: AssemblyInformationalVersion("0.1.6")]
 [assembly: AssemblyCopyright("Copyright (c) Phillip Sharpe 2015")]
+

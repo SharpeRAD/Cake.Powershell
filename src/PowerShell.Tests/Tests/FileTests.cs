@@ -20,7 +20,7 @@ namespace Cake.Powershell.Tests
     public class FileTests
     {
         [Fact]
-        public void File_Local()
+        public void Should_Start_Local_File()
         {
             Collection<PSObject> results = CakeHelper.CreatePowershellRunner().Start(new FilePath("../../Scripts/Test.ps1"), 
                 new PowershellSettings());
@@ -31,7 +31,7 @@ namespace Cake.Powershell.Tests
 
 
         [Fact]
-        public void File_Parameters()
+        public void Should_Start_File_With_Parameters()
         {
             Collection<PSObject> results = CakeHelper.CreatePowershellRunner().Start(new FilePath("../../Scripts/Test.ps1"),
                 new PowershellSettings().WithArguments(args => args.Append("Service", "eventlog")));
@@ -43,7 +43,7 @@ namespace Cake.Powershell.Tests
 
         /*
         [Fact]
-        public void File_Remote()
+        public void Should_Start_Remote_File()
         {
             Collection<PSObject> results = CakeHelper.CreatePowershellRunner().Start(new FilePath("../../Scripts/Test.ps1"), 
                 new PowershellSettings()
