@@ -13,9 +13,12 @@
 
 namespace Cake.Powershell
 {
+    /// <summary>
+    /// Powershell aliases.
+    /// </summary>
     [CakeAliasCategory("Powershell")]
     [CakeNamespaceImport("System.Management.Automation")]
-    public static class CakeAliases
+    public static class PowershellAliases
     {
         /// <summary>
         /// Starts a powershell script using the specified information.

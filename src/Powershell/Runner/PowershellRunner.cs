@@ -62,7 +62,12 @@ namespace Cake.Powershell
 
 
         #region Functions (6)
-            /// <inheritdoc/>
+            /// <summary>
+            /// Starts a powershell script using the specified information.
+            /// </summary>
+            /// <param name="script">The powershell script to run.</param>
+            /// <param name="settings">The information about the script to start.</param>
+            /// <returns>Powershell objects.</returns>
             public Collection<PSObject> Start(string script, PowershellSettings settings)
             {
                 if (String.IsNullOrEmpty(script))
@@ -89,7 +94,12 @@ namespace Cake.Powershell
                 return this.Invoke(script, settings);
             }
 
-            /// <inheritdoc/>
+            // <summary>
+            /// Starts a powershell script using the specified information.
+            /// </summary>
+            /// <param name="path">The path of the script file to run.</param>
+            /// <param name="settings">The information about the script to start.</param>
+            /// <returns>Powershell objects.</returns>
             public Collection<PSObject> Start(FilePath path, PowershellSettings settings)
             {
                 if (path == null)
@@ -117,7 +127,13 @@ namespace Cake.Powershell
                 return this.Invoke(script, settings);
             }
 
-            /// <inheritdoc/>
+            /// <summary>
+            /// Starts a powershell script using the specified information.
+            /// </summary>
+            /// <param name="uri">The location of the script file to download and run.</param>
+            /// <param name="path">The temporary path to download the file to.</param>
+            /// <param name="settings">The information about the process to start.</param>
+            /// <returns>Powershell objects.</returns>
             public Collection<PSObject> Start(Uri uri, FilePath path, PowershellSettings settings)
             {
                 if (uri == null)

@@ -48,7 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Aliases\CakeAliases.cs" />
+    <Compile Include="Aliases\PowershellAliases.cs" />
     <Compile Include="Extensions\ProcessArgumentListExtensions.cs" />
     <Compile Include="Arguments\NamedArgument.cs" />
     <Compile Include="Extensions\PowershellSettingsExtensions.cs" />
