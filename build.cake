@@ -251,7 +251,7 @@ Task("Slack")
 	var text = "Finished building version " + semVersion + " of " + appName;
 	
 	// Post the message.
-	var result = SlackChatPostMessage(token, channel, text);
+	var result = Slack.Chat.PostMessage(token, channel, text);
 	
 	if (result.Ok)
 	{
