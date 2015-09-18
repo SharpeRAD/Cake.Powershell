@@ -118,6 +118,10 @@ namespace Cake.Powershell
             {
                 throw new ArgumentNullException("settings");
             }
+            if(String.IsNullOrEmpty(name))
+            {
+                throw new ArgumentNullException("name");
+            }
 
             settings.ComputerName = name;
             return settings;
@@ -152,6 +156,10 @@ namespace Cake.Powershell
             {
                 throw new ArgumentNullException("settings");
             }
+            if (String.IsNullOrEmpty(username))
+            {
+                throw new ArgumentNullException("username");
+            }
 
             settings.Username = username;
             return settings;
@@ -168,6 +176,10 @@ namespace Cake.Powershell
             if (settings == null)
             {
                 throw new ArgumentNullException("settings");
+            }
+            if (String.IsNullOrEmpty(password))
+            {
+                throw new ArgumentNullException("password");
             }
 
             settings.Password = password;

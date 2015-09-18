@@ -22,7 +22,7 @@
 namespace Cake.Powershell
 {
     /// <summary>
-    /// Responsible for starting processes.
+    /// Responsible for executing powershell scripts.
     /// </summary>
     public sealed class PowershellRunner : IPowershellRunner
     {

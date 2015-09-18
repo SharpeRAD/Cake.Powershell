@@ -11,6 +11,9 @@
 
 namespace Cake.Powershell
 {
+    /// <summary>
+    /// Responsible for executing powershell scripts.
+    /// </summary>
     public interface IPowershellRunner
     {
         /// <summary>

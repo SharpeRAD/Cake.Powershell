@@ -23,7 +23,7 @@ namespace Cake.Powershell
         /// <summary>
         /// Starts a powershell script using the specified information.
         /// </summary>
-        /// <param name="context">The context.</param>
+        /// <param name="context">The cake context.</param>
         /// <param name="script">The powershell script to run.</param>
         /// <returns>A collection of powershell objects</returns>
         [CakeMethodAlias]
@@ -35,7 +35,7 @@ namespace Cake.Powershell
         /// <summary>
         /// Starts a powershell script using the specified information.
         /// </summary>
-        /// <param name="context">The context.</param>
+        /// <param name="context">The cake context.</param>
         /// <param name="script">The powershell script to run.</param>
         /// <param name="arguments">The arguments to append.</param>
         /// <returns>A collection of powershell objects</returns>
@@ -48,7 +48,7 @@ namespace Cake.Powershell
         /// <summary>
         /// Starts a powershell script using the specified information.
         /// </summary>
-        /// <param name="context">The context.</param>
+        /// <param name="context">The cake context.</param>
         /// <param name="script">The powershell script to run.</param>
         /// <param name="settings">The information about the script to start.</param>
         /// <returns>A collection of powershell objects</returns>
@@ -63,7 +63,7 @@ namespace Cake.Powershell
         /// <summary>
         /// Starts a powershell script using the specified information.
         /// </summary>
-        /// <param name="context">The context.</param>
+        /// <param name="context">The cake context.</param>
         /// <param name="path">The path of the script file to run.</param>
         /// <returns>A collection of powershell objects</returns>
         [CakeMethodAlias]
@@ -75,7 +75,7 @@ namespace Cake.Powershell
         /// <summary>
         /// Starts a powershell script using the specified information.
         /// </summary>
-        /// <param name="context">The context.</param>
+        /// <param name="context">The cake context.</param>
         /// <param name="path">The path of the script file to run.</param>
         /// <param name="arguments">The arguments to append.</param>
         /// <returns>A collection of powershell objects</returns>
@@ -88,7 +88,7 @@ namespace Cake.Powershell
         /// <summary>
         /// Starts a powershell script using the specified information.
         /// </summary>
-        /// <param name="context">The context.</param>
+        /// <param name="context">The cake context.</param>
         /// <param name="path">The path of the script file to run.</param>
         /// <param name="settings">The information about the script to start.</param>
         /// <returns>A collection of powershell objects</returns>
@@ -103,7 +103,7 @@ namespace Cake.Powershell
         /// <summary>
         /// Starts a powershell script using the specified information.
         /// </summary>
-        /// <param name="context">The context.</param>
+        /// <param name="context">The cake context.</param>
         /// <param name="uri">The location of the script file to download and run.</param>
         /// <param name="path">The temporary path to download the file to.</param>
         /// <returns>A collection of powershell objects</returns>
@@ -116,7 +116,7 @@ namespace Cake.Powershell
         /// <summary>
         /// Starts a powershell script using the specified information.
         /// </summary>
-        /// <param name="context">The context.</param>
+        /// <param name="context">The cake context.</param>
         /// <param name="uri">The location of the script file to download and run.</param>
         /// <param name="path">The temporary path to download the file to.</param>
         /// <param name="arguments">The arguments to append.</param>
@@ -130,7 +130,7 @@ namespace Cake.Powershell
         /// <summary>
         /// Starts a powershell script using the specified information.
         /// </summary>
-        /// <param name="context">The context.</param>
+        /// <param name="context">The cake context.</param>
         /// <param name="uri">The location of the script file to download and run.</param>
         /// <param name="path">The temporary path to download the file to.</param>
         /// <param name="settings">The information about the script to start.</param>

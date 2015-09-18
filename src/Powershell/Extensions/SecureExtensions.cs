@@ -8,7 +8,7 @@
 namespace Cake.Powershell
 {
     /// <summary>
-    /// Responsible for creating secure strings
+    /// Extensions methods for creating secure strings
     /// </summary>
     public static class SecureExtensions
     {

@@ -42,6 +42,7 @@ namespace Cake.Powershell
             {
                 builder.Append(new NamedArgument(name, new TextArgument(text), format));
             }
+
             return builder;
         }
 
@@ -76,6 +77,7 @@ namespace Cake.Powershell
             {
                 builder.Append(new NamedArgument(name, new QuotedArgument(argument)));
             }
+
             return builder;
         }
 
@@ -93,6 +95,7 @@ namespace Cake.Powershell
             {
                 builder.Append(new NamedArgument(name, new QuotedArgument(argument), format));
             }
+
             return builder;
         }
 
@@ -111,6 +114,7 @@ namespace Cake.Powershell
             {
                 builder.Append(new NamedArgument(name, new SecretArgument(new TextArgument(text))));
             }
+
             return builder;
         }
 
@@ -144,6 +148,7 @@ namespace Cake.Powershell
             {
                 builder.Append(new NamedArgument(name, new SecretArgument(argument), format));
             }
+
             return builder;
         }
 
@@ -162,6 +167,7 @@ namespace Cake.Powershell
             {
                 builder.Append(new NamedArgument(name, new QuotedArgument(new SecretArgument(new TextArgument(text)))));
             }
+
             return builder;
         }
 
@@ -178,6 +184,7 @@ namespace Cake.Powershell
             {
                 builder.Append(new NamedArgument(name, new QuotedArgument(new SecretArgument(argument))));
             }
+
             return builder;
         }
 
@@ -195,6 +202,7 @@ namespace Cake.Powershell
             {
                 builder.Append(new NamedArgument(name, new QuotedArgument(new SecretArgument(argument)), format));
             }
+
             return builder;
         }
     }

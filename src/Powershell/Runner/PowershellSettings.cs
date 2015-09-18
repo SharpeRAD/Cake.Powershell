@@ -11,7 +11,7 @@
 namespace Cake.Powershell
 {
     /// <summary>
-    /// Responsible for starting powershell processes.
+    /// The settings used when running powershell processes.
     /// </summary>
     public class PowershellSettings
     {

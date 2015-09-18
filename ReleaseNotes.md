@@ -1,3 +1,6 @@
+### New in 0.1.7 (Released 2015/09/18)
+* Compelete documentation
+
 ### New in 0.1.6 (Released 2015/08/06)
 * Force build
 
