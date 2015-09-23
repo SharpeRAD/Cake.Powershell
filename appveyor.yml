@@ -13,5 +13,5 @@ test: off
 branches:
   # Whitelist
   only:
+    - master
     - develop
-    - main
