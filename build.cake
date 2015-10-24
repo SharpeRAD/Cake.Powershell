@@ -155,20 +155,20 @@ Task("Copy-Files")
     .IsDependentOn("Run-Unit-Tests")
     .Does(() =>
 {
-	CopyFileToDirectory("./lib/System.Management.Automation.dll", binDir);
-
-    CopyFileToDirectory(buildDir + "/Cake.Core.dll", binDir);
-
     CopyFileToDirectory(buildDir + "/Cake.Powershell.dll", binDir);
     CopyFileToDirectory(buildDir + "/Cake.Powershell.pdb", binDir);
 
+    CopyFileToDirectory("./lib/System.Management.Automation.dll", binDir);
+
     CopyFiles(new FilePath[] { "LICENSE", "README.md", "ReleaseNotes.md" }, binDir);
+
 
 
 	CopyDirectory("./tools/",  "./test/tools/");
 	CreateDirectory("./test/tools/Addins/Cake.Powershell/lib/net45/");
 
 	CopyFileToDirectory(buildDir + "/Cake.Powershell.dll", "./test/tools/Addins/Cake.Powershell/lib/net45/");
+
 	CopyFileToDirectory("./lib/System.Management.Automation.dll", "./test/tools/Addins/Cake.Powershell/lib/net45/");
 });
 

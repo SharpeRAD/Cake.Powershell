@@ -1,3 +1,6 @@
+### New in 0.1.8 (Released 2015/10/24)
+* Remove Cake.Core from nuget
+
 ### New in 0.1.7 (Released 2015/09/18)
 * Compelete documentation
 
