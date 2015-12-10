@@ -14,7 +14,7 @@
 namespace Cake.Powershell
 {
     /// <summary>
-    /// Powershell aliases.
+    /// Contains Cake aliases for running Powershell commands.
     /// </summary>
     [CakeAliasCategory("Powershell")]
     [CakeNamespaceImport("System.Management.Automation")]

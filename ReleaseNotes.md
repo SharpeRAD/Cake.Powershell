@@ -1,3 +1,7 @@
+### New in 0.1.9 (Released 2015/12/10)
+* Add Cake namespace docs
+* Update Cake.Core reference
+
 ### New in 0.1.8 (Released 2015/10/24)
 * Remove Cake.Core from nuget
 
