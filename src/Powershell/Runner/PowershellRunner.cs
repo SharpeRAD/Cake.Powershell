@@ -94,7 +94,7 @@ namespace Cake.Powershell
                 return this.Invoke(script, settings);
             }
 
-            // <summary>
+            /// <summary>
             /// Starts a powershell script using the specified information.
             /// </summary>
             /// <param name="path">The path of the script file to run.</param>

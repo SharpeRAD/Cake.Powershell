@@ -16,6 +16,9 @@ namespace Cake.Powershell
     public class PowershellSettings
     {
         #region Constructor (1)
+            /// <summary>
+            /// Initializes a new instance of the <see cref="PowershellSettings" /> class.
+            /// </summary>
             public PowershellSettings()
             {
                 this.FormatOutput = false;

@@ -19,7 +19,7 @@ namespace Cake.Powershell
             private readonly IProcessArgument _Value;
 
             private string _Format;
-            public const string DefaultFormat = "-{0} {1}";
+            private const string DefaultFormat = "-{0} {1}";
         #endregion
 
 
