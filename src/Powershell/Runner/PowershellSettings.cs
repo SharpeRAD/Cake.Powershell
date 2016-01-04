@@ -30,7 +30,7 @@ namespace Cake.Powershell
 
 
 
-        #region Properties (1)
+        #region Properties (10)
             /// <summary>
             /// Gets or sets the working directory for the process to be started.
             /// </summary>
