@@ -1,70 +1,160 @@
 Param(
     [string]$Script = "build.cake",
+	[string]$Tools,
+
     [string]$Target = "Default",
+    [string]$Custom = "",
+
+    [ValidateSet("Release", "Debug")]
     [string]$Configuration = "Release",
-    [string]$Verbosity = "Verbose"
+	
+    [ValidateSet("Quiet", "Minimal", "Normal", "Verbose", "Diagnostic")]
+    [string]$Verbosity = "Verbose",
+	
+	[int]$BufferHeight = 5000,
+
+    [switch]$Experimental,
+    [switch]$WhatIf,
+    [switch]$Mono,
+    [switch]$SkipToolPackageRestore,
+	
+	[Parameter(ValueFromRemainingArguments = $true)]
+    [string[]]$ScriptArgs
 )
 
-$TOOLS_DIR = Join-Path $PSScriptRoot "tools"
-$NUGET_EXE = Join-Path $TOOLS_DIR "nuget.exe"
+
+
+# Find tools
+if(($Tools.IsPresent) -and (Test-Path $Tools))
+{
+	# Parameter
+	Write-Host "Using tools parameter"
+	$TOOLS_DIR = $Tools
+}
+elseif (Test-Path "C:/Tools/Cake/Cake.exe") 
+{
+	# Shared location
+    Write-Host "Using shared tools"
+	$TOOLS_DIR = "C:/Tools/"
+}
+else
+{
+	# Local path
+	Write-Host "Using local tools"
+	$PSScriptRoot = split-path -parent $MyInvocation.MyCommand.Definition
+	$TOOLS_DIR = Join-Path $PSScriptRoot "tools"
+
+	if (!(Test-Path $TOOLS_DIR)) 
+	{
+		Write-Host "Creating tools directory"
+		New-Item $TOOLS_DIR -itemtype directory
+	}
+}
+
+
+
+# Define Paths
 $CAKE_EXE = Join-Path $TOOLS_DIR "Cake/Cake.exe"
+
+$NUGET_URL = "https://nuget.org/nuget.exe"
+$NUGET_EXE = Join-Path $TOOLS_DIR "nuget.exe"
+
 $PACKAGES_CONFIG = Join-Path $TOOLS_DIR "packages.config"
 
-# Make sure tools folder exists
-if ((Test-Path $PSScriptRoot) -and !(Test-Path $TOOLS_DIR)) {
-    New-Item -path $TOOLS_DIR -name logfiles -itemtype directory
+
+
+# Save paths to environment for use in child processes
+$ENV:PATH = $TOOLS_DIR
+$ENV:NUGET_EXE = $NUGET_EXE
+
+
+
+# Increase the default buffer size
+$PSHost = get-host
+$PSWindow = $PSHost.ui.rawui
+
+$BufferSize = $PSWindow.buffersize
+$BufferSize.height = $BufferHeight
+$BufferSize.width = 120
+$PSWindow.buffersize = $BufferSize
+
+$WindowSize = $PSWindow.windowsize
+$WindowSize.height = 50
+$WindowSize.width = 120
+$PSWindow.windowsize = $WindowSize
+
+
+
+# Should we use experimental build of Roslyn?
+$UseExperimental = "";
+if($Experimental.IsPresent) 
+{
+    $UseExperimental = "-experimental"
 }
 
-# Try find NuGet.exe in path if not exists
-if (!(Test-Path $NUGET_EXE)) {
-    "Trying to find nuget.exe in path"
-    $NUGET_EXE_IN_PATH = &where.exe nuget.exe
-    if ($NUGET_EXE_IN_PATH -ne $null -and (Test-Path $NUGET_EXE_IN_PATH)) {
-        "Found $($NUGET_EXE_IN_PATH)"
-        $NUGET_EXE = $NUGET_EXE_IN_PATH 
-    }
+# Is this a dry run?
+$UseDryRun = "";
+if($WhatIf.IsPresent) 
+{
+    $UseDryRun = "-dryrun"
 }
 
-# Try download NuGet.exe if not exists
-if (!(Test-Path $NUGET_EXE)) {
-    Invoke-WebRequest -Uri http://nuget.org/nuget.exe -OutFile $NUGET_EXE
+# Should we use mono?
+$UseMono = "";
+if($Mono.IsPresent) 
+{
+    $UseMono = "-mono"
+}
+
+
+
+# Try download NuGet.exe if it does not exist.
+if (!(Test-Path $NUGET_EXE)) 
+{
+	Write-Host "Downloading Nuget"
+    (New-Object System.Net.WebClient).DownloadFile($NUGET_URL, $NUGET_EXE)
 }
 
 # Make sure NuGet exists where we expect it.
-if (!(Test-Path $NUGET_EXE)) {
+if (!(Test-Path $NUGET_EXE)) 
+{
     Throw "Could not find NuGet.exe"
 }
 
-# Save nuget.exe path to environment to be available to child processed
-$ENV:NUGET_EXE = $NUGET_EXE
 
-# Restore tools from NuGet.
-Push-Location
-Set-Location $TOOLS_DIR
 
-# Restore packages
-if (Test-Path $PACKAGES_CONFIG)
+# Restore tools from NuGet
+if (-Not $SkipToolPackageRestore.IsPresent)
 {
-    Invoke-Expression "&`"$NUGET_EXE`" install -ExcludeVersion"
-}
-# Install just Cake if missing config
-else
-{
-    Invoke-Expression "&`"$NUGET_EXE`" install Cake -ExcludeVersion"
-}
-Pop-Location
-if ($LASTEXITCODE -ne 0)
-{
-    exit $LASTEXITCODE
+    Push-Location
+    Set-Location $TOOLS_DIR
+
+	if (Test-Path $PACKAGES_CONFIG)
+	{
+		# Restore tools from config
+		Invoke-Expression "$NUGET_EXE install -ExcludeVersion"
+	}
+	else
+	{
+		# Install just Cake if missing config
+		Invoke-Expression "$NUGET_EXE install Cake -ExcludeVersion"
+	}
+
+    Pop-Location
+    if ($LASTEXITCODE -ne 0) 
+	{
+        exit $LASTEXITCODE
+    }
 }
 
 # Make sure that Cake has been installed.
-if (!(Test-Path $CAKE_EXE)) {
+if (!(Test-Path $CAKE_EXE)) 
+{
     Throw "Could not find Cake.exe"
 }
 
+
+
 # Start Cake
-Invoke-Expression "&`"$CAKE_EXE`" `"$Script`" -target=`"$Target`" -configuration=`"$Configuration`" -verbosity=`"$Verbosity`""
+Invoke-Expression "$CAKE_EXE `"$Script`" -tools=`"$TOOLS_DIR`" -target=`"$Target`" -configuration=`"$Configuration`" -custom=`"$Custom`" -verbosity=`"$Verbosity`" $UseMono $UseDryRun $UseExperimental $ScriptArgs"
 exit $LASTEXITCODE
-
-
