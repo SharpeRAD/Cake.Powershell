@@ -16,10 +16,7 @@ Param(
     [switch]$Experimental,
     [switch]$WhatIf,
     [switch]$Mono,
-    [switch]$SkipToolPackageRestore,
-	
-	[Parameter(ValueFromRemainingArguments = $true)]
-    [string[]]$ScriptArgs
+    [switch]$SkipToolPackageRestore
 )
 
 
@@ -64,7 +61,7 @@ $PACKAGES_CONFIG = Join-Path $TOOLS_DIR "packages.config"
 
 
 # Save paths to environment for use in child processes
-$ENV:PATH = $TOOLS_DIR
+$ENV:TOOLS_DIR = $TOOLS_DIR
 $ENV:NUGET_EXE = $NUGET_EXE
 
 
@@ -156,5 +153,5 @@ if (!(Test-Path $CAKE_EXE))
 
 
 # Start Cake
-Invoke-Expression "$CAKE_EXE `"$Script`" -tools=`"$TOOLS_DIR`" -target=`"$Target`" -configuration=`"$Configuration`" -custom=`"$Custom`" -verbosity=`"$Verbosity`" $UseMono $UseDryRun $UseExperimental $ScriptArgs"
+Invoke-Expression "$CAKE_EXE `"$Script`" -tools=`"$TOOLS_DIR`" -target=`"$Target`" -configuration=`"$Configuration`" -custom=`"$Custom`" -verbosity=`"$Verbosity`" $UseMono $UseDryRun $UseExperimental"
 exit $LASTEXITCODE
