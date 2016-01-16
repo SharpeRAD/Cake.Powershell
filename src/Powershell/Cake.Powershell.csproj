@@ -56,11 +56,13 @@
     <Compile Include="Host\CakePSHostInterface.cs" />
     <Compile Include="Host\CakePSHostRawUserInterface.cs" />
     <Compile Include="Interfaces\IPowershellRunner.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Properties\Namespaces.cs" />
-    <Compile Include="Properties\SolutionInfo.cs" />
     <Compile Include="Runner\PowershellRunner.cs" />
     <Compile Include="Runner\PowershellSettings.cs" />
+	<Compile Include="Properties\Namespaces.cs" />
+	<Compile Include="Properties\AssemblyInfo.cs" />
+	<Compile Include="..\SolutionInfo.cs">
+      <Link>Properties\SolutionInfo.cs</Link>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

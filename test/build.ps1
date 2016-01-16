@@ -4,7 +4,7 @@ Param(
 
     [ValidateSet("Release", "Debug")]
     [string]$Configuration = "Release",
-	
+    
     [ValidateSet("Quiet", "Minimal", "Normal", "Verbose", "Diagnostic")]
     [string]$Verbosity = "Verbose",
 
@@ -23,8 +23,8 @@ $TOOLS_DIR = Join-Path $PSScriptRoot "tools"
 
 if (!(Test-Path $TOOLS_DIR)) 
 {
-	Write-Host "Creating tools directory"
-	New-Item $TOOLS_DIR -itemtype directory
+    Write-Host "Creating tools directory"
+    New-Item $TOOLS_DIR -itemtype directory
 }
 
 
@@ -71,7 +71,7 @@ if($Mono.IsPresent)
 # Try download NuGet.exe if it does not exist.
 if (!(Test-Path $NUGET_EXE)) 
 {
-	Write-Host "Downloading Nuget"
+    Write-Host "Downloading Nuget"
     (New-Object System.Net.WebClient).DownloadFile($NUGET_URL, $NUGET_EXE)
 }
 
@@ -89,20 +89,20 @@ if (-Not $SkipToolPackageRestore.IsPresent)
     Push-Location
     Set-Location $TOOLS_DIR
 
-	if (Test-Path $PACKAGES_CONFIG)
-	{
-		# Restore tools from config
-		Invoke-Expression "$NUGET_EXE install -ExcludeVersion"
-	}
-	else
-	{
-		# Install just Cake if missing config
-		Invoke-Expression "$NUGET_EXE install Cake -ExcludeVersion"
-	}
+    if (Test-Path $PACKAGES_CONFIG)
+    {
+        # Restore tools from config
+        Invoke-Expression "$NUGET_EXE install -ExcludeVersion"
+    }
+    else
+    {
+        # Install just Cake if missing config
+        Invoke-Expression "$NUGET_EXE install Cake -ExcludeVersion"
+    }
 
     Pop-Location
     if ($LASTEXITCODE -ne 0) 
-	{
+    {
         exit $LASTEXITCODE
     }
 }

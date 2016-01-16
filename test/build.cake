@@ -18,21 +18,21 @@ var configuration = Argument("configuration", "Release");
 Task("Powershell-Script")
     .Description("Run an example powershell command")
     .Does(() =>
-	{
-		Information("Calling Powershell Script");
+    {
+        Information("Calling Powershell Script");
 
-		StartPowershellScript("Write-Host 'hello world'");
+        StartPowershellScript("Write-Host 'hello world'");
 
-		StartPowershellScript("Get-Process", new PowershellSettings()
-			.SetFormatOutput()
-			.SetLogOutput());
+        StartPowershellScript("Get-Process", new PowershellSettings()
+            .SetFormatOutput()
+            .SetLogOutput());
 
-		StartPowershellScript("Stop-Service", new PowershellSettings()
-			.WithArguments(args => 
-			{ 
-				args.AppendQuoted("MpsSvc"); 
-			}));
-	});
+        StartPowershellScript("Stop-Service", new PowershellSettings()
+            .WithArguments(args => 
+            { 
+                args.AppendQuoted("MpsSvc"); 
+            }));
+    });
 
 
 

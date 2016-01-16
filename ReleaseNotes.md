@@ -1,3 +1,6 @@
+### New in 0.2.1 (Released 2016/01/16)
+* Fixed SolutionInfo link
+
 ### New in 0.2.0 (Released 2015/12/28)
 * Add xml documentation
 
@@ -9,7 +12,7 @@
 * Remove Cake.Core from nuget
 
 ### New in 0.1.7 (Released 2015/09/18)
-* Compelete documentation
+* Complete documentation
 
 ### New in 0.1.6 (Released 2015/08/06)
 * Force build
@@ -37,7 +40,7 @@
 * Output Powershell exceptions to the cake console
 
 ### New in 0.0.8 (Released 2015/05/31)
-* Fixed bug in outputing to the cake console
+* Fixed bug in outputting to the cake console
 
 ### New in 0.0.7 (Released 2015/05/29)
 * Changes to package publishing
