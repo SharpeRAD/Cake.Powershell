@@ -42,7 +42,7 @@ Cake.Powershell is available as a nuget package from the package manager console
 Install-Package Cake.Powershell
 ```
 
-or directly in your build script via a cake addin:
+or directly in your build script via a cake addin directive:
 
 ```csharp
 #addin "Cake.Powershell"

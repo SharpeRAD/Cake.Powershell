@@ -7,10 +7,10 @@ Param(
 
     [ValidateSet("Release", "Debug")]
     [string]$Configuration = "Release",
-    
+
     [ValidateSet("Quiet", "Minimal", "Normal", "Verbose", "Diagnostic")]
     [string]$Verbosity = "Verbose",
-    
+
     [int]$BufferHeight = 5000,
 
     [switch]$Experimental,
@@ -28,20 +28,20 @@ if(($Tools.IsPresent) -and (Test-Path $Tools))
     Write-Host "Using tools parameter"
     $TOOLS_DIR = $Tools
 }
-elseif (Test-Path "C:/Tools/Cake/Cake.exe") 
+elseif (Test-Path "C:/Tools/Cake/Cake.exe")
 {
     # Shared location
     Write-Host "Using shared tools"
-    $TOOLS_DIR = "C:/Tools/"
+    $TOOLS_DIR = "C:/Tools"
 }
 else
 {
     # Local path
     Write-Host "Using local tools"
     $PSScriptRoot = split-path -parent $MyInvocation.MyCommand.Definition
-    $TOOLS_DIR = Join-Path $PSScriptRoot "tools"
+    $TOOLS_DIR = Join-Path $PSScriptRoot "/tools"
 
-    if (!(Test-Path $TOOLS_DIR)) 
+    if (!(Test-Path $TOOLS_DIR))
     {
         Write-Host "Creating tools directory"
         New-Item $TOOLS_DIR -itemtype directory
@@ -84,21 +84,21 @@ $PSWindow.windowsize = $WindowSize
 
 # Should we use experimental build of Roslyn?
 $UseExperimental = "";
-if($Experimental.IsPresent) 
+if($Experimental.IsPresent)
 {
     $UseExperimental = "-experimental"
 }
 
 # Is this a dry run?
 $UseDryRun = "";
-if($WhatIf.IsPresent) 
+if($WhatIf.IsPresent)
 {
     $UseDryRun = "-dryrun"
 }
 
 # Should we use mono?
 $UseMono = "";
-if($Mono.IsPresent) 
+if($Mono.IsPresent)
 {
     $UseMono = "-mono"
 }
@@ -106,14 +106,14 @@ if($Mono.IsPresent)
 
 
 # Try download NuGet.exe if it does not exist.
-if (!(Test-Path $NUGET_EXE)) 
+if (!(Test-Path $NUGET_EXE))
 {
     Write-Host "Downloading Nuget"
     (New-Object System.Net.WebClient).DownloadFile($NUGET_URL, $NUGET_EXE)
 }
 
 # Make sure NuGet exists where we expect it.
-if (!(Test-Path $NUGET_EXE)) 
+if (!(Test-Path $NUGET_EXE))
 {
     Throw "Could not find NuGet.exe"
 }
@@ -138,14 +138,14 @@ if (-Not $SkipToolPackageRestore.IsPresent)
     }
 
     Pop-Location
-    if ($LASTEXITCODE -ne 0) 
+    if ($LASTEXITCODE -ne 0)
     {
         exit $LASTEXITCODE
     }
 }
 
 # Make sure that Cake has been installed.
-if (!(Test-Path $CAKE_EXE)) 
+if (!(Test-Path $CAKE_EXE))
 {
     Throw "Could not find Cake.exe"
 }
