@@ -38,7 +38,15 @@ namespace Cake.Powershell.Tests
             Assert.True((results != null) && (results.Count > 0), "Check Rights");
         }
 
+        [Fact]
+        public void Working_Directory_With_Spaces_Should_Properly_Execute()
+        {
+            Collection<PSObject> results = CakeHelper.CreatePowershellRunner().Start("Write-Host",
+                new PowershellSettings().WithArguments(args => args.Append("Testing..."))
+                                        .UseWorkingDirectory(@"C:\Path With Spaces\"));
 
+            Assert.True((DebugLog.Lines != null) && (DebugLog.Lines.Contains("Testing...")), "Output not written to the powershell host");
+        }
 
         /*
         [Fact]
