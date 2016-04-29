@@ -1,3 +1,6 @@
+### New in 0.2.2 (Released 2016/04/29)
+* Fixed missing quotes from set-location command
+
 ### New in 0.2.1 (Released 2016/01/16)
 * Fixed SolutionInfo link
 
