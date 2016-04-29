@@ -6,6 +6,7 @@
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Diagnostics;
+    using System.Globalization;
     using System.Security.Principal;
 
     using Cake.Core;
@@ -262,7 +263,8 @@ namespace Cake.Powershell
                     //Invoke Command
                     if (settings.WorkingDirectory != null)
                     {
-                        pipeline.Commands.AddScript("Set-Location -Path " + settings.WorkingDirectory.FullPath);
+                        var path = string.Format(CultureInfo.InvariantCulture, "\"{0}\"", settings.WorkingDirectory.FullPath);
+                        pipeline.Commands.AddScript("Set-Location -Path " + path);
                     }
 
                     if ((settings.Modules != null) && (settings.Modules.Count > 0))
