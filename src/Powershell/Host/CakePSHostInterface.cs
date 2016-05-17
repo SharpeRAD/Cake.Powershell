@@ -70,7 +70,6 @@ namespace Cake.Powershell
 
             public override void WriteLine()
             {
-
             }
 
             public override void WriteLine(string value)
@@ -83,7 +82,10 @@ namespace Cake.Powershell
                 _Log.Write(Verbosity.Normal, LogLevel.Information, value);
             }
 
-
+            public override void WriteInformation(InformationRecord record)
+            {
+                _Log.Write(Verbosity.Verbose, LogLevel.Information, "{0}", record.MessageData);
+            }
 
             public override void WriteDebugLine(string value)
             {
@@ -104,8 +106,6 @@ namespace Cake.Powershell
             {
                 _Log.Write(Verbosity.Verbose, LogLevel.Warning, value);
             }
-
-
 
             public override void WriteProgress(long sourceId, ProgressRecord record)
             {
