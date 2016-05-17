@@ -55,7 +55,7 @@ var zipPackage = buildResultDir + "/Cake-Powershell-v" + semVersion + ".zip";
 // SETUP / TEARDOWN
 ///////////////////////////////////////////////////////////////////////////////
 
-Setup(() =>
+Setup(context =>
 {
     //Executed BEFORE the first task.
     Information("Building version {0} of {1}.", semVersion, appName);
@@ -68,7 +68,7 @@ Setup(() =>
     });
 });
 
-Teardown(() =>
+Teardown(context =>
 {
     // Executed AFTER the last task.
     Information("Finished building version {0} of {1}.", semVersion, appName);
@@ -179,7 +179,7 @@ Task("Copy-Files")
     CopyFileToDirectory(buildDir + "/Cake.Powershell.pdb", binDir);
     CopyFileToDirectory(buildDir + "/Cake.Powershell.xml", binDir);
 
-    CopyFileToDirectory("./lib/System.Management.Automation.dll", binDir);
+    CopyFileToDirectory(buildDir + "/System.Management.Automation.dll", binDir);
 
     CopyFiles(new FilePath[] { "LICENSE", "README.md", "ReleaseNotes.md" }, binDir);
 
@@ -189,7 +189,7 @@ Task("Copy-Files")
     CreateDirectory("./test/tools/Addins/Cake.Powershell/lib/net45/");
 
     CopyFileToDirectory(buildDir + "/Cake.Powershell.dll", "./test/tools/Addins/Cake.Powershell/lib/net45/");
-    CopyFileToDirectory("./lib/System.Management.Automation.dll", "./test/tools/Addins/Cake.Powershell/lib/net45/");
+    CopyFileToDirectory(buildDir + "/System.Management.Automation.dll", "./test/tools/Addins/Cake.Powershell/lib/net45/");
 });
 
 Task("Zip-Files")

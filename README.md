@@ -34,7 +34,7 @@ Cake-Build addin that extends Cake with Powershell commands
 
 ## Referencing
 
-[![NuGet Version](http://img.shields.io/nuget/v/Cake.Powershell.svg?style=flat)](https://www.nuget.org/packages/Cake.Powershell/) [![NuGet Downloads](http://img.shields.io/nuget/dt/Cake.Powershell.svg?style=flat)](https://www.nuget.org/packages/Cake.Powershell/)
+[![NuGet Version](http://img.shields.io/nuget/v/Cake.Powershell.svg?style=flat)](https://www.nuget.org/packages/Cake.Powershell/)
 
 Cake.Powershell is available as a nuget package from the package manager console:
 

@@ -1,3 +1,9 @@
+### New in 0.2.3 (Released 2016/05/17)
+* Target Powershell 5.0
+* Add nuget dependencies
+* Update all packages
+* Setup / Teardown with context
+
 ### New in 0.2.2 (Released 2016/04/29)
 * Fixed missing quotes from set-location command
 
