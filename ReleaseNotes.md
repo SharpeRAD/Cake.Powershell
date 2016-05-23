@@ -1,3 +1,6 @@
+### New in 0.2.4 (Released 2016/05/23)
+* StringLiteralArgument
+
 ### New in 0.2.3 (Released 2016/05/17)
 * Target Powershell 5.0
 * Add nuget dependencies
