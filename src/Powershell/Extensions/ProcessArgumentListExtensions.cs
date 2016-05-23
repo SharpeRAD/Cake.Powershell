@@ -99,7 +99,34 @@ namespace Cake.Powershell
             return builder;
         }
 
+        /// <summary>
+        /// Appends the specified text as a string-literal to the argument builder.
+        /// </summary>
+        /// <param name="builder">The builder.</param>
+        /// <param name="name">The argument name.</param>
+        /// <param name="text">The text to be quoted and appended as a string-literal.</param>
+        /// <returns>The same <see cref="ProcessArgumentBuilder"/> instance so that multiple calls can be chained.</returns>
+        public static ProcessArgumentBuilder AppendStringLiteral(this ProcessArgumentBuilder builder, string name, string text)
+        {
+            return AppendStringLiteral(builder, name, new TextArgument(text));
+        }
 
+        /// <summary>
+        /// Appends the specified argument as a string-literal to the argument builder.
+        /// </summary>
+        /// <param name="builder">The builder.</param>
+        /// <param name="name">The argument name.</param>
+        /// <param name="argument">The argument to be quoted and appended as a string-literal.</param>
+        /// <returns>The same <see cref="ProcessArgumentBuilder"/> instance so that multiple calls can be chained.</returns>
+        public static ProcessArgumentBuilder AppendStringLiteral(this ProcessArgumentBuilder builder, string name, IProcessArgument argument)
+        {
+            if (builder != null)
+            {
+                builder.Append(new NamedArgument(name, new StringLiteralArgument(argument)));
+            }
+
+            return builder;
+        }
 
         /// <summary>
         /// Appends the specified secret text to the argument builder.
@@ -152,8 +179,6 @@ namespace Cake.Powershell
             return builder;
         }
 
-
-
         /// <summary>
         /// Quotes and appends the specified secret text to the argument builder.
         /// </summary>
@@ -201,6 +226,34 @@ namespace Cake.Powershell
             if (builder != null)
             {
                 builder.Append(new NamedArgument(name, new QuotedArgument(new SecretArgument(argument)), format));
+            }
+
+            return builder;
+        }
+
+        /// <summary>
+        /// Appends the specified secret text as a string-literal to the argument builder.
+        /// </summary>
+        /// <param name="builder">The builder.</param>
+        /// <param name="name">The argument name.</param>
+        /// <param name="text">The secret text to be appended.</param>
+        public static ProcessArgumentBuilder AppendStringLiteralSecret(this ProcessArgumentBuilder builder, string name, string text)
+        {
+            return AppendStringLiteralSecret(builder, name, new TextArgument(text));
+        }
+
+        /// <summary>
+        /// Appends the specified secret argument as a string-literal to the argument builder.
+        /// </summary>
+        /// <param name="builder">The builder.</param>
+        /// <param name="name">The argument name.</param>
+        /// <param name="argument">The secret argument to be appended.</param>
+        /// <returns>The same <see cref="ProcessArgumentBuilder"/> instance so that multiple calls can be chained.</returns>
+        public static ProcessArgumentBuilder AppendStringLiteralSecret(this ProcessArgumentBuilder builder, string name, IProcessArgument argument)
+        {
+            if (builder != null)
+            {
+                builder.Append(new NamedArgument(name, new StringLiteralArgument(new SecretArgument(argument))));
             }
 
             return builder;
