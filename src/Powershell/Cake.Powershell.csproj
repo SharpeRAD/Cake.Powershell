@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="Aliases\PowershellAliases.cs" />
     <Compile Include="Arguments\NamedArgument.cs" />
+    <Compile Include="Arguments\StringLiteralArgument.cs" />
     <Compile Include="Extensions\PowershellSettingsExtensions.cs" />
     <Compile Include="Extensions\ProcessArgumentListExtensions.cs" />
     <Compile Include="Extensions\SecureExtensions.cs" />
