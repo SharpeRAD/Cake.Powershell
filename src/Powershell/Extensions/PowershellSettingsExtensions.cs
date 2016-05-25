@@ -221,5 +221,22 @@ namespace Cake.Powershell
             settings.LogOutput = log;
             return settings;
         }
+
+        /// <summary>
+        /// Sets a value indicating whether the output of an application is written to its on-screen console.
+        /// </summary>
+        /// <param name="settings">The powershell settings.</param>
+        /// <param name="outputToAppConsole">true if output should be written to the app's on-screen console; otherwsie, false. The default is true.</param>
+        /// <returns>The same <see cref="PowershellSettings"/> instance so that multiple calls can be chained.</returns>
+        public static PowershellSettings OutputToAppConsole(this PowershellSettings settings, bool outputToAppConsole = true)
+        {
+            if (settings == null)
+            {
+                throw new ArgumentNullException("settings");
+            }
+
+            settings.OutputToAppConsole = outputToAppConsole;
+            return settings;
+        }
     }
 }

@@ -1,6 +1,5 @@
 ﻿#region Using Statements
     using System;
-    using System.Text;
     using System.Collections.Generic;
 
     using System.Management.Automation;
@@ -25,7 +24,7 @@ namespace Cake.Powershell
 
 
         #region Constructor (1)
-            internal CakePSHostInterface(ICakeLog log)
+            internal CakePSHostInterface(ICakeLog log, bool outputToAppConsole)
             {
                 if (log == null)
                 {
@@ -33,7 +32,9 @@ namespace Cake.Powershell
                 }
 
                 _Log = log;
-                _RawUI = new CakePSHostRawUserInterface(_Log);
+                _RawUI = outputToAppConsole
+                    ? new CakePSHostRawUserInterface(_Log)
+                    : (PSHostRawUserInterface) new CakePSHostNoConsoleRawUserInterface();
             }
         #endregion
 

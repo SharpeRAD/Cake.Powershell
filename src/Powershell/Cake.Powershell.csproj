@@ -55,6 +55,7 @@
     <Compile Include="Extensions\SecureExtensions.cs" />
     <Compile Include="Host\CakePSHost.cs" />
     <Compile Include="Host\CakePSHostInterface.cs" />
+    <Compile Include="Host\CakePSHostNoConsoleRawUserInterface.cs" />
     <Compile Include="Host\CakePSHostRawUserInterface.cs" />
     <Compile Include="Interfaces\IPowershellRunner.cs" />
     <Compile Include="Runner\PowershellRunner.cs" />

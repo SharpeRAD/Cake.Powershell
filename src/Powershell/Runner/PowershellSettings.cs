@@ -21,8 +21,9 @@ namespace Cake.Powershell
             /// </summary>
             public PowershellSettings()
             {
-                this.FormatOutput = false;
-                this.LogOutput = false;
+                FormatOutput = false;
+                LogOutput = false;
+                OutputToAppConsole = true;
             }
         #endregion
 
@@ -77,7 +78,10 @@ namespace Cake.Powershell
             /// </summary>
             public bool LogOutput { get; set; }
 
-
+            /// <summary>
+            /// If the host should output to the app's console
+            /// </summary>
+            public bool OutputToAppConsole { get; set; }
 
             /// <summary>
             /// Gets or sets the modules to load into the initial state

@@ -219,7 +219,7 @@ namespace Cake.Powershell
                 if (String.IsNullOrEmpty(settings.ComputerName))
                 {
                     //Local
-                    runspace = RunspaceFactory.CreateRunspace(new CakePSHost(_Log));
+                    runspace = RunspaceFactory.CreateRunspace(new CakePSHost(_Log, settings.OutputToAppConsole));
                 }
                 else
                 {
@@ -248,7 +248,7 @@ namespace Cake.Powershell
                         connection.OpenTimeout = settings.Timeout.Value;
                     }
 
-                    runspace = RunspaceFactory.CreateRunspace(new CakePSHost(_Log), connection);
+                    runspace = RunspaceFactory.CreateRunspace(new CakePSHost(_Log, settings.OutputToAppConsole), connection);
                 }
 
                 runspace.Open();
