@@ -1,3 +1,6 @@
+### New in 0.2.5 (Released 2016/05/26)
+* Provide setting to not output to the console
+
 ### New in 0.2.4 (Released 2016/05/23)
 * StringLiteralArgument
 
