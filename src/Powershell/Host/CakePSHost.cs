@@ -24,14 +24,14 @@ namespace Cake.Powershell
 
 
         #region Constructor (1)
-            internal CakePSHost(ICakeLog log)
+            internal CakePSHost(ICakeLog log, bool outputToAppConsole)
             {
                 if (log == null)
                 {
                     throw new ArgumentNullException("log");
                 }
 
-                _Interface = new CakePSHostInterface(log);
+                _Interface = new CakePSHostInterface(log, outputToAppConsole);
             }
         #endregion
 
