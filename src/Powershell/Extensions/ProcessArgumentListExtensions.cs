@@ -1,6 +1,10 @@
 ﻿#region Using Statements
-    using Cake.Core.IO;
-    using Cake.Core.IO.Arguments;
+
+using System.Collections.Generic;
+using System.Linq;
+using Cake.Core.IO;
+using Cake.Core.IO.Arguments;
+
 #endregion
 
 
@@ -123,6 +127,40 @@ namespace Cake.Powershell
             if (builder != null)
             {
                 builder.Append(new NamedArgument(name, new StringLiteralArgument(argument)));
+            }
+
+            return builder;
+        }
+
+        /// <summary>
+        /// Appends the specified arguments as an array to the argument builder.
+        /// </summary>
+        /// <param name="builder">The builder.</param>
+        /// <param name="name">The argument name.</param>
+        /// <param name="arguments">The text collection to be appended as an array.</param>
+        /// <returns>The same <see cref="ProcessArgumentBuilder"/> instance so that multiple calls can be chained.</returns>
+        public static ProcessArgumentBuilder AppendArray(this ProcessArgumentBuilder builder, string name, IEnumerable<string> arguments)
+        {
+            if (builder != null)
+            {
+                builder.Append(new NamedArgument(name, new ArrayArgument(arguments.Select(argument => new TextArgument(argument)))));
+            }
+
+            return builder;
+        }
+
+        /// <summary>
+        /// Appends the specified arguments as an array to the argument builder.
+        /// </summary>
+        /// <param name="builder">The builder.</param>
+        /// <param name="name">The argument name.</param>
+        /// <param name="arguments">The arguments to be appended as an array.</param>
+        /// <returns>The same <see cref="ProcessArgumentBuilder"/> instance so that multiple calls can be chained.</returns>
+        public static ProcessArgumentBuilder AppendArray(this ProcessArgumentBuilder builder, string name, IEnumerable<IProcessArgument> arguments)
+        {
+            if (builder != null)
+            {
+                builder.Append(new NamedArgument(name, new ArrayArgument(arguments)));
             }
 
             return builder;
@@ -254,6 +292,40 @@ namespace Cake.Powershell
             if (builder != null)
             {
                 builder.Append(new NamedArgument(name, new StringLiteralArgument(new SecretArgument(argument))));
+            }
+
+            return builder;
+        }
+
+        /// <summary>
+        /// Appends the specified arguments as an array to the argument builder.
+        /// </summary>
+        /// <param name="builder">The builder.</param>
+        /// <param name="name">The argument name.</param>
+        /// <param name="arguments">The arguments to be appended as an array.</param>
+        /// <returns>The same <see cref="ProcessArgumentBuilder"/> instance so that multiple calls can be chained.</returns>
+        public static ProcessArgumentBuilder AppendSecretArray(this ProcessArgumentBuilder builder, string name, IEnumerable<string> arguments)
+        {
+            if (builder != null)
+            {
+                builder.Append(new NamedArgument(name, new ArrayArgument(arguments.Select(argument => new TextArgument(argument)))));
+            }
+
+            return builder;
+        }
+
+        /// <summary>
+        /// Appends the specified secret arguments as an array to the argument builder.
+        /// </summary>
+        /// <param name="builder">The builder.</param>
+        /// <param name="name">The argument name.</param>
+        /// <param name="arguments">The secret arguments to be appended as an array.</param>
+        /// <returns>The same <see cref="ProcessArgumentBuilder"/> instance so that multiple calls can be chained.</returns>
+        public static ProcessArgumentBuilder AppendSecretArray(this ProcessArgumentBuilder builder, string name, IEnumerable<IProcessArgument> arguments)
+        {
+            if (builder != null)
+            {
+                builder.Append(new NamedArgument(name, new ArrayArgument(arguments.Select(argument => new SecretArgument(argument)))));
             }
 
             return builder;
