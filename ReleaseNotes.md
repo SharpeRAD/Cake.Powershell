@@ -1,3 +1,6 @@
+### New in 0.2.6 (Released 2016/07/05)
+* Array Arguments
+
 ### New in 0.2.5 (Released 2016/05/26)
 * Provide setting to not output to the console
 
