@@ -12,6 +12,20 @@ var configuration = Argument("configuration", "Release");
 
 
 ///////////////////////////////////////////////////////////////////////////////
+// SETUP / TEARDOWN
+///////////////////////////////////////////////////////////////////////////////
+
+Setup(context =>
+{
+    //Executed BEFORE the first task.
+    Information("Tools dir: {0}.", EnvironmentVariable("CAKE_PATHS_TOOLS"));
+});
+
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////
 // TASK DEFINITIONS
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -28,9 +42,9 @@ Task("Powershell-Script")
             .SetLogOutput());
 
         StartPowershellScript("Stop-Service", new PowershellSettings()
-            .WithArguments(args => 
-            { 
-                args.AppendQuoted("MpsSvc"); 
+            .WithArguments(args =>
+            {
+                args.AppendQuoted("MpsSvc");
             }));
     });
 

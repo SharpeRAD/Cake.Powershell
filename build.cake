@@ -1,10 +1,9 @@
 #addin "Cake.Slack"
+#tool "xunit.runner.console"
 
 //////////////////////////////////////////////////////////////////////
 // ARGUMENTS
 //////////////////////////////////////////////////////////////////////
-
-var tools = Argument("tools", "./tools");
 
 var target = Argument("target", "Default");
 var configuration = Argument("configuration", "Release");
@@ -59,13 +58,7 @@ Setup(context =>
 {
     //Executed BEFORE the first task.
     Information("Building version {0} of {1}.", semVersion, appName);
-    Information("Tools dir: {0}.", tools);
-
-    NuGetInstall("xunit.runner.console", new NuGetInstallSettings
-    {
-        ExcludeVersion  = true,
-        OutputDirectory = tools
-    });
+    Information("Tools dir: {0}.", EnvironmentVariable("CAKE_PATHS_TOOLS"));
 });
 
 Teardown(context =>
@@ -155,8 +148,6 @@ Task("Run-Unit-Tests")
 {
     XUnit2("./src/**/bin/" + configuration + "/*.Tests.dll", new XUnit2Settings
     {
-        ToolPath = tools + "/xunit.runner.console/tools/xunit.console.exe",
-
         OutputDirectory = testResultsDir,
         XmlReportV1 = true
     });
