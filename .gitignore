@@ -65,6 +65,7 @@ _NCrunch_*
 
 # Visual Studio Directory
 src/.vs/
+project.lock.json
 
 # NuGet Packages Directory
 src/packages/
