@@ -85,7 +85,7 @@ namespace Cake.Powershell
                 //Get Script
                 this.SetWorkingDirectory(settings);
 
-                _Log.Debug(Verbosity.Normal, String.Format("Executing: {0}", this.AppendArguments(script, settings.Arguments, true)));
+                LogExecutingCommand(settings, script);
 
 
 
@@ -118,7 +118,7 @@ namespace Cake.Powershell
                 this.SetWorkingDirectory(settings);
                 string script = "&\"" + path.MakeAbsolute(settings.WorkingDirectory).FullPath + "\"";
 
-                _Log.Debug(Verbosity.Normal, String.Format("Executing: {0}", this.AppendArguments(script, settings.Arguments, true)));
+                LogExecutingCommand(settings, script);
 
 
 
@@ -160,7 +160,7 @@ namespace Cake.Powershell
                 WebClient client = new WebClient();
                 client.DownloadFile(uri, fullPath);
 
-                _Log.Debug(Verbosity.Normal, String.Format("Executing: {0}", this.AppendArguments(script, settings.Arguments, true)));
+                LogExecutingCommand(settings, script);
 
 
 
@@ -172,7 +172,7 @@ namespace Cake.Powershell
 
 
 
-            //Helpers
+        //Helpers
             private void SetWorkingDirectory(PowershellSettings settings)
             {
                 if (String.IsNullOrEmpty(settings.ComputerName))
@@ -209,6 +209,13 @@ namespace Cake.Powershell
                 }
 
                 return script;
+            }
+
+            private void LogExecutingCommand(PowershellSettings settings, string script, bool safe = true)
+            {
+                _Log.Debug(Verbosity.Normal,
+                    String.Format("Executing: {0}",
+                        this.AppendArguments(script, settings.Arguments, safe).Replace("{", "{{").Replace("}", "}}")));
             }
 
             private Collection<PSObject> Invoke(string script, PowershellSettings settings)
