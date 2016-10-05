@@ -134,7 +134,7 @@ Task("Powershell-Remote-File")
         }.WithArguments(args =>
         {
             args.Append("task", "do-what-i-say");
-        });
+        }));
 });
 
 
