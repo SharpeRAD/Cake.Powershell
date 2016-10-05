@@ -124,14 +124,17 @@ Task("Powershell-Remote-File")
     .Does(() =>
 {
     StartPowershellFile("C:/Scripts/sql.ps1", new PowershellSettings()
-    {
-        ComputerName = "remote-location",
-        Username = "admin",
-        Password = "pass1",
+        {
+            ComputerName = "remote-location",
+            Username = "admin",
+            Password = "pass1",
 
-        FormatOutput = true,
-        LogOutput = true
-    });
+            FormatOutput = true,
+            LogOutput = true
+        }.WithArguments(args =>
+        {
+            args.Append("task", "do-what-i-say");
+        });
 });
 
 
