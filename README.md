@@ -104,7 +104,7 @@ Task("Powershell-File-Settings")
 });
 
 
-Task("Powershell-Remote")
+Task("Powershell-Remote-Script")
     .Description("Run an example powershell command remotely")
     .Does(() =>
 {
@@ -118,6 +118,22 @@ Task("Powershell-Remote")
         LogOutput = true
     });
 });
+
+Task("Powershell-Remote-File")
+    .Description("Run an example powershell file remotely")
+    .Does(() =>
+{
+    StartPowershellFile("C:/Scripts/sql.ps1", new PowershellSettings()
+    {
+        ComputerName = "remote-location",
+        Username = "admin",
+        Password = "pass1",
+
+        FormatOutput = true,
+        LogOutput = true
+    });
+});
+
 
 
 Task("Powershell-Download")
