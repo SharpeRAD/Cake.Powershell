@@ -1,3 +1,6 @@
+### New in 0.2.8 (Released 2016/12/19)
+* Fix bug with ImportModule
+
 ### New in 0.2.7 (Released 2016/10/04)
 * Check for braces when logging commands to Cake
 

@@ -276,7 +276,7 @@ namespace Cake.Powershell
 
                     if ((settings.Modules != null) && (settings.Modules.Count > 0))
                     {
-                        pipeline.Commands.AddScript("Import-Module " + settings.Modules);
+                        settings.Modules.ToList().ForEach(m => pipeline.Commands.AddScript("Import-Module " + m));
                     }
 
                     pipeline.Commands.AddScript(script);
