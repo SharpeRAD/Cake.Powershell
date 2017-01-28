@@ -30,12 +30,10 @@ Setup(context =>
 ///////////////////////////////////////////////////////////////////////////////
 
 Task("Powershell-Script")
-    .Description("Run an example powershell command")
+    .Description("Run an example powershell script")
     .Does(() =>
     {
         Information("Calling Powershell Script");
-
-        StartPowershellScript("Write-Host 'hello world'");
 
         StartPowershellScript("Get-Process", new PowershellSettings()
             .SetFormatOutput()
@@ -48,14 +46,24 @@ Task("Powershell-Script")
             }));
     });
 
+    Task("Powershell-File")
+        .Description("Run an example powershell file")
+        .Does(() =>
+        {
+            Information("Calling Powershell File");
 
+            StartPowershellFile("./test.ps1", new PowershellSettings()
+                .SetFormatOutput()
+                .SetLogOutput());
+        });
 
 //////////////////////////////////////////////////////////////////////
 // TASK TARGETS
 //////////////////////////////////////////////////////////////////////
 
 Task("Default")
-    .IsDependentOn("Powershell-Script");
+    .IsDependentOn("Powershell-Script")
+    .IsDependentOn("Powershell-File");
 
 
 
