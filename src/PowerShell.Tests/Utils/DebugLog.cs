@@ -28,6 +28,7 @@ namespace Cake.Powershell.Tests
         public Verbosity Verbosity
         {
             get { return Verbosity.Diagnostic; }
+            set { }
         }
 
 
