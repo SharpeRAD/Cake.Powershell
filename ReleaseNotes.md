@@ -1,3 +1,6 @@
+### New in 0.2.9 (Released 2017/02/03)
+* Update Cake.Core reference
+
 ### New in 0.2.8 (Released 2016/12/19)
 * Fix bug with ImportModule
 
