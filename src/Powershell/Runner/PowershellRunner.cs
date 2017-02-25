@@ -172,7 +172,7 @@ namespace Cake.Powershell
 
 
 
-        //Helpers
+            //Helpers
             private void SetWorkingDirectory(PowershellSettings settings)
             {
                 if (String.IsNullOrEmpty(settings.ComputerName))
@@ -210,13 +210,20 @@ namespace Cake.Powershell
 
                 return script;
             }
+        
+
+
+            private string FormatLogMessage(string message)
+            {
+                return message.Replace("{", "{{").Replace("}", "}}");
+            }
 
             private void LogExecutingCommand(PowershellSettings settings, string script, bool safe = true)
             {
-                _Log.Debug(Verbosity.Normal,
-                    String.Format("Executing: {0}",
-                        this.AppendArguments(script, settings.Arguments, safe).Replace("{", "{{").Replace("}", "}}")));
+                _Log.Debug(Verbosity.Normal, String.Format("Executing: {0}", this.FormatLogMessage(this.AppendArguments(script, settings.Arguments, safe))));
             }
+
+
 
             private Collection<PSObject> Invoke(string script, PowershellSettings settings)
             {
@@ -320,7 +327,7 @@ namespace Cake.Powershell
                 {
                     foreach (PSObject res in results)
                     {
-                        _Log.Debug(Verbosity.Normal, res.ToString());
+                        _Log.Debug(Verbosity.Normal, this.FormatLogMessage(res.ToString()));
                     }
                 }
 

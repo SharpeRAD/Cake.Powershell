@@ -1,3 +1,6 @@
+### New in 0.3.0 (Released 2017/02/03)
+* Format output messages to replace brackets
+
 ### New in 0.2.9 (Released 2017/02/03)
 * Update Cake.Core reference
 
