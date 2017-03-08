@@ -39,6 +39,14 @@ namespace Cake.Powershell.Tests
             Assert.True((results != null) && (results.Count == 1), "Check Rights");
         }
 
+        [Fact]
+        public void Should_Return_Result_With_Error_Code()
+        {
+            Collection<PSObject> results = CakeHelper.CreatePowershellRunner().Start(new FilePath("../../Scripts/FailingScript.ps1"), new PowershellSettings());
+
+            Assert.True(results != null && results.Count == 1, "Check Rights");
+            Assert.Equal("1", results[0].BaseObject.ToString());
+        }
 
 
         /*
