@@ -1,5 +1,6 @@
 ﻿#region Using Statements
 using Cake.Core.IO;
+using System.Linq;
 using System.Collections.ObjectModel;
 using System.Management.Automation;
 using Xunit;
@@ -36,7 +37,8 @@ namespace Cake.Powershell.Tests
         {
             Collection<PSObject> results = CakeHelper.CreatePowershellRunner().Start(new FilePath("../../Scripts/FailingScript.ps1"), new PowershellSettings());
 
-            Assert.True(results != null && results.Count == 1, "Check Rights");
+            Assert.True(results != null && results.Count >= 1, "Check Rights");
+            Assert.True(results.FirstOrDefault(r => r.BaseObject.ToString().Contains("Cannot find path")) != null);
             Assert.Equal("1", results[0].BaseObject.ToString());
         }
 
