@@ -1,21 +1,16 @@
 ﻿#region Using Statements
-    using System;
-    using System.Linq;
-    using System.Text;
-    using System.Net;
-    using System.Collections.Generic;
-    using System.Collections.ObjectModel;
-    using System.Diagnostics;
-    using System.Globalization;
-    using System.Security.Principal;
+using Cake.Core;
+using Cake.Core.Diagnostics;
+using Cake.Core.IO;
+using System;
+using System.Collections.ObjectModel;
+using System.Globalization;
+using System.Linq;
+using System.Management.Automation;
+using System.Management.Automation.Runspaces;
+using System.Net;
+using System.Threading;
 
-    using Cake.Core;
-    using Cake.Core.IO;
-    using Cake.Core.IO.Arguments;
-    using Cake.Core.Diagnostics;
-
-    using System.Management.Automation;
-    using System.Management.Automation.Runspaces;
 #endregion
 
 
@@ -27,9 +22,13 @@ namespace Cake.Powershell
     /// </summary>
     public sealed class PowershellRunner : IPowershellRunner
     {
-        #region Fields (2)
+        #region Fields (5)
             private readonly ICakeEnvironment _Environment;
             private readonly ICakeLog _Log;
+            private Collection<PSObject> _pipelineResults = new Collection<PSObject>();
+            private bool _complete;
+            private bool _successful = true;
+
         #endregion
         
 
@@ -270,7 +269,6 @@ namespace Cake.Powershell
 
 
                 //Create Pipline
-                Collection<PSObject> results = null;
 
                 using (Pipeline pipeline = runspace.CreatePipeline())
                 {
@@ -290,30 +288,17 @@ namespace Cake.Powershell
 
                     if (settings.FormatOutput)
                     {
-                        pipeline.Commands.Add("Out-String");
+                        pipeline.Commands.Add("Out-Default");
                     }
 
-                    results = pipeline.Invoke();
+                    pipeline.Output.DataReady += Output_DataReady;
+                    pipeline.Error.DataReady += Error_DataReady;
+                    pipeline.StateChanged += Pipeline_StateChanged;
+                    pipeline.InvokeAsync();
 
-
-
-                    //Log Errors
-                    if (pipeline.Error.Count > 0)
+                    while (!_complete)
                     {
-                        while (!pipeline.Error.EndOfPipeline)
-                        {
-                            PSObject value = (PSObject)pipeline.Error.Read();
-
-                            if (value != null)
-                            {
-                                ErrorRecord record = (ErrorRecord)value.BaseObject;
-
-                                if (record != null)
-                                {
-                                    _Log.Error(Verbosity.Normal, record.Exception.Message);
-                                }
-                            }
-                        }
+                        Thread.Sleep(500);
                     }
                 }
 
@@ -322,17 +307,60 @@ namespace Cake.Powershell
 
 
 
-                //Log Results
-                if (settings.LogOutput)
+                return _pipelineResults;
+            }
+
+            private void Pipeline_StateChanged(object sender, PipelineStateEventArgs e)
+            {
+                if (e.PipelineStateInfo.State != PipelineState.Completed && e.PipelineStateInfo.State != PipelineState.Failed && e.PipelineStateInfo.State != PipelineState.Stopped) return;
+
+                if (e.PipelineStateInfo.State == PipelineState.Failed)
                 {
-                    foreach (PSObject res in results)
-                    {
-                        _Log.Debug(Verbosity.Normal, this.FormatLogMessage(res.ToString()));
-                    }
+                    var failedPso = new PSObject(e.PipelineStateInfo.Reason);
+                    _pipelineResults.Add(failedPso);
+                    _successful = false;
                 }
 
-                return results;
+                var pso = new PSObject(_successful ? 0 : 1);
+                _pipelineResults.Insert(0, pso);
+
+                _complete = true;
             }
+
+            private void Error_DataReady(object sender, EventArgs e)
+            {
+                var error = sender as PipelineReader<object>;
+
+                if (error == null) return;
+
+                if (_successful && error.Count > 0)
+                {
+                    _successful = false;
+                }
+
+                while (error.Count > 0)
+                {
+                    var errorItem = error.Read();
+                    var pso = new PSObject(errorItem);
+                    _pipelineResults.Add(pso);
+                    _Log.Error(Verbosity.Normal, this.FormatLogMessage(errorItem.ToString()));
+                }
+            }
+
+            private void Output_DataReady(object sender, EventArgs e)
+            {
+                var output = sender as PipelineReader<PSObject>;
+
+                if (output == null) return;
+
+                while (output.Count > 0)
+                {
+                    var outputItem = output.Read();
+                    _pipelineResults.Add(outputItem);
+                    _Log.Debug(Verbosity.Normal, this.FormatLogMessage(outputItem.ToString()));
+                }
+            }
+
         #endregion
     }
 }
