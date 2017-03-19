@@ -77,6 +77,7 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <None Include="Scripts\FailingScript.ps1" />
     <None Include="Scripts\Test.ps1" />
     <Compile Include="Tests\FileTests.cs" />
     <Compile Include="Utils\DebugLog.cs" />
