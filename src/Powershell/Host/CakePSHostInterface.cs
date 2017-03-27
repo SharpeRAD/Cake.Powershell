@@ -57,12 +57,24 @@ namespace Cake.Powershell
 
 
         #region Functions (14)
-            public override void Write(string value)
+            public override void Write(ConsoleColor foregroundColor, ConsoleColor backgroundColor, string value)
             {
-                _Log.Write(Verbosity.Normal, LogLevel.Information, value);
+                _Log.Write(Verbosity.Normal, LogLevel.Information, value.EscapeCurleyBrackets());
+            }
+        
+            public override void WriteLine(ConsoleColor foregroundColor, ConsoleColor backgroundColor, string value)
+            {
+                _Log.Write(Verbosity.Normal, LogLevel.Information, value.EscapeCurleyBrackets());
+            }
+        
+            public override void WriteInformation(InformationRecord record)
+            {
+                _Log.Write(Verbosity.Verbose, LogLevel.Information, "{0}", record.MessageData);
             }
 
-            public override void Write(ConsoleColor foregroundColor, ConsoleColor backgroundColor, string value)
+
+
+            public override void Write(string value)
             {
                 _Log.Write(Verbosity.Normal, LogLevel.Information, value);
             }
@@ -76,16 +88,6 @@ namespace Cake.Powershell
             public override void WriteLine(string value)
             {
                 _Log.Write(Verbosity.Normal, LogLevel.Information, value);
-            }
-
-            public override void WriteLine(ConsoleColor foregroundColor, ConsoleColor backgroundColor, string value)
-            {
-                _Log.Write(Verbosity.Normal, LogLevel.Information, value);
-            }
-
-            public override void WriteInformation(InformationRecord record)
-            {
-                _Log.Write(Verbosity.Verbose, LogLevel.Information, "{0}", record.MessageData);
             }
 
             public override void WriteDebugLine(string value)
@@ -107,6 +109,8 @@ namespace Cake.Powershell
             {
                 _Log.Write(Verbosity.Verbose, LogLevel.Warning, value);
             }
+
+
 
             public override void WriteProgress(long sourceId, ProgressRecord record)
             {

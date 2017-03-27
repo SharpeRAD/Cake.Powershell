@@ -35,5 +35,15 @@ namespace Cake.Powershell
 
             return securePassword;
         }
+
+        /// <summary>
+        /// Excapes curley brackets
+        /// </summary>
+        /// <param name="message">The string to escape.</param>
+        /// <returns>The escaped string.</returns>
+        public static string EscapeCurleyBrackets(this string message)
+        {
+            return message.Replace("{", "{{").Replace("}", "}}");
+        }
     }
 }

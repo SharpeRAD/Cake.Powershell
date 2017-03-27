@@ -47,19 +47,14 @@ namespace Cake.Powershell.Tests
 
             Assert.True((DebugLog.Lines != null) && (DebugLog.Lines.Contains("Testing...")), "Output not written to the powershell host");
         }
-
-        /*
+        
         [Fact]
-        public void Should_Start_Remote_Script()
+        public void Escapes_Curley_Brackets()
         {
-            Collection<PSObject> results = CakeHelper.CreatePowershellRunner().Start("Get-Service", 
-                new PowershellSettings()
-                {
-                    ComputerName = "remote-machine"
-                });
+            Collection<PSObject> results = CakeHelper.CreatePowershellRunner().Start("Write-Host '{ blah }'",
+                new PowershellSettings());
 
-            Assert.True((results != null) && (results.Count > 0), "Check Rights");
+            Assert.True((DebugLog.Lines != null) && (DebugLog.Lines.Contains("{ blah }")), "Output not written to the powershell host");
         }
-        */
     }
 }

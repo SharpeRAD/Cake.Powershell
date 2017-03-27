@@ -212,14 +212,9 @@ namespace Cake.Powershell
         
 
 
-            private string FormatLogMessage(string message)
-            {
-                return message.Replace("{", "{{").Replace("}", "}}");
-            }
-
             private void LogExecutingCommand(PowershellSettings settings, string script, bool safe = true)
             {
-                _Log.Debug(Verbosity.Normal, String.Format("Executing: {0}", this.FormatLogMessage(this.AppendArguments(script, settings.Arguments, safe))));
+                _Log.Debug(Verbosity.Normal, String.Format("Executing: {0}", this.AppendArguments(script, settings.Arguments, safe).EscapeCurleyBrackets()));
             }
 
 
@@ -269,7 +264,6 @@ namespace Cake.Powershell
 
 
                 //Create Pipline
-
                 using (Pipeline pipeline = runspace.CreatePipeline())
                 {
                     //Invoke Command
@@ -294,6 +288,7 @@ namespace Cake.Powershell
                     pipeline.Output.DataReady += Output_DataReady;
                     pipeline.Error.DataReady += Error_DataReady;
                     pipeline.StateChanged += Pipeline_StateChanged;
+
                     pipeline.InvokeAsync();
 
                     while (!_complete)
@@ -343,7 +338,7 @@ namespace Cake.Powershell
                     var errorItem = error.Read();
                     var pso = new PSObject(errorItem);
                     _pipelineResults.Add(pso);
-                    _Log.Error(Verbosity.Normal, this.FormatLogMessage(errorItem.ToString()));
+                    _Log.Error(Verbosity.Normal, errorItem.ToString().EscapeCurleyBrackets());
                 }
             }
 
@@ -357,7 +352,7 @@ namespace Cake.Powershell
                 {
                     var outputItem = output.Read();
                     _pipelineResults.Add(outputItem);
-                    _Log.Debug(Verbosity.Normal, this.FormatLogMessage(outputItem.ToString()));
+                    _Log.Debug(Verbosity.Normal, outputItem.ToString().EscapeCurleyBrackets());
                 }
             }
 

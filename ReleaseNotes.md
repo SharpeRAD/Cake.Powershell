@@ -1,3 +1,5 @@
+### New in 0.3.3 (Released 2017/03/27)
+
 ### New in 0.3.2 (Released 2017/03/19)
 * [Feature] Immediate Powershell Output
 
