@@ -34,3 +34,16 @@ cannot be loaded because running scripts is disabled on this system.
 ```
 Set-ExecutionPolicy Unrestricted
 ```
+
+
+
+### Error message
+```
+method get_BufferSize is not implemented.
+```
+
+### Solution
+* Disable output to console
+```
+settings.OutputToAppConsole = false;
+```
