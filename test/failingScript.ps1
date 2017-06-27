@@ -1,6 +1,7 @@
 Get-Item fileThatDoesNotExist.txt
 
-if (-Not $?) {
+if (-Not $?)
+{
     Return 1
 }
 

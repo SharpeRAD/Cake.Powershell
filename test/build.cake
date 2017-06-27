@@ -46,9 +46,10 @@ Task("Powershell-File")
     {
         Information("Calling Powershell File");
 
-        StartPowershellFile("./test.ps1", new PowershellSettings()
-            .SetFormatOutput()
-            .SetLogOutput());
+        var resultCollection = StartPowershellFile("./test.ps1");
+
+        var returnCode = int.Parse(resultCollection[0].BaseObject.ToString());
+        Information("Result: {0}", returnCode);
     });
 
 Task("Failing-Powershell-File")
@@ -57,11 +58,11 @@ Task("Failing-Powershell-File")
     {
         Information("Calling failing Powershell File");
 
-        var resultCollection = StartPowershellFile("./failingScript.ps1", new PowershellSettings()
-            .SetFormatOutput()
-            .SetLogOutput());
+        var resultCollection = StartPowershellFile("./failingScript.ps1");
 
         var returnCode = int.Parse(resultCollection[0].BaseObject.ToString());
+        Information("Result: {0}", returnCode);
+
         if (returnCode != 0) {
             throw new ApplicationException("Script failed to execute");
         }
@@ -74,7 +75,8 @@ Task("Failing-Powershell-File")
 
 Task("Default")
     .IsDependentOn("Powershell-Script")
-    .IsDependentOn("Powershell-File");
+    .IsDependentOn("Powershell-File")
+    .IsDependentOn("Failing-Powershell-File");
 
 
 
