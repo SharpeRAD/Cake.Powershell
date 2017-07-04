@@ -47,3 +47,20 @@ method get_BufferSize is not implemented.
 ```
 settings.OutputToAppConsole = false;
 ```
+
+
+
+### Error message
+```
+Error: Could not load file or assembly 'System.Management.Automation, Version=3.0.0.0, Culture=neutral, PublicKeyToken=3
+1bf3856ad364e35' or one of its dependencies. Strong name validation failed. (Exception from HRESULT: 0x8013141A)
+```
+
+### Solution
+* Run the following PowerShell command to check the installed version:
+```
+$PSVersionTable.PSVersion
+```
+
+If the major version is less than 5 update Windows Management framework.
+https://www.microsoft.com/en-us/download/details.aspx?id=50395
