@@ -1,10 +1,9 @@
 ﻿#region Using Statements
-
 using System.Collections.Generic;
 using System.Linq;
+
 using Cake.Core.IO;
 using Cake.Core.IO.Arguments;
-
 #endregion
 
 
@@ -16,6 +15,7 @@ namespace Cake.Powershell
     /// </summary>
     public static class ProcessArgumentListExtensions
     {
+        #region Methods (20)
         /// <summary>
         /// Appends the specified text to the argument builder.
         /// </summary>
@@ -330,5 +330,6 @@ namespace Cake.Powershell
 
             return builder;
         }
+        #endregion
     }
 }

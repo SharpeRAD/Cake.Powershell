@@ -1,5 +1,9 @@
-﻿using System;
+﻿#region Using Statements
+using System;
 using System.Management.Automation.Host;
+#endregion
+
+
 
 namespace Cake.Powershell
 {
@@ -9,6 +13,7 @@ namespace Cake.Powershell
     /// <seealso cref="PSHostRawUserInterface" />
     internal sealed class CakePSHostNoConsoleRawUserInterface : PSHostRawUserInterface
     {
+        #region Properties (11)
         /// <summary>
         /// There is no console, so a ConsoleColor of black is returned.
         /// </summary>
@@ -102,6 +107,7 @@ namespace Cake.Powershell
         }
 
 
+
         /// <summary>
         /// There is no console, so the value of <see cref="BufferSize"/> is returned.
         /// </summary>
@@ -154,7 +160,13 @@ namespace Cake.Powershell
             {
             }
         }
+        #endregion
 
+
+
+
+
+        #region Methods (6)
         /// <summary>
         /// There is no console, so this is not implemented.
         /// </summary>
@@ -202,5 +214,6 @@ namespace Cake.Powershell
         public override void ScrollBufferContents(Rectangle source, Coordinates destination, Rectangle clip, BufferCell fill)
         {
         }
+        #endregion
     }
 }

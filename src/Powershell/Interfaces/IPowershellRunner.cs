@@ -1,10 +1,10 @@
 ﻿#region Using Statements
-    using System;
-    using System.Collections.ObjectModel;
+using System;
+using System.Collections.ObjectModel;
 
-    using System.Management.Automation;
+using System.Management.Automation;
 
-    using Cake.Core.IO;
+using Cake.Core.IO;
 #endregion
 
 
@@ -16,6 +16,7 @@ namespace Cake.Powershell
     /// </summary>
     public interface IPowershellRunner
     {
+        #region Methods (3)
         /// <summary>
         /// Starts a powershell script using the specified information.
         /// </summary>
@@ -40,5 +41,6 @@ namespace Cake.Powershell
         /// <param name="settings">The information about the process to start.</param>
         /// <returns>Powershell objects.</returns>
         Collection<PSObject> Start(Uri uri, FilePath path, PowershellSettings settings);
+        #endregion
     }
 }

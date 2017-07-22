@@ -1,12 +1,12 @@
 ﻿#region Using Statements
-    using System;
-    using System.Collections.ObjectModel;
+using System;
+using System.Collections.ObjectModel;
 
-    using Cake.Core;
-    using Cake.Core.IO;
-    using Cake.Core.Annotations;
+using Cake.Core;
+using Cake.Core.IO;
+using Cake.Core.Annotations;
 
-    using System.Management.Automation;
+using System.Management.Automation;
 #endregion
 
 
@@ -20,6 +20,7 @@ namespace Cake.Powershell
     [CakeNamespaceImport("System.Management.Automation")]
     public static class PowershellAliases
     {
+        #region Methods (10)
         /// <summary>
         /// Starts a powershell script using the specified information.
         /// </summary>
@@ -140,5 +141,6 @@ namespace Cake.Powershell
         {
             return new PowershellRunner(context.Environment, context.Log).Start(uri, path, settings);
         }
+        #endregion
     }
 }

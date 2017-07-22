@@ -1,17 +1,11 @@
 ﻿#region Using Statements
-    using System;
-    using System.IO;
-    using System.Collections.ObjectModel;
+using System.Collections.ObjectModel;
+using System.Management.Automation;
 
-    using Xunit;
+using Xunit;
 
-    using System.Management.Automation;
-    using System.Management.Automation.Runspaces;
-
-    using Cake.Core;
-    using Cake.Core.Diagnostics;
-    using Cake.Core.IO;
-    using Cake.Powershell;
+using Cake.Core;
+using Cake.Powershell;
 #endregion
 
 
@@ -20,6 +14,7 @@ namespace Cake.Powershell.Tests
 {
     public class ScriptTests
     {
+        #region Methods (4)
         [Fact]
         public void Should_Start_Write_Script()
         {
@@ -56,5 +51,6 @@ namespace Cake.Powershell.Tests
 
             Assert.True((DebugLog.Lines != null) && (DebugLog.Lines.Contains("{ blah }")), "Output not written to the powershell host");
         }
+        #endregion
     }
 }

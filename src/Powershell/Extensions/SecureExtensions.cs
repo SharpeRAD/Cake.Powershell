@@ -1,6 +1,6 @@
 ﻿#region Using Statements
-    using System;
-    using System.Security;
+using System;
+using System.Security;
 #endregion
 
 
@@ -12,6 +12,7 @@ namespace Cake.Powershell
     /// </summary>
     public static class SecureExtensions
     {
+        #region Methods (2)
         /// <summary>
         /// Creates a secure string for storing powershell passwords
         /// </summary>
@@ -45,5 +46,6 @@ namespace Cake.Powershell
         {
             return message.Replace("{", "{{").Replace("}", "}}");
         }
+        #endregion
     }
 }

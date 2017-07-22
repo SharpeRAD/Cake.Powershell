@@ -1,6 +1,11 @@
-﻿using System.Collections.Generic;
+﻿#region Using Statements
+using System.Collections.Generic;
 using System.Linq;
+
 using Cake.Core.IO;
+#endregion
+
+
 
 namespace Cake.Powershell
 {
@@ -9,10 +14,17 @@ namespace Cake.Powershell
     /// </summary>
     public sealed class ArrayArgument : IProcessArgument
     {
+        #region Fields (2)
         private const string ArgumentSeparator = ", ";
 
         private readonly IEnumerable<IProcessArgument> _arguments;
+        #endregion
 
+
+
+
+
+        #region Constructors (1)
         /// <summary>
         /// Initializes a new instance of the <see cref="ArrayArgument"/> class.
         /// </summary>
@@ -21,7 +33,13 @@ namespace Cake.Powershell
         {
             _arguments = arguments;
         }
+        #endregion
 
+
+
+
+
+        #region Methods (3)
         /// <summary>
         /// Render the arguments as a <see cref="T:System.String" />.
         /// Sensitive information will be included.
@@ -46,9 +64,12 @@ namespace Cake.Powershell
             return ConcatenateStrings(_arguments.Select(argument => argument.RenderSafe()));
         }
 
+
+
         private static string ConcatenateStrings(IEnumerable<string> strings)
         {
             return string.Join(ArgumentSeparator, strings);
         }
+        #endregion
     }
 }

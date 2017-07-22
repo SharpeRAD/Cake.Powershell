@@ -1,3 +1,7 @@
+### New in 0.3.4 (Released 2017/03/27)
+* [Improvement] Remove region Indentation
+* [Improvement] Update CakeContrib icon
+
 ### New in 0.3.3 (Released 2017/03/27)
 * [Bug] Immediate output not escaping brackets 
 

@@ -1,10 +1,8 @@
 ﻿#region Using Statements
-    using System;
-    using System.Collections.Generic;
+using System;
+using System.Collections.Generic;
 
-    using Cake.Core;
-    using Cake.Core.IO;
-    using Cake.Core.IO.Arguments;
+using Cake.Core.IO;
 #endregion
 
 
@@ -16,6 +14,7 @@ namespace Cake.Powershell
     /// </summary>
     public static class PowershellSettingsExtensions
     {
+        #region Methods (11)
         /// <summary>
         /// Sets the arguments for the powershell command
         /// </summary>
@@ -238,5 +237,6 @@ namespace Cake.Powershell
             settings.OutputToAppConsole = outputToAppConsole;
             return settings;
         }
+        #endregion
     }
 }

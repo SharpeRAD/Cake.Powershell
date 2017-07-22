@@ -1,9 +1,10 @@
 ﻿#region Using Statements
-using Cake.Core.IO;
 using System.Linq;
 using System.Collections.ObjectModel;
 using System.Management.Automation;
+
 using Xunit;
+using Cake.Core.IO;
 #endregion
 
 
@@ -12,6 +13,7 @@ namespace Cake.Powershell.Tests
 {
     public class FileTests
     {
+        #region Methods (4)
         [Fact]
         public void Should_Start_Local_File()
         {
@@ -56,5 +58,6 @@ namespace Cake.Powershell.Tests
             Assert.True((results != null) && (results.Count > 0), "Check Rights");
         }
         */
+        #endregion
     }
 }

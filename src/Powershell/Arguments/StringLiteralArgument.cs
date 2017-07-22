@@ -1,5 +1,10 @@
-﻿using System.Globalization;
+﻿#region Using Statements
+using System.Globalization;
+
 using Cake.Core.IO;
+#endregion
+
+
 
 namespace Cake.Powershell
 {
@@ -9,8 +14,15 @@ namespace Cake.Powershell
     /// </summary>
     public sealed class StringLiteralArgument : IProcessArgument
     {
+        #region Fields (1)
         private readonly IProcessArgument _argument;
+        #endregion
 
+
+
+
+
+        #region Constructors (1)
         /// <summary>
         /// Initializes an instance of the <see cref="StringLiteralArgument"/> class.
         /// </summary>
@@ -19,7 +31,13 @@ namespace Cake.Powershell
         {
             _argument = argument;
         }
+        #endregion
 
+
+
+
+
+        #region Methods (4)
         /// <summary>
         /// Renders the argument as a string-literal <see cref="string"/>.
         /// </summary>
@@ -50,9 +68,12 @@ namespace Cake.Powershell
             return RenderSafe();
         }
 
+
+
         private static string MakePowershellLiteralString(string text)
         {
             return string.Format(CultureInfo.InvariantCulture, "'{0}'", text.Replace("'", "''"));
         }
+        #endregion
     }
 }
