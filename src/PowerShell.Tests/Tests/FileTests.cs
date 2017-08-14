@@ -1,4 +1,6 @@
 ﻿#region Using Statements
+
+using System;
 using System.Linq;
 using System.Collections.ObjectModel;
 using System.Management.Automation;
@@ -35,15 +37,23 @@ namespace Cake.Powershell.Tests
         }
 
         [Fact]
-        public void Should_Return_Result_With_Error_Code()
+        public void Exception_Script_Should_Throw_Exception()
         {
-            Collection<PSObject> results = CakeHelper.CreatePowershellRunner().Start(new FilePath("../../Scripts/FailingScript.ps1"), new PowershellSettings());
+            var runner = CakeHelper.CreatePowershellRunner();
+            Assert.Throws<AggregateException>(() => runner.Start(new FilePath("../../Scripts/ErrorScript.ps1"),
+                new PowershellSettings()));
+        }
+
+        [Fact]
+        public void Returned_Error_Code_Should_Throw_Exception()
+        {
+            var results = CakeHelper.CreatePowershellRunner()
+                .Start(new FilePath("../../Scripts/FailingScript.ps1"), new PowershellSettings());
 
             Assert.True(results != null && results.Count >= 1, "Check Rights");
             Assert.True(results.FirstOrDefault(r => r.BaseObject.ToString().Contains("Cannot find path")) != null);
             Assert.Equal("1", results[0].BaseObject.ToString());
         }
-
 
         /*
         [Fact]
