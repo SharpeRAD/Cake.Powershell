@@ -18,6 +18,12 @@ Setup(context =>
     Information("Tools dir: {0}.", EnvironmentVariable("CAKE_PATHS_TOOLS"));
 });
 
+Task("ErrorPs1")
+    .Does(() =>
+{
+	var results = StartPowershellFile("error.ps1");
+    
+});
 
 ///////////////////////////////////////////////////////////////////////////////
 // TASK DEFINITIONS

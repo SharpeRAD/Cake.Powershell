@@ -269,7 +269,8 @@ namespace Cake.Powershell
                 //Invoke Command
                 if (settings.WorkingDirectory != null)
                 {
-                    var path = string.Format(CultureInfo.InvariantCulture, "\"{0}\"", settings.WorkingDirectory.FullPath);
+                    var path = string.Format(CultureInfo.InvariantCulture, "\"{0}\"",
+                        settings.WorkingDirectory.FullPath);
                     pipeline.Commands.AddScript("Set-Location -Path " + path);
                 }
 
@@ -295,12 +296,19 @@ namespace Cake.Powershell
                 {
                     Thread.Sleep(500);
                 }
+
+                var exceptions = _pipelineResults.Where(result => result.BaseObject is Exception)
+                    .Select(e => e.BaseObject as Exception).ToArray();
+
+                if (exceptions.Length > 0)
+                {
+                    var exceptionString = string.Join(" - ", exceptions.Select(e => e.ToString()));
+                    throw new AggregateException($"Failed to Execute Powershell Script: {exceptionString}", exceptions);
+                }
             }
 
             runspace.Close();
             runspace.Dispose();
-
-
 
             return _pipelineResults;
         }
