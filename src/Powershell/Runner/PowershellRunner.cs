@@ -286,17 +286,20 @@ namespace Cake.Powershell
                     pipeline.Commands.Add("Out-Default");
                 }
 
+                //Bind Events
                 pipeline.Output.DataReady += Output_DataReady;
                 pipeline.Error.DataReady += Error_DataReady;
                 pipeline.StateChanged += Pipeline_StateChanged;
 
                 pipeline.InvokeAsync();
 
+                //Wait
                 while (!_complete)
                 {
                     Thread.Sleep(500);
                 }
 
+                //Handle Exceptions
                 var exceptions = _pipelineResults.Where(result => result.BaseObject is Exception)
                     .Select(e => e.BaseObject as Exception).ToArray();
 
@@ -321,6 +324,7 @@ namespace Cake.Powershell
             {
                 var failedPso = new PSObject(e.PipelineStateInfo.Reason);
                 _pipelineResults.Add(failedPso);
+
                 _successful = false;
             }
 
@@ -345,7 +349,9 @@ namespace Cake.Powershell
             {
                 var errorItem = error.Read();
                 var pso = new PSObject(errorItem);
+
                 _pipelineResults.Add(pso);
+
                 _Log.Error(Verbosity.Normal, errorItem.ToString().EscapeCurleyBrackets());
             }
         }
@@ -360,6 +366,7 @@ namespace Cake.Powershell
             {
                 var outputItem = output.Read();
                 _pipelineResults.Add(outputItem);
+
                 _Log.Debug(Verbosity.Normal, outputItem.ToString().EscapeCurleyBrackets());
             }
         }

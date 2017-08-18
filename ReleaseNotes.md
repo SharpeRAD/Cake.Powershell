@@ -1,9 +1,12 @@
+### New in 0.3.5 (Released 2017/08/18)
+* [Improvement] Exception handling
+
 ### New in 0.3.4 (Released 2017/03/27)
 * [Improvement] Remove region Indentation
 * [Improvement] Update CakeContrib icon
 
 ### New in 0.3.3 (Released 2017/03/27)
-* [Bug] Immediate output not escaping brackets 
+* [Bug] Immediate output not escaping brackets
 
 ### New in 0.3.2 (Released 2017/03/19)
 * [Feature] Immediate Powershell Output
