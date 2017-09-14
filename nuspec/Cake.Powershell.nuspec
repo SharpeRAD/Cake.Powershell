@@ -17,15 +17,15 @@
       <tags>Cake Script Build Powershell</tags>
 
       <dependencies>
-         <dependency id="Cake.Core" version="0.11.0" />
+         <dependency id="Cake.Core" version="0.22.0" />
          <dependency id="Microsoft.PowerShell.5.ReferenceAssemblies" version="1.0.0" />
       </dependencies>
    </metadata>
 
    <files>
-      <file src="System.Management.Automation.dll" target="lib/net45" />
-      <file src="Cake.Powershell.dll" target="lib/net45" />
-      <file src="Cake.Powershell.xml" target="lib/net45" />
+      <file src="System.Management.Automation.dll" target="lib\net46" />
+      <file src="Cake.Powershell.dll" target="lib\net46" />
+      <file src="Cake.Powershell.xml" target="lib\net46" />
       <file src="LICENSE" />
    </files>
 </package>

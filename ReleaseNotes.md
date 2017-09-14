@@ -1,3 +1,7 @@
+### New in 0.4.0 (Released 2017/09/14)
+* [Support] Upgrade to Cake v0.22.0
+* [Support] Upgrade to .Net 4.6
+
 ### New in 0.3.5 (Released 2017/08/18)
 * [Improvement] Exception handling
 
