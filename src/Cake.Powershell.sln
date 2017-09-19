@@ -1,13 +1,14 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.26730.15
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{805059EC-6CC4-418B-B0ED-E40A21145526}"
 	ProjectSection(SolutionItems) = preProject
 		..\.gitignore = ..\.gitignore
 		..\appveyor.yml = ..\appveyor.yml
 		..\build.cake = ..\build.cake
+		..\cake.config = ..\cake.config
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Source", "Source", "{EA42D027-E363-4943-ABED-1F3C37FD6CA5}"
@@ -16,8 +17,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Nuget", "Nuget", "{1DE4B19B
 	ProjectSection(SolutionItems) = preProject
 		..\nuspec\Cake.Powershell.nuspec = ..\nuspec\Cake.Powershell.nuspec
 	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cake.Powershell.Tests", "PowerShell.Tests\Cake.Powershell.Tests.csproj", "{DF373DAF-FE62-420F-8AA0-6C18CFF5C665}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{307216F2-D982-4935-8BF1-842114D14545}"
 	ProjectSection(SolutionItems) = preProject
@@ -32,7 +31,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{23704DC0-E
 		..\TroubleShooting.md = ..\TroubleShooting.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cake.Powershell", "Powershell\Cake.Powershell.csproj", "{B66F6FD0-20F3-4D3C-A21F-06E9398828D3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cake.Powershell", "Cake.Powershell\Cake.Powershell.csproj", "{ED3901EA-E3D2-488A-A66C-DC318DDC7089}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cake.Powershell.Tests", "Cake.Powershell.Tests\Cake.Powershell.Tests.csproj", "{716440BD-3C10-493E-949F-8E94A063F9F8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -40,20 +41,23 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{DF373DAF-FE62-420F-8AA0-6C18CFF5C665}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DF373DAF-FE62-420F-8AA0-6C18CFF5C665}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DF373DAF-FE62-420F-8AA0-6C18CFF5C665}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DF373DAF-FE62-420F-8AA0-6C18CFF5C665}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B66F6FD0-20F3-4D3C-A21F-06E9398828D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B66F6FD0-20F3-4D3C-A21F-06E9398828D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B66F6FD0-20F3-4D3C-A21F-06E9398828D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B66F6FD0-20F3-4D3C-A21F-06E9398828D3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED3901EA-E3D2-488A-A66C-DC318DDC7089}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED3901EA-E3D2-488A-A66C-DC318DDC7089}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED3901EA-E3D2-488A-A66C-DC318DDC7089}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED3901EA-E3D2-488A-A66C-DC318DDC7089}.Release|Any CPU.Build.0 = Release|Any CPU
+		{716440BD-3C10-493E-949F-8E94A063F9F8}.Debug|Any CPU.ActiveCfg = Release|Any CPU
+		{716440BD-3C10-493E-949F-8E94A063F9F8}.Debug|Any CPU.Build.0 = Release|Any CPU
+		{716440BD-3C10-493E-949F-8E94A063F9F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{716440BD-3C10-493E-949F-8E94A063F9F8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{DF373DAF-FE62-420F-8AA0-6C18CFF5C665} = {307216F2-D982-4935-8BF1-842114D14545}
-		{B66F6FD0-20F3-4D3C-A21F-06E9398828D3} = {EA42D027-E363-4943-ABED-1F3C37FD6CA5}
+		{ED3901EA-E3D2-488A-A66C-DC318DDC7089} = {EA42D027-E363-4943-ABED-1F3C37FD6CA5}
+		{716440BD-3C10-493E-949F-8E94A063F9F8} = {307216F2-D982-4935-8BF1-842114D14545}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7E0AF96A-1AA2-4477-921E-56FC38C8A055}
 	EndGlobalSection
 EndGlobal

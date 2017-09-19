@@ -16,7 +16,7 @@ namespace Cake.Powershell.Tests
     {
         #region Methods (4)
         [Fact]
-        public void Should_Start_Write_Script()
+        public void Start_Write_Script()
         {
             Collection<PSObject> results = CakeHelper.CreatePowershellRunner().Start("Write-Host", 
                 new PowershellSettings().WithArguments(args => args.Append("Testing...")));
@@ -25,13 +25,15 @@ namespace Cake.Powershell.Tests
         }
 
         [Fact]
-        public void Should_Start_Service_Script()
+        public void Start_Service_Script()
         {
             Collection<PSObject> results = CakeHelper.CreatePowershellRunner().Start("Get-Service", 
                 new PowershellSettings());
 
             Assert.True((results != null) && (results.Count > 0), "Check Rights");
         }
+
+
 
         [Fact]
         public void Working_Directory_With_Spaces_Should_Properly_Execute()
