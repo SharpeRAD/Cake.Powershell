@@ -90,6 +90,21 @@ Task("Powershell-File")
         });
 });
 
+Task("Remove-Files-With-Handling")
+    .Description("Handling errors while executing script")
+    .Does(() =>
+{
+    var results = StartPowershellScript("Remove-Item", args => {
+        args.AppendQuoted("Path", @"somepath");
+        args.Append("-Recurse");
+    });
+    foreach(var result in results){
+      var error = result.BaseObject as ErrorRecord;
+      if(error != null){
+        Information(error.Exception); // anything 
+      }
+});
+
 Task("Powershell-File-Settings")
     .Description("Run an example powershell script file with settings and parameters")
     .Does(() =>
