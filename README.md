@@ -159,7 +159,7 @@ A complete Cake example can be found [here](https://github.com/SharpeRAD/Cake.Po
 
 ## TroubleShooting
 
-* Please be aware of the breaking changes that occurred with the release of [Cake v0.22.0](https://cakebuild.net/blog/2017/09/cake-v0.22.0-released), you will need to upgrade Cake in order to use Cake.Powershell [v0.4.0] or above.
+* Please be aware of the breaking changes that occurred with the release of [Cake v0.22.0](https://cakebuild.net/blog/2017/09/cake-v0.22.0-released), you will need to upgrade Cake in order to use Cake.Powershell v0.4.0 or above.
 
 A few pointers for correctly enabling powershell scripting can be found [here](https://github.com/SharpeRAD/Cake.Powershell/blob/master/TroubleShooting.md).
 
