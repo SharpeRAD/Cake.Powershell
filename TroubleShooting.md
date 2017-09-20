@@ -7,6 +7,17 @@ https://technet.microsoft.com/en-us/library/hh847850.aspx
 
 ### Error message
 ```
+Error: Failed to install addin 'Cake.Powershell'
+Could not find any assemblies compatible with .NETFramework, Version=4.5
+```
+
+### Solution
+* Please be aware of the breaking changes that occurred with the release of [Cake v0.22.0](https://cakebuild.net/blog/2017/09/cake-v0.22.0-released), as a result you will need to upgrade Cake in order to use Cake.Powershell [v0.4.0] or above.
+
+
+
+### Error message
+```
 Connecting to remote server failed with the following error message : Access is denied. For
 more information, see the about_Remote_Troubleshooting Help topic.
 ```

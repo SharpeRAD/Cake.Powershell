@@ -44,17 +44,17 @@ Param(
     [ValidateSet("Release", "Debug")]
     [string]$Configuration = "Release",
     [ValidateSet("Quiet", "Minimal", "Normal", "Verbose", "Diagnostic")]
-	
+
     [string]$Verbosity = "Verbose",
     [switch]$WhatIf,
-	
+
     [Parameter(Position=0,Mandatory=$false,ValueFromRemainingArguments=$true)]
     [string[]]$ScriptArgs
 )
 
 
 
-$CakeVersion = "0.22.0"
+$CakeVersion = "0.22.2"
 $DotNetChannel = "preview";
 $DotNetVersion = "1.0.4";
 $DotNetInstallerUri = "https://dot.net/v1/dotnet-install.ps1";
@@ -96,7 +96,7 @@ else
 }
 
 # Make sure tools folder exists
-if (!(Test-Path $TOOLS_DIR)) 
+if (!(Test-Path $TOOLS_DIR))
 {
     Write-Verbose "Creating tools directory..."
     New-Item -Path $TOOLS_DIR -Type directory | out-null
@@ -145,16 +145,16 @@ Function Remove-PathVariable([string]$VariableToRemove)
 # Get .NET Core CLI path if installed.
 $FoundDotNetCliVersion = $null;
 
-if (Get-Command dotnet -ErrorAction SilentlyContinue) 
+if (Get-Command dotnet -ErrorAction SilentlyContinue)
 {
     $FoundDotNetCliVersion = dotnet --version;
 }
 
-if($FoundDotNetCliVersion -ne $DotNetVersion) 
+if($FoundDotNetCliVersion -ne $DotNetVersion)
 {
     $InstallPath = Join-Path $TOOLS_DIR "DotNet"
 
-    if (!(Test-Path $InstallPath)) 
+    if (!(Test-Path $InstallPath))
     {
         mkdir -Force $InstallPath | Out-Null;
     }
@@ -179,7 +179,7 @@ if($FoundDotNetCliVersion -ne $DotNetVersion)
 # Make sure nuget.exe exists.
 $NugetPath = Join-Path $TOOLS_DIR "nuget.exe"
 
-if (!(Test-Path $NugetPath)) 
+if (!(Test-Path $NugetPath))
 {
     Write-Host "Downloading NuGet.exe..."
     (New-Object System.Net.WebClient).DownloadFile($NugetUrl, $NugetPath);
@@ -196,12 +196,12 @@ if (!(Test-Path $NugetPath))
 # Make sure Cake has been installed.
 $CakePath = Join-Path $TOOLS_DIR "Cake.$CakeVersion/Cake.exe"
 
-if (!(Test-Path $CakePath)) 
+if (!(Test-Path $CakePath))
 {
     Write-Host "Installing Cake..."
     Invoke-Expression "&`"$NugetPath`" install Cake -Version $CakeVersion -OutputDirectory `"$TOOLS_DIR`"" | Out-Null;
 
-    if ($LASTEXITCODE -ne 0) 
+    if ($LASTEXITCODE -ne 0)
     {
         Throw "An error occured while restoring Cake from NuGet."
     }

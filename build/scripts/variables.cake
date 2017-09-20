@@ -51,7 +51,7 @@ foreach (string project in projectNames)
     {
         projectDirs.Add("./src/" + project);
 
-        projectBinDirs.Add("./src/" + project + "/bin");
+		projectBinDirs.Add("./src/" + project + "/bin");
 		projectObjDirs.Add("./src/" + project + "/obj");
 
         projectFiles.Add(File("./src/" + project + "/" + project + ".xproj"));
@@ -63,9 +63,7 @@ foreach (string project in projectNames)
 //Find Tests
 var testNames = new List<string>();
 
-if (DirectoryExists("./src/" + appName + ".Tests") 
-	&& (appName != "Eset.Services.Sage") 
-	&& (appName != "Eset.Services.Reports"))
+if (DirectoryExists("./src/" + appName + ".Tests"))
 {
     testNames.Add(appName + ".Tests");
 

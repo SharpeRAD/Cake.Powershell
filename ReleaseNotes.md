@@ -1,6 +1,3 @@
-### New in 0.4.1 (Released 2017/09/20)
-* [Bug] Incorrect Nuspec paths
-
 ### New in 0.4.0 (Released 2017/09/19)
 * [Improvement] Updated Cake reference to v0.22.0
 * [Improvement] Moved to net461 for Cake compatibility
