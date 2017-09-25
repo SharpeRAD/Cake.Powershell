@@ -80,11 +80,4 @@ src/TestResults/
 # Windows
 Thumbs.db
 
-
-
-# CDN
-src/Eset.Websites.CDN/wwwroot/js/
-src/Eset.Websites.CDN/wwwroot/css/
-src/Eset.Websites.CDN/wwwroot/maps/
-
 src/*/wwwroot/version.txt
