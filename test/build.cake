@@ -8,6 +8,9 @@ var target = Argument("target", "Default");
 var configuration = Argument("configuration", "Release");
 
 
+
+
+
 ///////////////////////////////////////////////////////////////////////////////
 // SETUP / TEARDOWN
 ///////////////////////////////////////////////////////////////////////////////
@@ -17,6 +20,9 @@ Setup(context =>
     //Executed BEFORE the first task.
     Information("Tools dir: {0}.", EnvironmentVariable("CAKE_PATHS_TOOLS"));
 });
+
+
+
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -69,6 +75,9 @@ Task("Failing-Powershell-File")
     });
 
 
+
+
+
 //////////////////////////////////////////////////////////////////////
 // TASK TARGETS
 //////////////////////////////////////////////////////////////////////
@@ -77,6 +86,8 @@ Task("Default")
     .IsDependentOn("Powershell-Script")
     .IsDependentOn("Powershell-File")
     .IsDependentOn("Failing-Powershell-File");
+
+
 
 
 

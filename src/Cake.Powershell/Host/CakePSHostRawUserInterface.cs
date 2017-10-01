@@ -1,9 +1,5 @@
 ﻿#region Using Statements
 using System;
-using System.Text;
-using System.Collections.Generic;
-
-using System.Management.Automation;
 using System.Management.Automation.Host;
 
 using Cake.Core.Diagnostics;
@@ -15,7 +11,7 @@ namespace Cake.Powershell
 {
     internal class CakePSHostRawUserInterface : PSHostRawUserInterface
     {
-        #region Fields (1)
+        #region Fields
         private readonly ICakeLog _Log;
         #endregion
 
@@ -23,7 +19,7 @@ namespace Cake.Powershell
 
 
 
-        #region Constructor (1)
+        #region Constructor
         internal CakePSHostRawUserInterface(ICakeLog log)
         {
             if (log == null)
@@ -39,7 +35,7 @@ namespace Cake.Powershell
 
 
 
-        #region Properties (11)
+        #region Properties
         /// <summary>
         /// Gets or sets the background color of the displayed text.
         /// This maps to the corresponding Console.Background property.
@@ -167,7 +163,7 @@ namespace Cake.Powershell
 
 
 
-        #region Methods (6)
+        #region Methods
         /// <summary>
         /// This API resets the input buffer. In this example this 
         /// functionality is not needed so the method returns nothing.

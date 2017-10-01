@@ -15,7 +15,7 @@ namespace Cake.Powershell.Tests
     /// </summary>
     internal class DebugLog : ICakeLog
     {
-        #region Properties (2)
+        #region Properties
         /// <summary>
         /// Gets the verbosity.
         /// </summary>
@@ -37,7 +37,7 @@ namespace Cake.Powershell.Tests
 
 
 
-        #region Methods (1)
+        #region Methods
         /// <summary>
         /// Writes the text representation of the specified array of objects to the 
         /// log using the specified verbosity, log level and format information.

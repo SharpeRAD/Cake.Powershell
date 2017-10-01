@@ -16,7 +16,7 @@ namespace Cake.Powershell
     /// </summary>
     public interface IPowershellRunner
     {
-        #region Methods (3)
+        #region Methods
         /// <summary>
         /// Starts a powershell script using the specified information.
         /// </summary>

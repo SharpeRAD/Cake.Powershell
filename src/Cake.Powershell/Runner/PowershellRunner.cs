@@ -22,7 +22,7 @@ namespace Cake.Powershell
     /// </summary>
     public sealed class PowershellRunner : IPowershellRunner
     {
-        #region Fields (5)
+        #region Fields
         private readonly ICakeEnvironment _Environment;
         private readonly ICakeLog _Log;
         private Collection<PSObject> _pipelineResults = new Collection<PSObject>();
@@ -35,7 +35,7 @@ namespace Cake.Powershell
 
 
 
-        #region Constructor (1)
+        #region Constructor
         /// <summary>
         /// Initializes a new instance of the <see cref="PowershellRunner" /> class.
         /// </summary>
@@ -61,7 +61,7 @@ namespace Cake.Powershell
 
 
 
-        #region Functions (6)
+        #region Functions
         /// <summary>
         /// Starts a powershell script using the specified information.
         /// </summary>

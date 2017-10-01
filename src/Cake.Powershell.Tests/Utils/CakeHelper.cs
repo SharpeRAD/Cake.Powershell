@@ -11,7 +11,7 @@ namespace Cake.Powershell.Tests
 { 
     internal static class CakeHelper
     {
-        #region Methods (2)
+        #region Methods
         public static ICakeEnvironment CreateEnvironment()
         {
             var environment = FakeEnvironment.CreateWindowsEnvironment();

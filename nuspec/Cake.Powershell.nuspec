@@ -24,8 +24,10 @@
 
    <files>
       <file src="net461/System.Management.Automation.dll" target="lib/net461" />
+       
       <file src="net461/Cake.Powershell.dll" target="lib/net461" />
       <file src="net461/Cake.Powershell.xml" target="lib/net461" />
+       
       <file src="LICENSE" />
    </files>
 </package>

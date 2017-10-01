@@ -12,7 +12,7 @@ namespace Cake.Powershell
     /// </summary>
     public static class SecureExtensions
     {
-        #region Methods (2)
+        #region Methods
         /// <summary>
         /// Creates a secure string for storing powershell passwords
         /// </summary>

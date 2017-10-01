@@ -14,7 +14,7 @@ namespace Cake.Powershell
     /// </summary>
     public sealed class NamedArgument : IProcessArgument
     {
-        #region Fields (4)
+        #region Fields
         private readonly string _Name;
         private readonly IProcessArgument _Value;
 
@@ -26,7 +26,7 @@ namespace Cake.Powershell
 
 
 
-        #region Constructor (2)
+        #region Constructor
         /// <summary>
         /// Initializes a new instance of the <see cref="NamedArgument"/> class.
         /// </summary>
@@ -70,7 +70,7 @@ namespace Cake.Powershell
 
 
 
-        #region Properties (1)
+        #region Properties
         /// <summary>
         /// Gets or sets the format of the argument
         /// </summary>
@@ -93,7 +93,7 @@ namespace Cake.Powershell
 
 
 
-        #region Methods (3)
+        #region Methods
         /// <summary>
         /// Render the arguments as a <see cref="System.String" />.
         /// </summary>

@@ -13,7 +13,7 @@ namespace Cake.Powershell
     /// <seealso cref="PSHostRawUserInterface" />
     internal sealed class CakePSHostNoConsoleRawUserInterface : PSHostRawUserInterface
     {
-        #region Properties (11)
+        #region Properties
         /// <summary>
         /// There is no console, so a ConsoleColor of black is returned.
         /// </summary>
@@ -166,7 +166,7 @@ namespace Cake.Powershell
 
 
 
-        #region Methods (6)
+        #region Methods
         /// <summary>
         /// There is no console, so this is not implemented.
         /// </summary>

@@ -20,7 +20,7 @@ namespace Cake.Powershell
     [CakeNamespaceImport("System.Management.Automation")]
     public static class PowershellAliases
     {
-        #region Methods (10)
+        #region Methods
         /// <summary>
         /// Starts a powershell script using the specified information.
         /// </summary>

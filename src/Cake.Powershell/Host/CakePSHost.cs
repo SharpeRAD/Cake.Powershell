@@ -14,7 +14,7 @@ namespace Cake.Powershell
 {
     internal class CakePSHost : PSHost
     {
-        #region Fields (2)
+        #region Fields
         private Guid _ID = Guid.NewGuid();
         private CakePSHostInterface _Interface;
         #endregion
@@ -23,7 +23,7 @@ namespace Cake.Powershell
 
 
 
-        #region Constructor (1)
+        #region Constructor
         internal CakePSHost(ICakeLog log, bool outputToAppConsole)
         {
             if (log == null)
@@ -39,7 +39,7 @@ namespace Cake.Powershell
 
 
 
-        #region Properties (6)
+        #region Properties
         public override Guid InstanceId
         {
             get { return _ID; }
@@ -77,7 +77,7 @@ namespace Cake.Powershell
 
 
 
-        #region Methods (5)
+        #region Methods
         public override void EnterNestedPrompt()
         {
             throw new NotImplementedException();

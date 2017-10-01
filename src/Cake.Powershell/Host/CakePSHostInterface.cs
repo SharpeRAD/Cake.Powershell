@@ -14,7 +14,7 @@ namespace Cake.Powershell
 {
     internal class CakePSHostInterface : PSHostUserInterface
     {
-        #region Fields (2)
+        #region Fields
         private readonly ICakeLog _Log;
         private readonly PSHostRawUserInterface _RawUI;
         #endregion
@@ -23,7 +23,7 @@ namespace Cake.Powershell
 
 
 
-        #region Constructor (1)
+        #region Constructor
         internal CakePSHostInterface(ICakeLog log, bool outputToAppConsole)
         {
             if (log == null)
@@ -42,7 +42,7 @@ namespace Cake.Powershell
 
 
 
-        #region Properties (1)
+        #region Properties
         public override PSHostRawUserInterface RawUI
         {
             get 
@@ -56,7 +56,7 @@ namespace Cake.Powershell
 
 
 
-        #region Functions (14)
+        #region Methods
         public override void Write(ConsoleColor foregroundColor, ConsoleColor backgroundColor, string value)
         {
             _Log.Write(Verbosity.Normal, LogLevel.Information, value.EscapeCurleyBrackets());

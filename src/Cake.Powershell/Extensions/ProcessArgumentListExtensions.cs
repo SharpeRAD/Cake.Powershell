@@ -15,7 +15,7 @@ namespace Cake.Powershell
     /// </summary>
     public static class ProcessArgumentListExtensions
     {
-        #region Methods (20)
+        #region Methods
         /// <summary>
         /// Appends the specified text to the argument builder.
         /// </summary>

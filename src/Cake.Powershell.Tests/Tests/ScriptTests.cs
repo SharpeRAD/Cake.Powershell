@@ -14,7 +14,7 @@ namespace Cake.Powershell.Tests
 {
     public class ScriptTests
     {
-        #region Methods (4)
+        #region Methods
         [Fact]
         public void Start_Write_Script()
         {

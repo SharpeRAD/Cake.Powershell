@@ -13,7 +13,7 @@ namespace Cake.Powershell
     /// </summary>
     public class PowershellSettings
     {
-        #region Constructor (1)
+        #region Constructor
         /// <summary>
         /// Initializes a new instance of the <see cref="PowershellSettings" /> class.
         /// </summary>
@@ -29,7 +29,7 @@ namespace Cake.Powershell
 
 
 
-        #region Properties (10)
+        #region Properties
         /// <summary>
         /// Gets or sets the working directory for the process to be started.
         /// </summary>

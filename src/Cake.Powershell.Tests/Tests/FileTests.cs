@@ -15,7 +15,7 @@ namespace Cake.Powershell.Tests
 {
     public class FileTests
     {
-        #region Methods (4)
+        #region Methods
         [Fact]
         public void Start_Local_File()
         {

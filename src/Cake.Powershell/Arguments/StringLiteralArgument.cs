@@ -14,7 +14,7 @@ namespace Cake.Powershell
     /// </summary>
     public sealed class StringLiteralArgument : IProcessArgument
     {
-        #region Fields (1)
+        #region Fields
         private readonly IProcessArgument _argument;
         #endregion
 
@@ -22,7 +22,7 @@ namespace Cake.Powershell
 
 
 
-        #region Constructors (1)
+        #region Constructors
         /// <summary>
         /// Initializes an instance of the <see cref="StringLiteralArgument"/> class.
         /// </summary>
@@ -37,7 +37,7 @@ namespace Cake.Powershell
 
 
 
-        #region Methods (4)
+        #region Methods
         /// <summary>
         /// Renders the argument as a string-literal <see cref="string"/>.
         /// </summary>

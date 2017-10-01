@@ -14,7 +14,7 @@ namespace Cake.Powershell
     /// </summary>
     public sealed class ArrayArgument : IProcessArgument
     {
-        #region Fields (2)
+        #region Fields
         private const string ArgumentSeparator = ", ";
 
         private readonly IEnumerable<IProcessArgument> _arguments;
@@ -24,7 +24,7 @@ namespace Cake.Powershell
 
 
 
-        #region Constructors (1)
+        #region Constructors
         /// <summary>
         /// Initializes a new instance of the <see cref="ArrayArgument"/> class.
         /// </summary>
@@ -39,7 +39,7 @@ namespace Cake.Powershell
 
 
 
-        #region Methods (3)
+        #region Methods
         /// <summary>
         /// Render the arguments as a <see cref="T:System.String" />.
         /// Sensitive information will be included.

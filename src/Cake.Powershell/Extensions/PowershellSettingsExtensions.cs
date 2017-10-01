@@ -14,7 +14,7 @@ namespace Cake.Powershell
     /// </summary>
     public static class PowershellSettingsExtensions
     {
-        #region Methods (11)
+        #region Methods
         /// <summary>
         /// Sets the arguments for the powershell command
         /// </summary>
