@@ -1,3 +1,6 @@
+### New in 0.4.2 (Released 2017/10/24)
+* [Bug] Wrong nuspec folder
+
 ### New in 0.4.1 (Released 2017/10/24)
 * [Improvement] Move down to net46 to bring the project inline with Cake.Core
 

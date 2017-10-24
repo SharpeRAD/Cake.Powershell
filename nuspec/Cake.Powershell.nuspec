@@ -23,10 +23,10 @@
     </metadata>
 
     <files>
-        <file src="net46/System.Management.Automation.dll" target="lib/net461" />
+        <file src="net46/System.Management.Automation.dll" target="lib/net46" />
 
-        <file src="net46/Cake.Powershell.dll" target="lib/net461" />
-        <file src="net46/Cake.Powershell.xml" target="lib/net461" />
+        <file src="net46/Cake.Powershell.dll" target="lib/net46" />
+        <file src="net46/Cake.Powershell.xml" target="lib/net46" />
 
         <file src="LICENSE" />
     </files>
