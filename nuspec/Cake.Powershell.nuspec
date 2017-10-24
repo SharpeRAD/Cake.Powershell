@@ -1,33 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <package xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-   <metadata xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
-      <id>Cake.Powershell</id>
-      <version>0.0.0</version>
-      <authors>Phillip Sharpe</authors>
-      <owners>Phillip Sharpe</owners>
-      <title>Cake.Powershell</title>
-      <description>Cake Build addon for Powershell.</description>
-      <summary>Powershell addon for cake build.</summary>
-      <licenseUrl>https://github.com/SharpeRAD/Cake.Powershell/LICENSE</licenseUrl>
-      <projectUrl>https://github.com/SharpeRAD/Cake.Powershell</projectUrl>
-      <iconUrl>https://cdn.rawgit.com/cake-contrib/graphics/a5cf0f881c390650144b2243ae551d5b9f836196/png/cake-contrib-medium.png</iconUrl>
-      <requireLicenseAcceptance>false</requireLicenseAcceptance>
-      <copyright>Copyright (c) Phillip Sharpe 2015</copyright>
-      <releaseNotes>Initial Release</releaseNotes>
-      <tags>Cake Script Build Powershell</tags>
+    <metadata xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+        <id>Cake.Powershell</id>
+        <version>0.0.0</version>
+        <authors>Phillip Sharpe</authors>
+        <owners>Phillip Sharpe</owners>
+        <title>Cake.Powershell</title>
+        <description>Cake Build addon for Powershell.</description>
+        <summary>Powershell addon for cake build.</summary>
+        <licenseUrl>https://github.com/SharpeRAD/Cake.Powershell/LICENSE</licenseUrl>
+        <projectUrl>https://github.com/SharpeRAD/Cake.Powershell</projectUrl>
+        <iconUrl>https://cdn.rawgit.com/cake-contrib/graphics/a5cf0f881c390650144b2243ae551d5b9f836196/png/cake-contrib-medium.png</iconUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <copyright>Copyright (c) Phillip Sharpe 2015</copyright>
+        <releaseNotes>Initial Release</releaseNotes>
+        <tags>Cake Script Build Powershell</tags>
 
-      <dependencies>
-         <dependency id="Cake.Core" version="0.22.0" />
-         <dependency id="Microsoft.PowerShell.5.ReferenceAssemblies" version="1.1.0" />
-      </dependencies>
-   </metadata>
+        <dependencies>
+            <dependency id="Cake.Core" version="0.22.0" />
+            <dependency id="Microsoft.PowerShell.5.ReferenceAssemblies" version="1.1.0" />
+        </dependencies>
+    </metadata>
 
-   <files>
-      <file src="net461/System.Management.Automation.dll" target="lib/net461" />
-       
-      <file src="net461/Cake.Powershell.dll" target="lib/net461" />
-      <file src="net461/Cake.Powershell.xml" target="lib/net461" />
-       
-      <file src="LICENSE" />
-   </files>
+    <files>
+        <file src="net46/System.Management.Automation.dll" target="lib/net461" />
+
+        <file src="net46/Cake.Powershell.dll" target="lib/net461" />
+        <file src="net46/Cake.Powershell.xml" target="lib/net461" />
+
+        <file src="LICENSE" />
+    </files>
 </package>

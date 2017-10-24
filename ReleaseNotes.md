@@ -1,3 +1,6 @@
+### New in 0.4.1 (Released 2017/10/24)
+* [Improvement] Move down to net46 to bring the project inline with Cake.Core
+
 ### New in 0.4.0 (Released 2017/09/19)
 * [Improvement] Updated Cake reference to v0.22.0
 * [Improvement] Moved to net461 for Cake compatibility

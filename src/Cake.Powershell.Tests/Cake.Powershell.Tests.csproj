@@ -5,7 +5,7 @@
         <PackageId>Cake.Powershell.Tests</PackageId>
         <OutputType>Library</OutputType>
 
-        <TargetFrameworks>net461</TargetFrameworks>
+        <TargetFrameworks>net46;</TargetFrameworks>
 
         <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
         <GenerateAssemblyVersionAttribute>false</GenerateAssemblyVersionAttribute>
