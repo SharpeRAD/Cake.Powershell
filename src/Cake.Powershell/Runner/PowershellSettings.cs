@@ -91,6 +91,12 @@ namespace Cake.Powershell
         /// </summary>
         /// <value>The set of command-line arguments to use when starting the application.</value>
         public ProcessArgumentBuilder Arguments { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating to use dot sourcing when executing scripts.
+        /// </summary>
+        /// <value><c>true</c> if dot sourcing should be used; otherwise <c>false</c>.</value>
+        public bool UseDotSourcing { get; set; }
         #endregion
     }
 }

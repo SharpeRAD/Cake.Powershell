@@ -84,7 +84,9 @@ namespace Cake.Powershell
             //Get Script
             this.SetWorkingDirectory(settings);
 
-            LogExecutingCommand(settings, script);
+            string prefix = settings.UseDotSourcing ? ". " : "";
+
+            LogExecutingCommand(settings, prefix + script);
 
 
 
@@ -115,7 +117,10 @@ namespace Cake.Powershell
 
             //Get Script
             this.SetWorkingDirectory(settings);
-            string script = "&\"" + path.MakeAbsolute(settings.WorkingDirectory).FullPath + "\"";
+
+            string prefix = settings.UseDotSourcing ? ". " : "&";
+            string fullPath = path.MakeAbsolute(settings.WorkingDirectory).FullPath;
+            string script = prefix + "\"" + fullPath + "\"";
 
             LogExecutingCommand(settings, script);
 
@@ -150,8 +155,9 @@ namespace Cake.Powershell
             //Get Script
             this.SetWorkingDirectory(settings);
 
+            string prefix = settings.UseDotSourcing ? ". " : "&";
             string fullPath = path.MakeAbsolute(settings.WorkingDirectory).FullPath;
-            string script = "&\"" + path.MakeAbsolute(settings.WorkingDirectory).FullPath + "\"";
+            string script = prefix + "\"" + fullPath + "\"";
 
 
 
@@ -279,6 +285,11 @@ namespace Cake.Powershell
                     settings.Modules.ToList().ForEach(m => pipeline.Commands.AddScript("Import-Module " + m));
                 }
 
+                //if (settings.UseGlobalScope)
+                //{
+                //    script = $". {script}";
+                //}
+                //pipeline.Commands.AddScript(script, !settings.UseGlobalScope);
                 pipeline.Commands.AddScript(script);
 
                 if (settings.FormatOutput)

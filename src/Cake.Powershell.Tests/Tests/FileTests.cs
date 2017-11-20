@@ -35,6 +35,15 @@ namespace Cake.Powershell.Tests
         }
 
         [Fact]
+        public void Start_File_With_Dot_Sourcing()
+        {
+            Collection<PSObject> results = CakeHelper.CreatePowershellRunner().Start(new FilePath("Scripts/Test.ps1"),
+                new PowershellSettings().WithDotSourcing());
+
+            Assert.True((results != null) && (results.Count >= 1), "Check Rights");
+        }
+
+        [Fact]
         public void Exception_Script_Should_Throw_Exception()
         {
             var runner = CakeHelper.CreatePowershellRunner();
