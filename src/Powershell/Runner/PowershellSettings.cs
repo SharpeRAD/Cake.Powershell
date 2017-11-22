@@ -22,6 +22,7 @@ namespace Cake.Powershell
             FormatOutput = false;
             LogOutput = false;
             OutputToAppConsole = true;
+            ExceptionOnScriptError = true;
         }
         #endregion
 
@@ -91,6 +92,11 @@ namespace Cake.Powershell
         /// </summary>
         /// <value>The set of command-line arguments to use when starting the application.</value>
         public ProcessArgumentBuilder Arguments { get; set; }
+
+        /// <summary>
+        /// If true script execution which have errors will throw exception, If false it will return result. Default: true
+        /// </summary>
+        public bool ExceptionOnScriptError { get; set; }
         #endregion
     }
 }
