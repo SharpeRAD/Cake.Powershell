@@ -8,6 +8,9 @@ var target = Argument("target", "Default");
 var configuration = Argument("configuration", "Release");
 
 
+
+
+
 ///////////////////////////////////////////////////////////////////////////////
 // SETUP / TEARDOWN
 ///////////////////////////////////////////////////////////////////////////////
@@ -18,12 +21,9 @@ Setup(context =>
     Information("Tools dir: {0}.", EnvironmentVariable("CAKE_PATHS_TOOLS"));
 });
 
-Task("ErrorPs1")
-    .Does(() =>
-{
-	var results = StartPowershellFile("error.ps1");
-    
-});
+
+
+
 
 ///////////////////////////////////////////////////////////////////////////////
 // TASK DEFINITIONS
@@ -75,6 +75,9 @@ Task("Failing-Powershell-File")
     });
 
 
+
+
+
 //////////////////////////////////////////////////////////////////////
 // TASK TARGETS
 //////////////////////////////////////////////////////////////////////
@@ -83,6 +86,8 @@ Task("Default")
     .IsDependentOn("Powershell-Script")
     .IsDependentOn("Powershell-File")
     .IsDependentOn("Failing-Powershell-File");
+
+
 
 
 

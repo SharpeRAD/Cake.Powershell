@@ -1,3 +1,15 @@
+### New in 0.4.2 (Released 2017/10/24)
+* [Bug] Wrong nuspec folder
+
+### New in 0.4.1 (Released 2017/10/24)
+* [Improvement] Move down to net46 to bring the project inline with Cake.Core
+
+### New in 0.4.0 (Released 2017/09/19)
+* [Improvement] Updated Cake reference to v0.22.0
+* [Improvement] Moved to net461 for Cake compatibility
+* [Improvement] Upgraded solution to vs2017
+* [Improvement] New .net core based build scripts
+
 ### New in 0.3.5 (Released 2017/08/18)
 * [Improvement] Exception handling
 

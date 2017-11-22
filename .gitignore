@@ -3,13 +3,13 @@
 [Oo]bj/
 [Tt]emp/
 [Pp]ackages/
-/[Bb]uild/
 *.sln.ide/
 
 # Build related
-build/
+build/results/
 tools/
 test/tools/
+node_modules/
 
 
 
@@ -67,6 +67,8 @@ _NCrunch_*
 src/.vs/
 project.lock.json
 
+SolutionInfo.cs
+
 # NuGet Packages Directory
 src/packages/
 
@@ -77,3 +79,5 @@ src/TestResults/
 
 # Windows
 Thumbs.db
+
+src/*/wwwroot/version.txt
