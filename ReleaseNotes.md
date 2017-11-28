@@ -1,3 +1,7 @@
+### New in 0.4.3 (Released 2017/11/28)
+* [Improvement] Throw on errors
+* [Improvement] dot sourcing
+
 ### New in 0.4.2 (Released 2017/10/24)
 * [Bug] Wrong nuspec folder
 
