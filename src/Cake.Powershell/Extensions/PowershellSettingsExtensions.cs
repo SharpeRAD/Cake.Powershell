@@ -68,6 +68,23 @@ namespace Cake.Powershell
         }
 
 
+        /// <summary>
+        /// Executes scripts using dot sourcing
+        /// </summary>
+        /// <param name="settings">The powershell settings.</param>
+        /// <returns>The same <see cref="PowershellSettings"/> instance so that multiple calls can be chained.</returns>
+        public static PowershellSettings WithDotSourcing(this PowershellSettings settings)
+        {
+            if (settings == null)
+            {
+                throw new ArgumentNullException("settings");
+            }
+
+            settings.UseDotSourcing = true;
+            return settings;
+        }
+
+
 
         /// <summary>
         /// Sets the working directory for the process to be started.
