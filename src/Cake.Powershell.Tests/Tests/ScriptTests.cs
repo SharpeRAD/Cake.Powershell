@@ -40,7 +40,7 @@ namespace Cake.Powershell.Tests
         {
             Collection<PSObject> results = CakeHelper.CreatePowershellRunner().Start("Write-Host",
                 new PowershellSettings().WithArguments(args => args.Append("Testing..."))
-                                        .UseWorkingDirectory(@"C:\Path With Spaces\"));
+                                        .UseWorkingDirectory(@"C:\Program Files\"));
 
             Assert.True((DebugLog.Lines != null) && (DebugLog.Lines.Contains("Testing...")), "Output not written to the powershell host");
         }

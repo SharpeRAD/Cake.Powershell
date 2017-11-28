@@ -311,12 +311,19 @@ namespace Cake.Powershell
                 }
 
                 //Handle Exceptions
-                var exceptions = _pipelineResults.Where(result => result.BaseObject is Exception)
-                    .Select(e => e.BaseObject as Exception).ToArray();
+                var exceptions = _pipelineResults
+                    .Select(result => result.BaseObject)
+                    .OfType<Exception>().ToArray();
 
-                if (exceptions.Length > 0)
+                var errors = _pipelineResults
+                    .Select(b=> b.BaseObject)
+                    .OfType<ErrorRecord>()
+                    .Select(er => er.Exception ?? new Exception(er.ErrorDetails.Message)).ToArray();
+
+                if (exceptions.Any() || (settings.ExceptionOnScriptError && errors.Any()))
                 {
                     var exceptionString = string.Join(" - ", exceptions.Select(e => e.ToString()));
+                    exceptionString += string.Join(" - ", errors.Select(e => e.ToString()));
                     throw new AggregateException($"Failed to Execute Powershell Script: {exceptionString}", exceptions);
                 }
             }

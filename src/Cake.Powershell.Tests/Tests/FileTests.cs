@@ -52,17 +52,23 @@ namespace Cake.Powershell.Tests
         }
 
         [Fact]
-        public void Returned_Error_Code_Should_Throw_Exception()
+        public void Returned_Error_Code_Should_Not_Throw_Exception_If_Option_Passed()
         {
             var results = CakeHelper.CreatePowershellRunner()
-                .Start(new FilePath("Scripts/FailingScript.ps1"), new PowershellSettings());
+                .Start(new FilePath("Scripts/FailingScript.ps1"), new PowershellSettings() { ExceptionOnScriptError = false });
 
             Assert.True(results != null && results.Count >= 1, "Check Rights");
             Assert.True(results.FirstOrDefault(r => r.BaseObject.ToString().Contains("Cannot find path")) != null);
             Assert.Equal("1", results[0].BaseObject.ToString());
         }
 
-
+        [Fact]
+        public void Returned_Error_Code_Should_Throw_Exception()
+        {
+            var runner = CakeHelper.CreatePowershellRunner();
+            Assert.Throws<AggregateException>(() => runner.Start(new FilePath("Scripts/FailingScript.ps1"),
+                new PowershellSettings() { ExceptionOnScriptError = true }));
+        }
 
         /*
         [Fact]
