@@ -1,6 +1,6 @@
 ﻿#region Using Statements
 using System.Collections.Generic;
-
+using System.Management.Automation.Runspaces;
 using Cake.Core.IO;
 #endregion
 
@@ -64,6 +64,11 @@ namespace Cake.Powershell
         /// Gets or sets the credentials to use when connecting
         /// </summary>
         public string Password { get; set; }
+
+        /// <summary>
+        /// Gets or sets the authentication mechanism to use when conecting
+        /// </summary>
+        public AuthenticationMechanism AuthenticationMechanism { get; set; }
 
 
 
