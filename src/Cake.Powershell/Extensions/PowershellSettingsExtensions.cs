@@ -1,7 +1,7 @@
 ﻿#region Using Statements
 using System;
 using System.Collections.Generic;
-
+using System.Management.Automation.Runspaces;
 using Cake.Core.IO;
 #endregion
 
@@ -199,6 +199,23 @@ namespace Cake.Powershell
             }
 
             settings.Password = password;
+            return settings;
+        }
+
+        /// <summary>
+        /// Sets the authentication mechanism to use when connecting
+        /// </summary>
+        /// <param name="settings">The powershell settings.</param>
+        /// <param name="authenticationMechanism">The authentication mechanism to connect with.</param>
+        /// <returns>The same <see cref="PowershellSettings"/> instance so that multiple calls can be chained.</returns>
+        public static PowershellSettings UseAuthenticationMechanism(this PowershellSettings settings, AuthenticationMechanism authenticationMechanism)
+        {
+            if (settings == null)
+            {
+                throw new ArgumentNullException("settings");
+            }
+
+            settings.AuthenticationMechanism = authenticationMechanism;
             return settings;
         }
 

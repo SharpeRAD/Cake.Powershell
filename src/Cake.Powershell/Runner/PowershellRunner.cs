@@ -254,6 +254,7 @@ namespace Cake.Powershell
                 if (!String.IsNullOrEmpty(settings.Username))
                 {
                     connection.Credential = new PSCredential(settings.Username, settings.Password.MakeSecure());
+                    connection.AuthenticationMechanism = settings.AuthenticationMechanism;
                 }
 
                 if (settings.Timeout.HasValue)
