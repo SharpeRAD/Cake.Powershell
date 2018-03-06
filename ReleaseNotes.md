@@ -1,3 +1,7 @@
+### New in 0.4.4 (Released 2018/03/06)
+* [Improvement] Updated to Cake v0.26
+* [Improvement] Added AuthenticationMechanism
+
 ### New in 0.4.3 (Released 2017/11/28)
 * [Improvement] Throw on errors
 * [Improvement] dot sourcing
