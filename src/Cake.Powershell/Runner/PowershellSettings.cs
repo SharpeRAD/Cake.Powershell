@@ -23,6 +23,8 @@ namespace Cake.Powershell
             LogOutput = false;
             OutputToAppConsole = true;
             ExceptionOnScriptError = true;
+
+            AuthenticationMechanism = AuthenticationMechanism.Default;
         }
         #endregion
 
