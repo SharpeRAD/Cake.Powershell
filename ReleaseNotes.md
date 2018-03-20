@@ -1,3 +1,6 @@
+### New in 0.4.5 (Released 2018/03/20)
+* [Improvement] Remove extra references
+* 
 ### New in 0.4.4 (Released 2018/03/06)
 * [Improvement] Updated to Cake v0.26
 * [Improvement] Added AuthenticationMechanism

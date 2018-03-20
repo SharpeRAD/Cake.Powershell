@@ -54,14 +54,14 @@ Param(
 
 
 
-$CakeVersion = "0.22.2"
+$CakeVersion = "0.26.0"
 $DotNetChannel = "preview";
-$DotNetVersion = "1.0.4";
+$DotNetVersion = "2.0.0";
 $DotNetInstallerUri = "https://dot.net/v1/dotnet-install.ps1";
 $NugetUrl = "https://dist.nuget.org/win-x86-commandline/latest/nuget.exe"
 
 # Temporarily skip verification and opt-in to new in-proc NuGet
-$ENV:CAKE_SETTINGS_SKIPVERIFICATION='true'
+$ENV:CAKE_SETTINGS_SKIPVERIFICATION='false'
 $ENV:CAKE_NUGET_USEINPROCESSCLIENT='true'
 
 
