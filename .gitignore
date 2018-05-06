@@ -81,3 +81,5 @@ src/TestResults/
 Thumbs.db
 
 src/*/wwwroot/version.txt
+/.vs/slnx.sqlite
+/.vs/ProjectSettings.json
