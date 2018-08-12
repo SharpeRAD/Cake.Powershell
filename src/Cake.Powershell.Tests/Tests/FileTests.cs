@@ -48,7 +48,7 @@ namespace Cake.Powershell.Tests
 
             foreach (var item in array)
             {
-                Assert.True(results.Any(r => r.BaseObject.ToString().Equals((item))));
+                Assert.True(results.FirstOrDefault(r => r.BaseObject.ToString().Equals((item))) != null);
             }
         }
 
@@ -69,7 +69,7 @@ namespace Cake.Powershell.Tests
 
             foreach (var item in dict.ToArray())
             {
-                Assert.True(results.Any(r => r.BaseObject.ToString().Equals(($"{item.Key} = {item.Value}"))));
+                Assert.True(results.FirstOrDefault(r => r.BaseObject.ToString().Equals(($"{item.Key} = {item.Value}"))) != null);
             }
         }
 
