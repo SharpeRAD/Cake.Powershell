@@ -44,7 +44,7 @@ Task("Restore-Nuget-Packages")
 
     		DotNetCoreRestore("./src/" + project, new DotNetCoreRestoreSettings()
             {
-				Verbosity = DotNetCoreVerbosity.Diagnostic
+				Verbosity = DotNetCoreVerbosity.Normal
             });
         }
 	}
@@ -56,7 +56,7 @@ Task("Restore-Nuget-Packages")
 
         DotNetCoreRestore("./src/" + project, new DotNetCoreRestoreSettings()
         {
-			Verbosity = DotNetCoreVerbosity.Diagnostic
+			Verbosity = DotNetCoreVerbosity.Normal
         });
     }
 });

@@ -9,7 +9,6 @@
 build/results/
 tools/
 test/tools/
-node_modules/
 
 
 
@@ -69,6 +68,8 @@ project.lock.json
 
 SolutionInfo.cs
 
+
+
 # NuGet Packages Directory
 src/packages/
 
@@ -77,7 +78,11 @@ src/TestResults/
 
 
 
+# Websites
+src/*/wwwroot/version.txt
+node_modules/
+
+
+
 # Windows
 Thumbs.db
-
-src/*/wwwroot/version.txt

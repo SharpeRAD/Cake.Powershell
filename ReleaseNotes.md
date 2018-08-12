@@ -1,3 +1,7 @@
+### New in 0.4.6 (Released 2018/08/12)
+* [Improvement] Update to Cake.Core v0.29
+* [Improvement] Update build scripts
+
 ### New in 0.4.5 (Released 2018/03/20)
 * [Improvement] Remove extra references
 

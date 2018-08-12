@@ -17,7 +17,7 @@
         <tags>Cake Script Build Powershell</tags>
 
         <dependencies>
-            <dependency id="Cake.Core" version="0.26.0" />
+            <dependency id="Cake.Core" version="0.29.0" />
         </dependencies>
     </metadata>
 

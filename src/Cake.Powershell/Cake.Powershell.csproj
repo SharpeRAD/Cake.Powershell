@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
         <AssemblyTitle>Cake.Powershell</AssemblyTitle>
         <AssemblyName>Cake.Powershell</AssemblyName>
@@ -19,7 +19,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Cake.Core" Version="0.26.0" />
+        <PackageReference Include="Cake.Core" Version="0.29.0" PrivateAssets="All" />
         
         <PackageReference Include="Microsoft.PowerShell.5.ReferenceAssemblies" Version="1.1.0" />
     </ItemGroup>
