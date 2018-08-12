@@ -1,6 +1,7 @@
 ﻿#region Using Statements
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Collections.ObjectModel;
 using System.Management.Automation;
@@ -32,6 +33,44 @@ namespace Cake.Powershell.Tests
                 new PowershellSettings().WithArguments(args => args.Append("Service", "eventlog")));
 
             Assert.True((results != null) && (results.Count >= 1), "Check Rights");
+        }
+
+        [Fact]
+        public void Start_File_With_ArrayParameters()
+        {
+            var array = new string[] {"A", "B", "C"};
+
+            Collection<PSObject> results = CakeHelper.CreatePowershellRunner().Start(new FilePath("Scripts/ArrayTest.ps1"),
+                new PowershellSettings().WithArguments(args => args.AppendArray("AnArray", array)));
+
+            Assert.True((results != null) && (results.Count == array.Length + 1));
+            Assert.Equal("0", results[0].BaseObject.ToString());
+
+            foreach (var item in array)
+            {
+                Assert.True(results.Any(r => r.BaseObject.ToString().Equals((item))));
+            }
+        }
+
+        [Fact]
+        public void Start_File_With_HashTableParameters()
+        {
+            var dict = new Dictionary<string, string>
+            {
+                { "A", "1" },
+                { "B", "2 "},
+                { "C", "3" }
+            };
+            Collection<PSObject> results = CakeHelper.CreatePowershellRunner().Start(new FilePath("Scripts/HashTableTest.ps1"),
+                new PowershellSettings().WithArguments(args => args.AppendHashTable("AHashTable", dict)));
+
+            Assert.True((results != null) && (results.Count == dict.Count + 1));
+            Assert.Equal("0", results[0].BaseObject.ToString());
+
+            foreach (var item in dict.ToArray())
+            {
+                Assert.True(results.Any(r => r.BaseObject.ToString().Equals(($"{item.Key} = {item.Value}"))));
+            }
         }
 
         [Fact]
