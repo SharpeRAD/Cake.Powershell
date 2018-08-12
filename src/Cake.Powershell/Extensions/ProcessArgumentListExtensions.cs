@@ -1,4 +1,6 @@
 ﻿#region Using Statements
+
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -127,6 +129,40 @@ namespace Cake.Powershell
             if (builder != null)
             {
                 builder.Append(new NamedArgument(name, new StringLiteralArgument(argument)));
+            }
+
+            return builder;
+        }
+
+        /// <summary>
+        /// Appends the specified arguments as a hashtable to the argument builder.
+        /// </summary>
+        /// <param name="builder">The builder.</param>
+        /// <param name="name">The argument name.</param>
+        /// <param name="arguments">The dictionary collection to be appended as a hashtable.</param>
+        /// <returns>The same <see cref="ProcessArgumentBuilder"/> instance so that multiple calls can be chained.</returns>
+        public static ProcessArgumentBuilder AppendHashTable(this ProcessArgumentBuilder builder, string name, IDictionary<string, string> arguments)
+        {
+            if (builder != null)
+            {
+                builder.Append(new NamedArgument(name, new HashTableArgument(arguments.Select(argument => new KeyValueArgument(argument.Key, new TextArgument(argument.Value))))));
+            }
+
+            return builder;
+        }
+
+        /// <summary>
+        /// Appends the specified arguments as a hashtable to the argument builder.
+        /// </summary>
+        /// <param name="builder">The builder.</param>
+        /// <param name="name">The argument name.</param>
+        /// <param name="arguments">The arguments to be appended as a hashtable.</param>
+        /// <returns>The same <see cref="ProcessArgumentBuilder"/> instance so that multiple calls can be chained.</returns>
+        public static ProcessArgumentBuilder AppendHashTable(this ProcessArgumentBuilder builder, string name, IEnumerable<KeyValueArgument> arguments)
+        {
+            if (builder != null)
+            {
+                builder.Append(new NamedArgument(name, new HashTableArgument(arguments)));
             }
 
             return builder;
