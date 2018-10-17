@@ -6,13 +6,11 @@ using System.Linq;
 using System.Management.Automation;
 using System.Management.Automation.Runspaces;
 using System.Net;
-using System.Runtime;
 using System.Threading;
 
 using Cake.Core;
 using Cake.Core.Diagnostics;
 using Cake.Core.IO;
-using Cake.Core.Tooling;
 using Cake.Powershell.Runner;
 
 #endregion
