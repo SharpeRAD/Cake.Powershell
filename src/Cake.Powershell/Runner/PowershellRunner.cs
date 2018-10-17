@@ -244,7 +244,7 @@ namespace Cake.Powershell
 
             if (_Environment.Platform.Family != PlatformFamily.Windows)
             {
-                var tool = new PwshScriptRunner(_Context.FileSystem, _Context.Environment, _Context.ProcessRunner, _Context.Tools, _Context.Log);
+                var tool = new PwshScriptRunner(_Context.FileSystem, _Context.Environment, _Context.ProcessRunner, _Context.Tools);
                 tool.RunScript(script, settings);
                 return new Collection<PSObject>();
             }
