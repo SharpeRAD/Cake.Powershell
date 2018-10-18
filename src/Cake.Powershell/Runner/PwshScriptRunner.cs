@@ -62,7 +62,7 @@ namespace Cake.Powershell.Runner
         /// Builds the arguments for pwsh.
         /// </summary>
         /// <returns>Argument builder containing the arguments based on <paramref name="script"/>.</returns>
-        private ProcessArgumentBuilder GetArguments(string script)
+        private static ProcessArgumentBuilder GetArguments(string script)
         {
             var args = new ProcessArgumentBuilder();
             args.Append(script);
