@@ -11,6 +11,8 @@ using System.Threading;
 using Cake.Core;
 using Cake.Core.Diagnostics;
 using Cake.Core.IO;
+using Cake.Powershell.Runner;
+
 #endregion
 
 
@@ -25,6 +27,7 @@ namespace Cake.Powershell
         #region Fields
         private readonly ICakeEnvironment _Environment;
         private readonly ICakeLog _Log;
+        private readonly ICakeContext _Context;
         private Collection<PSObject> _pipelineResults = new Collection<PSObject>();
 
         private bool _complete;
@@ -33,9 +36,16 @@ namespace Cake.Powershell
         
 
 
-
-
         #region Constructor
+        /// <summary>
+        /// Initializes a new instance of the <see cref="T:Cake.Powershell.PowershellRunner"/> class.
+        /// </summary>
+        /// <param name="context">Context.</param>
+        public PowershellRunner(ICakeContext context) : this(context.Environment, context.Log) 
+        {
+            _Context = context;
+        }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="PowershellRunner" /> class.
         /// </summary>
@@ -229,6 +239,14 @@ namespace Cake.Powershell
         {
             //Create Runspace
             Runspace runspace = null;
+
+            if (_Environment.Platform.Family != PlatformFamily.Windows)
+            {
+                var tool = new PwshScriptRunner(_Context.FileSystem, _Context.Environment, _Context.ProcessRunner, _Context.Tools);
+                tool.RunScript(script, settings);
+                return new Collection<PSObject>();
+            }
+
 
             if (String.IsNullOrEmpty(settings.ComputerName))
             {

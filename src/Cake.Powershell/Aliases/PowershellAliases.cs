@@ -30,7 +30,7 @@ namespace Cake.Powershell
         [CakeMethodAlias]
         public static Collection<PSObject> StartPowershellScript(this ICakeContext context, string script)
         {
-            return new PowershellRunner(context.Environment, context.Log).Start(script, new PowershellSettings());
+            return new PowershellRunner(context).Start(script, new PowershellSettings());
         }
 
         /// <summary>
@@ -43,7 +43,7 @@ namespace Cake.Powershell
         [CakeMethodAlias]
         public static Collection<PSObject> StartPowershellScript(this ICakeContext context, string script, Action<ProcessArgumentBuilder> arguments)
         {
-            return new PowershellRunner(context.Environment, context.Log).Start(script, new PowershellSettings().WithArguments(arguments));
+            return new PowershellRunner(context).Start(script, new PowershellSettings().WithArguments(arguments));
         }
 
         /// <summary>
@@ -56,7 +56,7 @@ namespace Cake.Powershell
         [CakeMethodAlias]
         public static Collection<PSObject> StartPowershellScript(this ICakeContext context, string script, PowershellSettings settings)
         {
-            return new PowershellRunner(context.Environment, context.Log).Start(script, settings);
+            return new PowershellRunner(context).Start(script, settings);
         }
 
 
