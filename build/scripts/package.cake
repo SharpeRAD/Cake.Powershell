@@ -9,7 +9,10 @@ Task("Copy-Files")
     {
         bool found = false;
 
-		CleanDirectory("./test/tools/Addins/");
+		if (appName.Contains("Cake."))
+		{
+			CleanDirectory("./test/tools/Addins/");
+		}
 
         foreach (string project in projectBinDirs)
         {
@@ -17,7 +20,11 @@ Task("Copy-Files")
     		{
                 found = true;
                 CopyDirectory(project + "/" + configuration, binDir);
-				CopyDirectory(project + "/" + configuration, "./test/tools/Addins/" + appName + "." + version + "/lib/");
+
+				if (project.Contains("Cake."))
+				{
+					CopyDirectory(project + "/" + configuration, "./test/tools/Addins/" + appName + "." + version + "/lib/");
+				}
             }
         }
 
@@ -69,6 +76,8 @@ Task("Create-NuGet-Packages")
             {
                 Version = version,
                 ReleaseNotes = releaseNotes.Notes.ToArray(),
+				Copyright = "Copyright (c) 2015 - " + DateTime.Now.Year.ToString() + " " + copyright,
+
                 BasePath = binDir,
                 OutputDirectory = nugetDir,
                 Symbols = false,

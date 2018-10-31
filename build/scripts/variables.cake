@@ -73,7 +73,7 @@ if (DirectoryExists("./src/" + appName + ".Tests"))
 
 foreach (string project in projectNames)
 {
-    if (DirectoryExists("./src/" + project + ".Tests") && !testNames.Contains(project + ".Tests"))
+    if (DirectoryExists("./src/" + project + ".Tests"))
     {
         testNames.Add(project + ".Tests");
 		

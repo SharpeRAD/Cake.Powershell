@@ -6,15 +6,10 @@ using Cake.Core.Tooling;
 
 namespace Cake.Powershell.Runner
 {
-    public class PwshSettings : ToolSettings
-    {
-
-    }
-
     /// <summary>
     /// Runs Pwsh scripts on the command line
     /// </summary>
-    public class PwshScriptRunner : Tool<PwshSettings>
+    public class PwshScriptRunner : Tool<ToolSettings>
     {
         /// <summary>
         /// Constructs a PwshScriptRunner
@@ -46,7 +41,7 @@ namespace Cake.Powershell.Runner
         /// </summary>
         public void RunScript(string script, PowershellSettings settings)
         {
-            var pwshSettings = new PwshSettings
+            var pwshSettings = new ToolSettings
             {
                 WorkingDirectory = settings.WorkingDirectory,
                 ToolTimeout = settings.Timeout == null

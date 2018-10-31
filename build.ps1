@@ -55,7 +55,7 @@ Param(
 
 
 $CakeVersion = "0.29.0"
-$DotNetChannel = "preview";
+$DotNetChannel = "Current";
 $DotNetVersion = "2.1.2";
 $DotNetInstallerUri = "https://dot.net/v1/dotnet-install.ps1";
 $NugetUrl = "https://dist.nuget.org/win-x86-commandline/latest/nuget.exe"
@@ -63,6 +63,9 @@ $NugetUrl = "https://dist.nuget.org/win-x86-commandline/latest/nuget.exe"
 # Temporarily skip verification and opt-in to new in-proc NuGet
 $ENV:CAKE_SETTINGS_SKIPVERIFICATION='true'
 $ENV:CAKE_NUGET_USEINPROCESSCLIENT='true'
+
+# Use TLS 1.2
+[System.Net.ServicePointManager]::SecurityProtocol = [System.Net.SecurityProtocolType]::Tls12;
 
 
 
@@ -139,11 +142,6 @@ Function Remove-PathVariable([string]$VariableToRemove)
         [Environment]::SetEnvironmentVariable("PATH", [System.String]::Join(';', $newItems), "Process")
     }
 }
-
-
-
-# Enforce TLS 1.2
-[System.Net.ServicePointManager]::SecurityProtocol = [System.Net.SecurityProtocolType]::Tls12;
 
 
 

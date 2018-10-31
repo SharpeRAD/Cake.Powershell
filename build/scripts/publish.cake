@@ -16,9 +16,14 @@ Task("Clear-AppData")
         foreach (string project in projectNames)
         {
             var dirs = dataDir.GetDirectories(project, SearchScope.Current);
+
             foreach(IDirectory dir in dirs)
             {
-                DeleteDirectory(dir.Path, true);
+                DeleteDirectory(dir.Path, new DeleteDirectorySettings()
+				{
+					Force = true,
+					Recursive = true
+				});
             }
         }
     }
@@ -40,6 +45,7 @@ Task("Publish-Local")
         foreach (string project in projectNames)
         {
             var files = packageDir.GetFiles(project + ".*", SearchScope.Current);
+
             foreach (IFile file in files)
             {
                 DeleteFile(file.Path);

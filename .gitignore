@@ -9,6 +9,7 @@
 build/results/
 tools/
 test/tools/
+node_modules/
 
 
 
@@ -68,19 +69,11 @@ project.lock.json
 
 SolutionInfo.cs
 
-
-
 # NuGet Packages Directory
 src/packages/
 
 # mstest test results
 src/TestResults/
-
-
-
-# Websites
-src/*/wwwroot/version.txt
-node_modules/
 
 
 

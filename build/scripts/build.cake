@@ -32,6 +32,8 @@ Task("Build")
     .IsDependentOn("Patch-Assembly-Info")
     .Does(() =>
 {
+    Information("Building {0}", solution);
+
 	// Check Logger folder
 	if (!DirectoryExists(loggerResultsDir))
 	{
@@ -41,7 +43,10 @@ Task("Build")
 	// Create build settings
 	var buildSettings = new DotNetCoreMSBuildSettings
 	{
-		Verbosity = DotNetCoreVerbosity.Normal
+		Verbosity = DotNetCoreVerbosity.Normal,
+		TreatAllWarningsAs = Cake.Common.Tools.DotNetCore.MSBuild.MSBuildTreatAllWarningsAs.Error,
+
+		MaxCpuCount = 3
 	};
 	
 	// Add Logger
@@ -67,62 +72,25 @@ Task("Build")
 	DotNetCoreBuild(solution, new DotNetCoreBuildSettings
     {
     	Configuration = configuration,
-
+		
+		NoRestore = true,
 		MSBuildSettings = buildSettings
     });
 })
 .OnError(exception =>
 {
-	// Get Errors
-	string[] lines = FileReadLines(loggerResultsDir + "/build.txt");
+	List<SlackChatMessageAttachment> attachments = new List<SlackChatMessageAttachment>();
 
-	IList<string> errors = new List<string>();
 
-	foreach(string line in lines)
+
+	// Get MsBuild Errors
+	var path = loggerResultsDir + "/build.txt";
+
+	if (FileExists(path))
 	{
-		bool found = false;
+		IList<SlackChatMessageAttachment> lstAttachments = GetMsBuildAttachments(path, exception);
 
-		foreach(string name in projectNames)
-		{
-			if (line.StartsWith("  " + name + " -> "))
-			{
-				found = true;
-			}
-		}
-
-		foreach(string name in testNames)
-		{
-			if (line.StartsWith("  " + name + " -> "))
-			{
-				found = true;
-			}
-		}
-
-		if (!found)
-		{
-			errors.Add(line);
-		}
-	}
-
-	if (errors.Count == 0)
-	{
-		errors.Add(exception.Message);
-	}
-
-
-
-    // Get Message
-	var title = "Build failed for " + appName + " v" + version;
-    var text = "";
-
-	for (int index = 0; index < errors.Count; index++)
-	{
-		text += errors[index];
-
-		if (index < (errors.Count - 1))
-		{
-			text += "\n";
-		}
+		CombineAttachments(attachments, lstAttachments);
 	}
 
 
@@ -138,8 +106,6 @@ Task("Build")
 
 
 	// Post Message
-	SlackChatMessageResult result;
-	
 	SlackChatMessageSettings settings = new SlackChatMessageSettings()
 	{
 		Token = token,
@@ -147,15 +113,9 @@ Task("Build")
 		IconUrl = new System.Uri("https://raw.githubusercontent.com/cake-build/graphics/master/png/cake-small.png")
 	};
 
-	IList<SlackChatMessageAttachment> attachments = new List<SlackChatMessageAttachment>();
-		
-	attachments.Add(new SlackChatMessageAttachment()
-	{
-		Color = "danger",
-		Text = text
-	});
-		
-	result = Slack.Chat.PostMessage("#code", title, attachments, settings);
+	var title = "Build failed for " + appName + " v" + version;
+
+	SlackChatMessageResult result = Slack.Chat.PostMessage("#code", title, attachments, settings);
 
 	
 	

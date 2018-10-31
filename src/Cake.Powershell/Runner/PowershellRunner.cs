@@ -94,9 +94,7 @@ namespace Cake.Powershell
             //Get Script
             this.SetWorkingDirectory(settings);
 
-            string prefix = settings.UseDotSourcing ? ". " : "";
-
-            LogExecutingCommand(settings, prefix + script);
+            LogExecutingCommand(settings, script);
 
 
 
@@ -179,6 +177,7 @@ namespace Cake.Powershell
 
 
 
+
             //Call
             script = this.AppendArguments(script, settings.Arguments, false);
 
@@ -237,16 +236,19 @@ namespace Cake.Powershell
 
         private Collection<PSObject> Invoke(string script, PowershellSettings settings)
         {
-            //Create Runspace
-            Runspace runspace = null;
-
+            //Linux Support
             if (_Environment.Platform.Family != PlatformFamily.Windows)
             {
                 var tool = new PwshScriptRunner(_Context.FileSystem, _Context.Environment, _Context.ProcessRunner, _Context.Tools);
                 tool.RunScript(script, settings);
+
                 return new Collection<PSObject>();
             }
 
+
+
+            //Create Runspace
+            Runspace runspace = null;
 
             if (String.IsNullOrEmpty(settings.ComputerName))
             {
@@ -296,6 +298,7 @@ namespace Cake.Powershell
                 {
                     var path = string.Format(CultureInfo.InvariantCulture, "\"{0}\"",
                         settings.WorkingDirectory.FullPath);
+
                     pipeline.Commands.AddScript("Set-Location -Path " + path);
                 }
 
@@ -304,11 +307,6 @@ namespace Cake.Powershell
                     settings.Modules.ToList().ForEach(m => pipeline.Commands.AddScript("Import-Module " + m));
                 }
 
-                //if (settings.UseGlobalScope)
-                //{
-                //    script = $". {script}";
-                //}
-                //pipeline.Commands.AddScript(script, !settings.UseGlobalScope);
                 pipeline.Commands.AddScript(script);
 
                 if (settings.FormatOutput)

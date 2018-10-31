@@ -19,6 +19,7 @@ Task("Run-Unit-Tests")
 		
         DotNetCoreTest("./src/" + test + "/" + test + ".csproj", new DotNetCoreTestSettings
         {
+			NoRestore = true,
             ArgumentCustomization = args => args.AppendSwitch("-a", " ", ".".Quote())
 												.AppendSwitch("-l", " ", ("xunit;LogFilePath=" + outputPath).Quote())
         });
@@ -118,49 +119,6 @@ Task("Run-Unit-Tests")
     }
 
 	throw exception;
-});
-
-
-
-Task("Find-Duplicates")
-	.WithCriteria(() => (target != "Skip-Test") && (target != "Skip-Restore"))
-    .IsDependentOn("Run-Unit-Tests")
-    .Does(() =>
-{
-    Information("Finding duplicates");
-
-    DupFinder(projectFiles, new DupFinderSettings()
-    {
-        OutputFile = testResultsDir + File("DupFinder.xml"),
-
-        ShowStats = true,
-        ShowText = true,
-
-        ExcludeFilesByStartingCommentSubstring = new string[] { "auto-generated" }
-    });
-
-    Information("Building report");
-    ReSharperReports(testResultsDir + "/DupFinder.xml", testResultsDir + File("DupFinder.html"));
-});
-
-
-
-Task("Inspect-Code")
-	.WithCriteria(() => (target != "Skip-Test") && (target != "Skip-Restore"))
-    .IsDependentOn("Find-Duplicates")
-    .Does(() =>
-{
-    Information("Inspecting code");
-
-	InspectCode(solution, new InspectCodeSettings()
-    {
-        OutputFile = testResultsDir + File("InspectCode.xml"),
-
-        SolutionWideAnalysis = true
-    });
-
-    Information("Building report");
-    ReSharperReports(testResultsDir + "/InspectCode.xml", testResultsDir + File("InspectCode.html"));
 });
 
 
