@@ -383,11 +383,15 @@ namespace Cake.Powershell
             while (error.Count > 0)
             {
                 var errorItem = error.Read();
-                var pso = new PSObject(errorItem);
+                if (errorItem != null)
+                {
+                    var pso = new PSObject(errorItem);
 
-                _pipelineResults.Add(pso);
+                    _pipelineResults.Add(pso);
 
-                _Log.Error(Verbosity.Normal, errorItem.ToString().EscapeCurleyBrackets());
+                    _Log.Error(Verbosity.Normal, errorItem.ToString().EscapeCurleyBrackets());
+                }
+                
             }
         }
 
@@ -400,9 +404,13 @@ namespace Cake.Powershell
             while (output.Count > 0)
             {
                 var outputItem = output.Read();
-                _pipelineResults.Add(outputItem);
+                if(outputItem != null)
+                {
+                    _pipelineResults.Add(outputItem);
 
-                _Log.Debug(Verbosity.Normal, outputItem.ToString().EscapeCurleyBrackets());
+                    _Log.Debug(Verbosity.Normal, outputItem.ToString().EscapeCurleyBrackets());
+                }
+                
             }
         }
         #endregion
