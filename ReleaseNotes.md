@@ -1,5 +1,5 @@
 ### New in 0.4.7 (Released 2018/10/31)
-* [Improvement] Partial Linux support
+* [Feature] Partial Linux support
 
 ### New in 0.4.6 (Released 2018/08/12)
 * [Improvement] Update to Cake.Core v0.29
