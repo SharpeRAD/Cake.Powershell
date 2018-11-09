@@ -20,6 +20,7 @@ before_install:
   - git fetch --unshallow # Travis always does a shallow clone, but GitVersion needs the full history including branches and tags
   - git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
   - git fetch origin
+  - chmod +x build.sh
 
 script:
   - ./build.sh --target Travis --verbosity diagnostic
