@@ -9,7 +9,6 @@ Task("Run-Unit-Tests")
     .IsDependentOn("Build")
     .Does(() =>
 {
-	// Run Test
     foreach(string test in testNames)
     {
 		Information("Running unit tests: {0}", test);
@@ -23,16 +22,6 @@ Task("Run-Unit-Tests")
             ArgumentCustomization = args => args.AppendSwitch("-a", " ", ".".Quote())
 												.AppendSwitch("-l", " ", ("xunit;LogFilePath=" + outputPath).Quote())
         });
-    }
-
-
-
-	// Build Report
-    Information("Building report");
-
-    if (testNames.Count > 0)
-    {
-        ReportUnit(testResultsDir);
     }
 })
 .OnError(exception =>
