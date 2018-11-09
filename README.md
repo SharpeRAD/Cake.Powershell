@@ -12,6 +12,7 @@ Cake-Build addin that extends Cake with Powershell commands
 ## Table of contents
 
 1. [Implemented functionality](https://github.com/SharpeRAD/Cake.Powershell#implemented-functionality)
+2. [Continuous integration](https://github.com/SharpeRAD/Cake.Powershell#continuous-integration)
 2. [Referencing](https://github.com/SharpeRAD/Cake.Powershell#referencing)
 3. [Usage](https://github.com/SharpeRAD/Cake.Powershell#usage)
 4. [Example](https://github.com/SharpeRAD/Cake.Powershell#example)
@@ -29,6 +30,15 @@ Cake-Build addin that extends Cake with Powershell commands
 * Download and run remote script file
 * Script parameters
 * Outputting to the cake console
+
+
+
+## Continuous integration
+
+| Build server                | Platform      | Build status                                                                                                                                                        |                       
+|-----------------------------|---------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| AppVeyor                    | Windows       | [![AppVeyor](https://ci.appveyor.com/api/projects/status/5g0u2757tix9se6f?svg=true)](https://ci.appveyor.com/project/SharpeRAD/cake-powershell)                     |
+| Travis                      | Linux / MacOS | [![Travis](https://travis-ci.com/SharpeRAD/Cake.Powershell.svg?branch=master)](https://travis-ci.org/cake-build/cake)                                               |   
 
 
 
