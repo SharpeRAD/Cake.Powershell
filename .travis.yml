@@ -24,8 +24,3 @@ before_install:
 
 script:
   - ./build.sh --target Travis --verbosity diagnostic
-
-cache:
-  directories:
-    - .packages
-    - tools/Addins
