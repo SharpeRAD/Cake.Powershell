@@ -12,7 +12,7 @@ dist: trusty
 osx_image: xcode9.2
 
 mono:
-  - 4.4.2
+  - latest
 
 dotnet: 2.1.403
 
@@ -24,3 +24,7 @@ before_install:
 
 script:
   - ./build.sh --target Travis --verbosity diagnostic
+  
+cache:
+  directories:
+   - tools/Addins
