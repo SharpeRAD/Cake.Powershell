@@ -7,8 +7,6 @@
 #addin nuget:?package=Cake.FileHelpers
 #addin nuget:?package=Cake.Slack
 
-#tool nuget:?package=ReportUnit
-
 
 
 
