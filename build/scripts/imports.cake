@@ -2,8 +2,6 @@
 // IMPORTS
 //////////////////////////////////////////////////////////////////////
 
-#addin nuget:?package=Cake.AWS.S3
-
 #addin nuget:?package=Cake.FileHelpers
 #addin nuget:?package=Cake.Slack
 
