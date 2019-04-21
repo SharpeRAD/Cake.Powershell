@@ -17,10 +17,10 @@
     <ItemGroup>
         <ProjectReference Include="..\Cake.Powershell\Cake.Powershell.csproj" />
     </ItemGroup>
-    
+
     <ItemGroup>
-        <PackageReference Include="Cake.Core" Version="0.29.0" />
-        <PackageReference Include="Cake.Testing" Version="0.29.0" />
+        <PackageReference Include="Cake.Core" Version="0.33.0" />
+        <PackageReference Include="Cake.Testing" Version="0.33.0" />
 
         <PackageReference Include="Microsoft.PowerShell.5.ReferenceAssemblies" Version="1.1.0" />
 
