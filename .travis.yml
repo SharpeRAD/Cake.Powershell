@@ -4,17 +4,16 @@ os:
   - osx
   - linux
 
-# Ubuntu 14.04
+# Ubuntu 16.04
 sudo: required
-dist: trusty
+dist: xenial
 
 # OS X 10.12
 osx_image: xcode9.2
 
 mono:
   - latest
-
-dotnet: 2.1.403
+dotnet: 2.1.502
 
 before_install:
   - git fetch --unshallow # Travis always does a shallow clone, but GitVersion needs the full history including branches and tags
@@ -24,7 +23,8 @@ before_install:
 
 script:
   - ./build.sh --target Travis --verbosity diagnostic
-  
+
 cache:
   directories:
-   - tools/Addins
+    - packages
+    - tools
