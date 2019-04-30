@@ -1,11 +1,11 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
         <AssemblyTitle>Cake.Powershell</AssemblyTitle>
         <AssemblyName>Cake.Powershell</AssemblyName>
         <PackageId>Cake.Powershell</PackageId>
         <OutputType>Library</OutputType>
 
-        <TargetFrameworks>net46;</TargetFrameworks>
+        <TargetFrameworks>netstandard2.0</TargetFrameworks>
 
         <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
         <GenerateAssemblyVersionAttribute>false</GenerateAssemblyVersionAttribute>
