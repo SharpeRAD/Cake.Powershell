@@ -10,15 +10,11 @@
         <summary>Powershell addon for cake build.</summary>
         <licenseUrl>https://github.com/SharpeRAD/Cake.Powershell/LICENSE</licenseUrl>
         <projectUrl>https://github.com/SharpeRAD/Cake.Powershell</projectUrl>
-        <iconUrl>https://cdn.rawgit.com/cake-contrib/graphics/a5cf0f881c390650144b2243ae551d5b9f836196/png/cake-contrib-medium.png</iconUrl>
+        <iconUrl>https://cdn.jsdelivr.net/gh/cake-contrib/graphics/png/cake-contrib-medium.png</iconUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <copyright>Copyright (c) Phillip Sharpe 2015</copyright>
         <releaseNotes>Initial Release</releaseNotes>
         <tags>Cake Script Build Powershell</tags>
-
-        <dependencies>
-            <dependency id="Cake.Core" version="0.29.0" />
-        </dependencies>
     </metadata>
 
     <files>
