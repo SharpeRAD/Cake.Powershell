@@ -1,3 +1,7 @@
+### New in 0.4.9 (Released 2019/06/28)
+* [Improvement] Finish Cake 0.29 -> 0.33 transition
+* [Improvement] Remove "Initial Release" from release notes
+
 ### New in 0.4.8 (Released 2019/05/12)
 * [Improvement] Update to Cake.Core v0.33
 

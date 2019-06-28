@@ -13,7 +13,7 @@
         <iconUrl>https://cdn.jsdelivr.net/gh/cake-contrib/graphics/png/cake-contrib-medium.png</iconUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <copyright>Copyright (c) Phillip Sharpe 2015</copyright>
-        <releaseNotes>Initial Release</releaseNotes>
+        <releaseNotes></releaseNotes>
         <tags>Cake Script Build Powershell</tags>
 
         <dependencies>
