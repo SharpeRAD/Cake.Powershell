@@ -21,6 +21,7 @@
     <ItemGroup>
         <PackageReference Include="Cake.Core" Version="1.0.0-rc0002" />
         <PackageReference Include="Cake.Testing" Version="1.0.0-rc0002" />
+        <PackageReference Include="Microsoft.PowerShell.SDK" Version="7.2.0-preview.2" />
         <PackageReference Include="Microsoft.WSMan.Management" Version="7.2.0-preview.2" />
 
         <PackageReference Include="xunit" Version="2.4.1" />

@@ -44,7 +44,7 @@ namespace Cake.Powershell.Tests
                 new PowershellSettings().WithArguments(args => args.AppendArray("AnArray", array)));
 
             Assert.True((results != null) && (results.Count == array.Length + 1));
-            Assert.Equal("0", results[0].BaseObject.ToString());
+            Assert.Equal("", results[0].BaseObject.ToString());
 
             foreach (var item in array)
             {
@@ -65,7 +65,7 @@ namespace Cake.Powershell.Tests
                 new PowershellSettings().WithArguments(args => args.AppendHashTable("AHashTable", dict)));
 
             Assert.True((results != null) && (results.Count == dict.Count + 1));
-            Assert.Equal("0", results[0].BaseObject.ToString());
+            Assert.Equal("", results[0].BaseObject.ToString());
 
             foreach (var item in dict.ToArray())
             {
@@ -97,8 +97,8 @@ namespace Cake.Powershell.Tests
                 .Start(new FilePath("Scripts/FailingScript.ps1"), new PowershellSettings() { ExceptionOnScriptError = false });
 
             Assert.True(results != null && results.Count >= 1, "Check Rights");
-            Assert.True(results.FirstOrDefault(r => r.BaseObject.ToString().Contains("Cannot find path")) != null);
-            Assert.Equal("1", results[0].BaseObject.ToString());
+            Assert.True(results.Where(r => r.BaseObject.ToString().Contains("Cannot find path")) != null);
+            Assert.Equal("1", results.Last().BaseObject.ToString());
         }
 
         [Fact]
