@@ -5,7 +5,7 @@
         <PackageId>Cake.Powershell</PackageId>
         <OutputType>Library</OutputType>
 
-        <TargetFrameworks>net46;</TargetFrameworks>
+        <TargetFrameworks>net50;</TargetFrameworks>
 
         <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
         <GenerateAssemblyVersionAttribute>false</GenerateAssemblyVersionAttribute>
@@ -19,8 +19,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Cake.Core" Version="0.33.0" PrivateAssets="All" />
-        
-        <PackageReference Include="Microsoft.PowerShell.5.ReferenceAssemblies" Version="1.1.0" />
+        <PackageReference Include="Cake.Core" Version="1.0.0-rc0002" PrivateAssets="All" />
+        <PackageReference Include="Microsoft.WSMan.Management" Version="7.2.0-preview.2" />
     </ItemGroup>
 </Project>
