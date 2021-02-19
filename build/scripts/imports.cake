@@ -3,7 +3,7 @@
 //////////////////////////////////////////////////////////////////////
 
 #addin nuget:?package=Cake.FileHelpers
-#addin nuget:?package=Cake.Slack
+#addin nuget:?package=Cake.Slack&version=1.0.0
 
 
 
