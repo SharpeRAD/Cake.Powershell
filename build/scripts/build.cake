@@ -71,7 +71,7 @@ Task("Build")
 
 	DotNetCoreBuild(solution, new DotNetCoreBuildSettings
     {
-    	Configuration = configuration,
+        Configuration = configuration,
 		
 		NoRestore = true,
 		MSBuildSettings = buildSettings

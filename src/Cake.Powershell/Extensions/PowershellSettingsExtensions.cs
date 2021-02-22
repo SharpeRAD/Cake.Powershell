@@ -271,6 +271,22 @@ namespace Cake.Powershell
             settings.OutputToAppConsole = outputToAppConsole;
             return settings;
         }
+
+        /// <summary>
+        /// Sets a value indicating whether security should be set to unrestricted.
+        /// </summary>
+        /// <param name="settings">The powershell settings.</param>
+        /// <returns>The same <see cref="PowershellSettings"/> instance so that multiple calls can be chained.</returns>
+        public static PowershellSettings BypassExecutionPolicy(this PowershellSettings settings)
+        {
+            if (settings == null)
+            {
+                throw new ArgumentNullException(nameof(settings));
+            }
+
+            settings.BypassExecutionPolicy = true;
+            return settings;
+        }
         #endregion
     }
 }

@@ -1,10 +1,13 @@
 ﻿#region Using Statements
+
+using System;
 using System.Collections.ObjectModel;
 using System.Management.Automation;
 
 using Xunit;
 
 using Cake.Core;
+using Cake.Core.IO;
 using Cake.Powershell;
 #endregion
 
@@ -27,10 +30,24 @@ namespace Cake.Powershell.Tests
         [Fact]
         public void Start_Service_Script()
         {
-            Collection<PSObject> results = CakeHelper.CreatePowershellRunner().Start("Get-Service", 
+#if NET5_0
+            if (OperatingSystem.IsWindows())
+            {
+                Collection<PSObject> results = CakeHelper.CreatePowershellRunner().Start("Get-Service", 
                 new PowershellSettings());
 
-            Assert.True((results != null) && (results.Count > 0), "Check Rights");
+                Assert.True((results != null) && (results.Count > 0), "Check Rights");
+            }
+#else
+            if (Environment.OSVersion.Platform == PlatformID.Win32NT)
+            {
+                Collection<PSObject> results = CakeHelper.CreatePowershellRunner().Start("Get-Service", 
+                    new PowershellSettings());
+
+                Assert.True((results != null) && (results.Count > 0), "Check Rights");
+            }
+#endif
+            Assert.True(true);
         }
 
 
@@ -38,9 +55,15 @@ namespace Cake.Powershell.Tests
         [Fact]
         public void Working_Directory_With_Spaces_Should_Properly_Execute()
         {
+            var path = System.IO.Path.Combine(Environment.CurrentDirectory, "test dir");
+            if (!System.IO.Directory.Exists(path))
+            {
+                System.IO.Directory.CreateDirectory(path);
+            }
+
             Collection<PSObject> results = CakeHelper.CreatePowershellRunner().Start("Write-Host",
                 new PowershellSettings().WithArguments(args => args.Append("Testing..."))
-                                        .UseWorkingDirectory(@"C:\Program Files\"));
+                                        .UseWorkingDirectory(path));
 
             Assert.True((DebugLog.Lines != null) && (DebugLog.Lines.Contains("Testing...")), "Output not written to the powershell host");
         }

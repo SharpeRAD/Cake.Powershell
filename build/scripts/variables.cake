@@ -11,6 +11,7 @@ var username = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile).
 // Get whether or not this is a local build.
 var local = BuildSystem.IsLocalBuild;
 var isRunningOnAppVeyor = AppVeyor.IsRunningOnAppVeyor;
+var isRunningOnTravisCI = BuildSystem.IsRunningOnTravisCI;
 var isRunningOnTFS = (EnvironmentVariable("TF_BUILD") == "True");
 var isPullRequest = AppVeyor.Environment.PullRequest.IsPullRequest;
 
