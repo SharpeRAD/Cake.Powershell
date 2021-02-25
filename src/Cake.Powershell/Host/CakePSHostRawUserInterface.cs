@@ -53,7 +53,20 @@ namespace Cake.Powershell
         public override Size BufferSize
         {
             get { return new Size(Console.BufferWidth, Console.BufferHeight); }
-            set { Console.SetBufferSize(value.Width, value.Height); }
+            set
+            {
+#if NET5_0
+                if (OperatingSystem.IsWindows())
+                {
+                    Console.SetBufferSize(value.Width, value.Height);
+                }
+#else
+                if (Environment.OSVersion.Platform == PlatformID.Win32NT)
+                {
+                    Console.SetBufferSize(value.Width, value.Height);
+                }
+#endif
+            }
         }
 
         /// <summary>
@@ -81,7 +94,20 @@ namespace Cake.Powershell
         public override int CursorSize
         {
             get { return Console.CursorSize; }
-            set { Console.CursorSize = value; }
+            set
+            {
+#if NET5_0
+                if (OperatingSystem.IsWindows())
+                {
+                    Console.CursorSize = value;
+                }
+#else
+                if (Environment.OSVersion.Platform == PlatformID.Win32NT)
+                {
+                    Console.CursorSize = value;
+                }
+#endif
+            }
         }
 
         /// <summary>
@@ -134,7 +160,20 @@ namespace Cake.Powershell
         public override Coordinates WindowPosition
         {
             get { return new Coordinates(Console.WindowLeft, Console.WindowTop); }
-            set { Console.SetWindowPosition(value.X, value.Y); }
+            set
+            {
+#if NET5_0
+                if (OperatingSystem.IsWindows())
+                {
+                    Console.SetWindowPosition(value.X, value.Y);
+                }
+#else
+                if (Environment.OSVersion.Platform == PlatformID.Win32NT)
+                {
+                    Console.SetWindowPosition(value.X, value.Y);
+                }
+#endif
+            }
         }
 
         /// <summary>
@@ -145,7 +184,20 @@ namespace Cake.Powershell
         public override Size WindowSize
         {
             get { return new Size(Console.WindowWidth, Console.WindowHeight); }
-            set { Console.SetWindowSize(value.Width, value.Height); }
+            set
+            {
+#if NET5_0
+                if (OperatingSystem.IsWindows())
+                {
+                    Console.SetWindowSize(value.Width, value.Height);
+                }
+#else
+                if (Environment.OSVersion.Platform == PlatformID.Win32NT)
+                {
+                    Console.SetWindowSize(value.Width, value.Height);
+                }
+#endif
+            }
         }
 
         /// <summary>
@@ -154,8 +206,37 @@ namespace Cake.Powershell
         /// </summary>
         public override string WindowTitle
         {
-            get { return Console.Title; }
-            set { Console.Title = value; }
+            get
+            {
+#if NET5_0
+                if (OperatingSystem.IsWindows())
+                {
+                    return Console.Title;
+                }
+#else
+                if (Environment.OSVersion.Platform == PlatformID.Win32NT)
+                {
+
+                    return Console.Title;
+                }
+#endif
+
+                return string.Empty;
+            }
+            set
+            {
+#if NET5_0
+                if (OperatingSystem.IsWindows())
+                {
+                    Console.Title = value;
+                }
+#else
+                if (Environment.OSVersion.Platform == PlatformID.Win32NT)
+                {
+                    Console.Title = value;
+                }
+#endif
+            }
         }
         #endregion
 
