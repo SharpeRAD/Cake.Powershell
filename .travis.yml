@@ -13,6 +13,7 @@ matrix:
           packages:
             - powershell
             - dotnet-sdk-3.1
+
     - os: osx
       osx_image: xcode12.2
       before_install:
@@ -20,6 +21,7 @@ matrix:
         - brew install --cask powershell
         - brew tap isen-ng/dotnet-sdk-versions
         - brew install --cask dotnet-sdk3-1-400
+
   fast_finish: true
 
 mono:

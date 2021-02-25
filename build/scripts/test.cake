@@ -2,20 +2,17 @@
 // TEST
 ///////////////////////////////////////////////////////////////////////////////
 
-
-
 Task("Run-Unit-Tests")
-	.WithCriteria(() => (target != "Skip-Test") && (target != "Skip-Restore"))
+    .WithCriteria(() => (target != "Skip-Test") && (target != "Skip-Restore"))
     .IsDependentOn("Build")
     .Does(() =>
 {
+    // Run Test
     foreach(string test in testNames)
     {
-		Information("Running unit tests: {0}", test);
+        Information("Running unit tests: {0}", test);
 
-		
-
-        if(isRunningOnTravisCI)
+        if (isRunningOnTravis)
         {
             string outputPath1 = testResultsDir + "/" + test.Replace(".Tests", "") + ".3.1.xml";
             outputPath1 = MakeAbsolute(File(outputPath1)).FullPath;
@@ -44,85 +41,94 @@ Task("Run-Unit-Tests")
             DotNetCoreTest("./src/" + test + "/" + test + ".csproj", new DotNetCoreTestSettings
             {
                 NoRestore = true,
-
                 ArgumentCustomization = args => args.AppendSwitch("-a", " ", ".".Quote())
                                                     .AppendSwitch("-l", " ", ("xunit;LogFilePath=" + outputPath).Quote())
             });
-        }        
+        }  
+    }
+
+
+
+    // Build Report
+    Information("Building report");
+
+    if (testNames.Count > 0)
+    {
+        ReportUnit(testResultsDir);
     }
 })
 .OnError(exception =>
 {
-	// Get Errors
-	IList<string> errors = new List<string>();
+    // Get Errors
+    IList<string> errors = new List<string>();
 
-	foreach(string test in testNames)
+    foreach(string test in testNames)
     {
-		IList<XunitResult> testResults = GetXunitResults(testResultsDir + "/" + test.Replace(".Tests", "") + ".xml");
-		
-		foreach(XunitResult testResult in testResults)
-		{
-			errors.Add(testResult.Type + " => " + testResult.Method);
-			errors.Add(testResult.StackTrace);
-		}
+        IList<XunitResult> testResults = GetXunitResults(testResultsDir + "/" + test.Replace(".Tests", "") + ".xml");
+
+        foreach(XunitResult testResult in testResults)
+        {
+            errors.Add(testResult.Type + " => " + testResult.Method);
+            errors.Add(testResult.StackTrace);
+        }
     }
 
-	if (errors.Count == 0)
-	{
-		errors.Add(exception.Message);
-	}
+    if (errors.Count == 0)
+    {
+        errors.Add(exception.Message);
+    }
 
 
 
     // Get Message
-	var title = "Unit-Tests failed for " + appName + " v" + version;
+    var title = "Unit-Tests failed for " + appName + " v" + version;
     var text = "";
 
-	for (int index = 0; index < errors.Count; index++)
-	{
-		text += errors[index];
-
-		if (index < (errors.Count - 1))
-		{
-			text += "\n";
-		}
-	}
-
-
-
-	// Resolve the API key.
-    var token = EnvironmentVariable("SLACK_TOKEN");
-
-    if (string.IsNullOrEmpty(token))
+    for (int index = 0; index < errors.Count; index++)
     {
-        throw new InvalidOperationException("Could not resolve Slack token.");
+        text += errors[index];
+
+        if (index < (errors.Count - 1))
+        {
+            text += "\n";
+        }
     }
 
 
 
-	// Post Message
-	SlackChatMessageResult result;
-	
-	SlackChatMessageSettings settings = new SlackChatMessageSettings()
-	{
-		Token = token,
-		UserName = "Cake",
-		IconUrl = new System.Uri("https://raw.githubusercontent.com/cake-build/graphics/master/png/cake-small.png")
-	};
+    // Resolve the webHook Url.
+    var webHookUrl = EnvironmentVariable("SLACK_WEBHOOK_URL");
 
-	IList<SlackChatMessageAttachment> attachments = new List<SlackChatMessageAttachment>();
-		
-	attachments.Add(new SlackChatMessageAttachment()
-	{
-		Color = "danger",
-		Text = text
-	});
-		
-	result = Slack.Chat.PostMessage("#code", title, attachments, settings);
+    if (string.IsNullOrEmpty(webHookUrl))
+    {
+        throw new InvalidOperationException("Could not resolve Slack webHook Url.");
+    }
 
-	
-	
-	// Check Result
+
+
+    // Post Message
+    SlackChatMessageResult result;
+
+    SlackChatMessageSettings settings = new SlackChatMessageSettings()
+    {
+        IncomingWebHookUrl = webHookUrl,
+        UserName = "Cake",
+        IconUrl = new System.Uri("https://cdn.jsdelivr.net/gh/cake-build/graphics/png/cake-small.png")
+    };
+
+    IList<SlackChatMessageAttachment> attachments = new List<SlackChatMessageAttachment>();
+
+    attachments.Add(new SlackChatMessageAttachment()
+    {
+        Color = "danger",
+        Text = text
+    });
+
+    result = Slack.Chat.PostMessage("#code", title, attachments, settings);
+
+
+
+    // Check Result
     if (result.Ok)
     {
         // Posted
@@ -134,7 +140,7 @@ Task("Run-Unit-Tests")
         Error("Failed to send message to Slack: {0}", result.Error);
     }
 
-	throw exception;
+    throw exception;
 });
 
 
@@ -145,12 +151,8 @@ using System.Xml.Linq;
 
 public IList<XunitResult> GetXunitResults(string filePath)
 {
-    //Load Document
+    // Load Document
     XDocument doc = XDocument.Load(filePath);
-
-
-
-    //Get Podcasts
     IList<XElement> elements = doc.Descendants("test").Where(e => e.Attribute("result").Value == "Fail").ToList();
     IList<XunitResult> results = new List<XunitResult>();
 
@@ -165,8 +167,6 @@ public IList<XunitResult> GetXunitResults(string filePath)
         XElement message = element.Descendants("message").FirstOrDefault();
         XElement stackTrace = element.Descendants("stack-trace").FirstOrDefault();
 
-
-
         results.Add(new XunitResult()
         {
             Type = type != null ? type.Value : "",
@@ -179,7 +179,7 @@ public IList<XunitResult> GetXunitResults(string filePath)
             StackTrace = stackTrace != null ? stackTrace.Value : "",
         });
     }
-            
+
     return results;
 }
 

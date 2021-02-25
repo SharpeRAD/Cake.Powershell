@@ -15,7 +15,7 @@
     </PropertyGroup>
     
     <PropertyGroup>
-      <DocumentationFile>bin\Debug\net46\Cake.Powershell.xml</DocumentationFile>
+        <DocumentationFile>bin\Debug\net46\Cake.Powershell.xml</DocumentationFile>
     </PropertyGroup>
 
     <ItemGroup>
