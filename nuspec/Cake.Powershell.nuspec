@@ -14,7 +14,7 @@
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <copyright>Copyright (c) Phillip Sharpe 2015</copyright>
         <releaseNotes>Initial Release</releaseNotes>
-        <tags>Cake Script Build Powershell</tags>
+        <tags>Cake cake-addin Script Build Powershell</tags>
       
 		    <dependencies>
 		        <group targetFramework="net46">
@@ -33,6 +33,7 @@
         <file src="net46/Cake.Powershell.dll" target="lib/net46" />
         <file src="net46/Cake.Powershell.xml" target="lib/net46" />
         <file src="net46/Cake.Powershell.pdb" target="lib/net46" />
+        <file src="net46/System.Management.Automation.dll" target="lib/net46" />
       
         <file src="netcoreapp3.1/Cake.Powershell.dll" target="lib/netcoreapp3.1" />
         <file src="netcoreapp3.1/Cake.Powershell.xml" target="lib/netcoreapp3.1" />
