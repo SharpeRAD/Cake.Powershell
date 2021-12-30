@@ -2,12 +2,14 @@
 using System;
 using System.Collections.ObjectModel;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Management.Automation;
 using System.Management.Automation.Runspaces;
 using System.Net;
+using System.Net.Http;
 using System.Threading;
-
+using System.Threading.Tasks;
 using Cake.Core;
 using Cake.Core.Diagnostics;
 using Cake.Core.IO;
@@ -156,8 +158,6 @@ namespace Cake.Powershell
                 throw new ArgumentNullException("settings");
             }
 
-
-
             //Get Script
             this.SetWorkingDirectory(settings);
 
@@ -165,23 +165,16 @@ namespace Cake.Powershell
             string fullPath = path.MakeAbsolute(settings.WorkingDirectory).FullPath;
             string script = prefix + "\"" + fullPath + "\"";
 
-
-
             //Download Script
-            WebClient client = new WebClient();
-            client.DownloadFile(uri, fullPath);
+            DownloadAsync(uri, fullPath).GetAwaiter().GetResult();
 
             LogExecutingCommand(settings, script);
-
-
-
 
             //Call
             script = this.AppendArguments(script, settings.Arguments, false);
 
             return this.Invoke(script, settings);
         }
-
 
 
         //Helpers
@@ -222,8 +215,32 @@ namespace Cake.Powershell
 
             return script;
         }
-        
 
+        private static async Task DownloadAsync(Uri uri, string fullPath)
+        {
+            if (string.IsNullOrWhiteSpace(fullPath))
+                throw new ArgumentNullException("fullPath");
+
+            using (var client = new HttpClient())
+            {
+                using (var request = new HttpRequestMessage(HttpMethod.Get, uri))
+                {
+                    var response = await client.SendAsync(request);
+                    if (response.IsSuccessStatusCode)
+                    {
+                        using (Stream contentStream = await response.Content.ReadAsStreamAsync(), 
+                            stream = new FileStream(fullPath, FileMode.Create, FileAccess.Write, FileShare.None))
+                        {
+                            await contentStream.CopyToAsync(stream);
+                        }
+                    }
+                    else
+                    {
+                        throw new FileNotFoundException();
+                    }
+                }
+            }
+        }
 
         private void LogExecutingCommand(PowershellSettings settings, string script, bool safe = true)
         {

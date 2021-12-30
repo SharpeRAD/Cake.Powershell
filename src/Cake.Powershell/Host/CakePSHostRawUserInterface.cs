@@ -55,7 +55,7 @@ namespace Cake.Powershell
             get { return new Size(Console.BufferWidth, Console.BufferHeight); }
             set
             {
-#if NET5_0
+#if NET5_0 || NET6_0
                 if (OperatingSystem.IsWindows())
                 {
                     Console.SetBufferSize(value.Width, value.Height);
@@ -96,7 +96,7 @@ namespace Cake.Powershell
             get { return Console.CursorSize; }
             set
             {
-#if NET5_0
+#if NET5_0 || NET6_0
                 if (OperatingSystem.IsWindows())
                 {
                     Console.CursorSize = value;
@@ -162,7 +162,7 @@ namespace Cake.Powershell
             get { return new Coordinates(Console.WindowLeft, Console.WindowTop); }
             set
             {
-#if NET5_0
+#if NET5_0 || NET6_0
                 if (OperatingSystem.IsWindows())
                 {
                     Console.SetWindowPosition(value.X, value.Y);
@@ -186,7 +186,7 @@ namespace Cake.Powershell
             get { return new Size(Console.WindowWidth, Console.WindowHeight); }
             set
             {
-#if NET5_0
+#if NET5_0 || NET6_0
                 if (OperatingSystem.IsWindows())
                 {
                     Console.SetWindowSize(value.Width, value.Height);
@@ -208,7 +208,7 @@ namespace Cake.Powershell
         {
             get
             {
-#if NET5_0
+#if NET5_0 || NET6_0
                 if (OperatingSystem.IsWindows())
                 {
                     return Console.Title;
@@ -225,7 +225,7 @@ namespace Cake.Powershell
             }
             set
             {
-#if NET5_0
+#if NET5_0 || NET6_0
                 if (OperatingSystem.IsWindows())
                 {
                     Console.Title = value;
