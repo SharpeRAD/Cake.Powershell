@@ -30,7 +30,7 @@ namespace Cake.Powershell.Tests
         [Fact]
         public void Start_Service_Script()
         {
-#if NET5_0
+#if NET5_0 || NET6_0
             if (OperatingSystem.IsWindows())
             {
                 Collection<PSObject> results = CakeHelper.CreatePowershellRunner().Start("Get-Service", 
