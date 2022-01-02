@@ -11,7 +11,7 @@ Invoke-Command -ScriptBlock { ./dotnet-sdk-3.1.406-win-x64.exe /S /v/qn }
 Write-Host "Installation succeeded." -ForegroundColor Green
 
 Write-Host "Downloading .NET SDK 5.0 ..."
-(New-Object System.Net.WebClient).DownloadFile('https://download.visualstudio.microsoft.com/download/pr/44069ee2-ce02-41d7-bcc5-2168a1653278/cfc5131c81ae00a5f77f05f9963ec98d/dotnet-sdk-5.0.404-win-x64.exe')
+(New-Object System.Net.WebClient).DownloadFile('https://download.visualstudio.microsoft.com/download/pr/44069ee2-ce02-41d7-bcc5-2168a1653278/cfc5131c81ae00a5f77f05f9963ec98d/dotnet-sdk-5.0.404-win-x64.exe', 'dotnet-sdk-5.0.404-win-x64.exe')
 
 Write-Host "Installing .NET SDK 5.0 ..."
 Invoke-Command -ScriptBlock { ./dotnet-sdk-5.0.404-win-x64.exe /S /v/qn }
