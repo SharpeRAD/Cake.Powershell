@@ -132,8 +132,6 @@ namespace Cake.Powershell
 
             LogExecutingCommand(settings, script);
 
-
-
             //Call
             script = this.AppendArguments(script, settings.Arguments, false);
 
@@ -292,7 +290,15 @@ namespace Cake.Powershell
 
             //Create Pipline
             using (Pipeline pipeline = runspace.CreatePipeline())
+            using(var powershellInstance = PowerShell.Create())
             {
+                if (settings.BypassExecutionPolicy)
+                {
+                    powershellInstance.Runspace = runspace;
+                    powershellInstance.AddScript("Set-ExecutionPolicy Unrestricted");
+                    powershellInstance.Invoke();
+                }
+
                 //Invoke Command
                 if (settings.WorkingDirectory != null)
                 {

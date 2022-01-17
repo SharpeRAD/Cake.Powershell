@@ -9,7 +9,7 @@ Task("Package")
     .IsDependentOn("Publish-Local");
 
 Task("Publish")
-    .IsDependentOn("Package")
+	.IsDependentOn("Package")
     .IsDependentOn("Publish-Nuget");
 
 
@@ -19,7 +19,7 @@ Task("AppVeyor")
     .IsDependentOn("Update-AppVeyor-Build-Number")
     .IsDependentOn("Upload-AppVeyor-Artifacts")
     .IsDependentOn("Slack");
-
+	
 Task("Travis")
     .IsDependentOn("Run-Unit-Tests");
 

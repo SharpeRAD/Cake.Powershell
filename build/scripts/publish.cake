@@ -12,7 +12,7 @@ Task("Clear-AppData")
 
     if (dataDir.Exists)
     {
-        //Delete
+        // Delete
         foreach (string project in projectNames)
         {
             var dirs = dataDir.GetDirectories(project, SearchScope.Current);
@@ -41,7 +41,7 @@ Task("Publish-Local")
 
     if (packageDir.Exists)
     {
-        //Delete
+        // Delete
         foreach (string project in projectNames)
         {
             var files = packageDir.GetFiles(project + ".*", SearchScope.Current);
@@ -52,7 +52,7 @@ Task("Publish-Local")
             }
         }
 
-        //Copy
+        // Copy
         CopyDirectory(nugetDir, packageDir.Path);
     }
 });

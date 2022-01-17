@@ -68,7 +68,7 @@ namespace Cake.Powershell
         public string Password { get; set; }
 
         /// <summary>
-        /// Gets or sets the authentication mechanism to use when conecting
+        /// Gets or sets the authentication mechanism to use when connecting
         /// </summary>
         public AuthenticationMechanism AuthenticationMechanism { get; set; }
 
@@ -110,6 +110,11 @@ namespace Cake.Powershell
         /// If true script execution which have errors will throw exception, If false it will return result. Default: true
         /// </summary>
         public bool ExceptionOnScriptError { get; set; }
+
+        /// <summary>
+        /// Bypass Execution Policy if true
+        /// </summary>
+        public bool BypassExecutionPolicy { get; set; }
         #endregion
     }
 }

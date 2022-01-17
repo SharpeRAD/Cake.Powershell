@@ -49,7 +49,7 @@ Task("Restore-Nuget-Packages")
         }
 	}
 
-	//Restoring test projects
+	// Restoring test projects
     foreach(string project in testNames)
     {
         Information("Restoring: {0}", project);

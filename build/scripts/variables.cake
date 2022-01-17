@@ -2,7 +2,7 @@
 // VARIABLES
 //////////////////////////////////////////////////////////////////////
 
-//Setup
+// Setup
 var tools = EnvironmentVariable("CAKE_PATHS_TOOLS");
 var username = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile).ToLower().Replace(@"c:\users\", "").Replace(@"c:\windows\serviceprofiles\", "");
 
@@ -11,6 +11,7 @@ var username = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile).
 // Get whether or not this is a local build.
 var local = BuildSystem.IsLocalBuild;
 var isRunningOnAppVeyor = AppVeyor.IsRunningOnAppVeyor;
+var isRunningOnTravis = BuildSystem.IsRunningOnTravisCI;
 var isRunningOnTFS = (EnvironmentVariable("TF_BUILD") == "True");
 var isPullRequest = AppVeyor.Environment.PullRequest.IsPullRequest;
 
@@ -46,8 +47,7 @@ var projectFiles = new List<FilePath>();
 
 foreach (string project in projectNames)
 {
-    //Exclude Legacy projects without namespaces
-    if (project.Contains(".") && DirectoryExists("./src/" + project))
+    if (DirectoryExists("./src/" + project))
     {
         projectDirs.Add("./src/" + project);
 
@@ -60,7 +60,7 @@ foreach (string project in projectNames)
 
 
 
-//Find Tests
+// Find Tests
 var testNames = new List<string>();
 
 if (DirectoryExists("./src/" + appName + ".Tests"))

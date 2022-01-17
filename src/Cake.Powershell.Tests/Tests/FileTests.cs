@@ -20,8 +20,21 @@ namespace Cake.Powershell.Tests
         [Fact]
         public void Start_Local_File()
         {
-            Collection<PSObject> results = CakeHelper.CreatePowershellRunner().Start(new FilePath("Scripts/Test.ps1"), 
-                new PowershellSettings());
+            var testPath = "Scripts/TestNonWin.ps1";
+
+#if NET5_0
+            if (OperatingSystem.IsWindows())
+            {
+                testPath = "Scripts/Test.ps1";
+            }
+#else
+            if (Environment.OSVersion.Platform == PlatformID.Win32NT)
+            {
+                testPath = "Scripts/Test.ps1";
+            }
+#endif
+            Collection<PSObject> results = CakeHelper.CreatePowershellRunner().Start(new FilePath(testPath), 
+                new PowershellSettings().BypassExecutionPolicy());
 
             Assert.True((results != null) && (results.Count > 0), "Check Rights");
         }
@@ -29,8 +42,24 @@ namespace Cake.Powershell.Tests
         [Fact]
         public void Start_File_With_Parameters()
         {
-            Collection<PSObject> results = CakeHelper.CreatePowershellRunner().Start(new FilePath("Scripts/Test.ps1"),
-                new PowershellSettings().WithArguments(args => args.Append("Service", "eventlog")));
+            var testPath = "Scripts/TestNonWin.ps1";
+
+#if NET5_0
+            if (OperatingSystem.IsWindows())
+            {
+                testPath = "Scripts/Test.ps1";
+            }
+#else
+            if (Environment.OSVersion.Platform == PlatformID.Win32NT)
+            {
+                testPath = "Scripts/Test.ps1";
+            }
+#endif
+
+            Collection<PSObject> results = CakeHelper.CreatePowershellRunner().Start(new FilePath(testPath),
+                new PowershellSettings()
+                    .WithArguments(args => args.Append("Service", "eventlog"))
+                    .BypassExecutionPolicy());
 
             Assert.True((results != null) && (results.Count >= 1), "Check Rights");
         }
@@ -41,10 +70,16 @@ namespace Cake.Powershell.Tests
             var array = new string[] {"A", "B", "C"};
 
             Collection<PSObject> results = CakeHelper.CreatePowershellRunner().Start(new FilePath("Scripts/ArrayTest.ps1"),
-                new PowershellSettings().WithArguments(args => args.AppendArray("AnArray", array)));
+                new PowershellSettings()
+                    .WithArguments(args => args.AppendArray("AnArray", array))
+                    .BypassExecutionPolicy());
 
             Assert.True((results != null) && (results.Count == array.Length + 1));
-            Assert.Equal("", results[0].BaseObject.ToString());
+#if NET5_0 || NETCOREAPP3_1
+            Assert.Equal(string.Empty, results[0].BaseObject.ToString());
+#else
+            Assert.Equal("0", results[0].BaseObject.ToString());
+#endif
 
             foreach (var item in array)
             {
@@ -62,10 +97,16 @@ namespace Cake.Powershell.Tests
                 { "C", "3" }
             };
             Collection<PSObject> results = CakeHelper.CreatePowershellRunner().Start(new FilePath("Scripts/HashTableTest.ps1"),
-                new PowershellSettings().WithArguments(args => args.AppendHashTable("AHashTable", dict)));
+                new PowershellSettings()
+                    .WithArguments(args => args.AppendHashTable("AHashTable", dict))
+                    .BypassExecutionPolicy());
 
             Assert.True((results != null) && (results.Count == dict.Count + 1));
-            Assert.Equal("", results[0].BaseObject.ToString());
+#if NET5_0 || NETCOREAPP3_1
+            Assert.Equal(string.Empty, results[0].BaseObject.ToString());
+#else
+            Assert.Equal("0", results[0].BaseObject.ToString());
+#endif
 
             foreach (var item in dict.ToArray())
             {
@@ -76,8 +117,22 @@ namespace Cake.Powershell.Tests
         [Fact]
         public void Start_File_With_Dot_Sourcing()
         {
-            Collection<PSObject> results = CakeHelper.CreatePowershellRunner().Start(new FilePath("Scripts/Test.ps1"),
-                new PowershellSettings().WithDotSourcing());
+            var testPath = "Scripts/TestNonWin.ps1";
+
+#if NET5_0
+            if (OperatingSystem.IsWindows())
+            {
+                testPath = "Scripts/Test.ps1";
+            }
+#else
+            if (Environment.OSVersion.Platform == PlatformID.Win32NT)
+            {
+                testPath = "Scripts/Test.ps1";
+            }
+#endif
+
+            Collection<PSObject> results = CakeHelper.CreatePowershellRunner().Start(new FilePath(testPath),
+                new PowershellSettings().WithDotSourcing().BypassExecutionPolicy());
 
             Assert.True((results != null) && (results.Count >= 1), "Check Rights");
         }
@@ -94,11 +149,12 @@ namespace Cake.Powershell.Tests
         public void Returned_Error_Code_Should_Not_Throw_Exception_If_Option_Passed()
         {
             var results = CakeHelper.CreatePowershellRunner()
-                .Start(new FilePath("Scripts/FailingScript.ps1"), new PowershellSettings() { ExceptionOnScriptError = false });
+                .Start(new FilePath("Scripts/FailingScript.ps1"),
+                    new PowershellSettings {ExceptionOnScriptError = false}.BypassExecutionPolicy());
 
             Assert.True(results != null && results.Count >= 1, "Check Rights");
-            Assert.True(results.Where(r => r.BaseObject.ToString().Contains("Cannot find path")) != null);
-            Assert.Equal("1", results.Last().BaseObject.ToString());
+            Assert.True(results.FirstOrDefault(r => r.BaseObject.ToString().Contains("Cannot find path")) != null);
+            Assert.Equal("1", results[2].BaseObject.ToString());
         }
 
         [Fact]
