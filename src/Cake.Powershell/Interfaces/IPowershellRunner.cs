@@ -3,7 +3,7 @@ using System;
 using System.Collections.ObjectModel;
 
 using System.Management.Automation;
-
+using System.Threading.Tasks;
 using Cake.Core.IO;
 #endregion
 
@@ -40,7 +40,7 @@ namespace Cake.Powershell
         /// <param name="path">The temporary path to download the file to.</param>
         /// <param name="settings">The information about the process to start.</param>
         /// <returns>Powershell objects.</returns>
-        Collection<PSObject> Start(Uri uri, FilePath path, PowershellSettings settings);
+        Task<Collection<PSObject>> Start(Uri uri, FilePath path, PowershellSettings settings);
         #endregion
     }
 }

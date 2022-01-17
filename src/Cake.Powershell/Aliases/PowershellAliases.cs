@@ -7,6 +7,7 @@ using Cake.Core.IO;
 using Cake.Core.Annotations;
 
 using System.Management.Automation;
+using System.Threading.Tasks;
 #endregion
 
 
@@ -109,7 +110,7 @@ namespace Cake.Powershell
         /// <param name="path">The temporary path to download the file to.</param>
         /// <returns>A collection of powershell objects</returns>
         [CakeMethodAlias]
-        public static Collection<PSObject> StartPowershellDownload(this ICakeContext context, Uri uri, FilePath path)
+        public static Task<Collection<PSObject>> StartPowershellDownload(this ICakeContext context, Uri uri, FilePath path)
         {
             return new PowershellRunner(context.Environment, context.Log).Start(uri, path, new PowershellSettings());
         }
@@ -123,7 +124,7 @@ namespace Cake.Powershell
         /// <param name="arguments">The arguments to append.</param>
         /// <returns>A collection of powershell objects</returns>
         [CakeMethodAlias]
-        public static Collection<PSObject> StartPowershellDownload(this ICakeContext context, Uri uri, FilePath path, Action<ProcessArgumentBuilder> arguments)
+        public static Task<Collection<PSObject>> StartPowershellDownload(this ICakeContext context, Uri uri, FilePath path, Action<ProcessArgumentBuilder> arguments)
         {
             return new PowershellRunner(context.Environment, context.Log).Start(uri, path, new PowershellSettings().WithArguments(arguments));
         }
@@ -137,7 +138,7 @@ namespace Cake.Powershell
         /// <param name="settings">The information about the script to start.</param>
         /// <returns>A collection of powershell objects</returns>
         [CakeMethodAlias]
-        public static Collection<PSObject> StartPowershellDownload(this ICakeContext context, Uri uri, FilePath path, PowershellSettings settings)
+        public static Task<Collection<PSObject>> StartPowershellDownload(this ICakeContext context, Uri uri, FilePath path, PowershellSettings settings)
         {
             return new PowershellRunner(context.Environment, context.Log).Start(uri, path, settings);
         }
