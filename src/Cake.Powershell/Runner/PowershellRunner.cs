@@ -2,12 +2,14 @@
 using System;
 using System.Collections.ObjectModel;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Management.Automation;
 using System.Management.Automation.Runspaces;
 using System.Net;
+using System.Net.Http;
 using System.Threading;
-
+using System.Threading.Tasks;
 using Cake.Core;
 using Cake.Core.Diagnostics;
 using Cake.Core.IO;
@@ -145,7 +147,7 @@ namespace Cake.Powershell
         /// <param name="path">The temporary path to download the file to.</param>
         /// <param name="settings">The information about the process to start.</param>
         /// <returns>Powershell objects.</returns>
-        public Collection<PSObject> Start(Uri uri, FilePath path, PowershellSettings settings)
+        public async Task<Collection<PSObject>> Start(Uri uri, FilePath path, PowershellSettings settings)
         {
             if (uri == null)
             {
@@ -163,13 +165,18 @@ namespace Cake.Powershell
 
             string prefix = settings.UseDotSourcing ? ". " : "&";
             string fullPath = path.MakeAbsolute(settings.WorkingDirectory).FullPath;
-            string script = prefix + "\"" + fullPath + "\"";
+            string script = $"{prefix}\\{fullPath}\\temp.ps1";
 
 
 
             //Download Script
-            WebClient client = new WebClient();
-            client.DownloadFile(uri, fullPath);
+            var client = new HttpClient();
+            using (var stream = await client.GetStreamAsync(uri).ConfigureAwait(false))
+            using (var fileStream = new FileStream(script, FileMode.CreateNew))
+            {
+                await stream.CopyToAsync(fileStream);
+            }
+
 
             LogExecutingCommand(settings, script);
 
@@ -179,7 +186,7 @@ namespace Cake.Powershell
             //Call
             script = this.AppendArguments(script, settings.Arguments, false);
 
-            return this.Invoke(script, settings);
+            return await Task.FromResult(this.Invoke(script, settings));
         }
 
 

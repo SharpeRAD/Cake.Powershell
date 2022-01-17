@@ -1,7 +1,7 @@
 ﻿#region Using Statements
 using System;
 using System.Management.Automation.Host;
-
+using System.Runtime.Versioning;
 using Cake.Core.Diagnostics;
 #endregion
 
@@ -50,6 +50,7 @@ namespace Cake.Powershell
         /// Gets or sets the size of the host buffer. In this example the 
         /// buffer size is adapted from the Console buffer size members.
         /// </summary>
+        [SupportedOSPlatform("windows")]
         public override Size BufferSize
         {
             get { return new Size(Console.BufferWidth, Console.BufferHeight); }
@@ -91,6 +92,7 @@ namespace Cake.Powershell
         /// the cursor size is taken directly from the Console.CursorSize 
         /// property.
         /// </summary>
+        [SupportedOSPlatform("windows")]
         public override int CursorSize
         {
             get { return Console.CursorSize; }
@@ -157,6 +159,7 @@ namespace Cake.Powershell
         /// uses the Console window position APIs to determine the returned 
         /// value of this property.
         /// </summary>
+        [SupportedOSPlatform("windows")]
         public override Coordinates WindowPosition
         {
             get { return new Coordinates(Console.WindowLeft, Console.WindowTop); }
@@ -181,6 +184,7 @@ namespace Cake.Powershell
         /// uses the corresponding Console window size APIs to determine the  
         /// returned value of this property.
         /// </summary>
+        [SupportedOSPlatform("windows")]
         public override Size WindowSize
         {
             get { return new Size(Console.WindowWidth, Console.WindowHeight); }
@@ -204,6 +208,7 @@ namespace Cake.Powershell
         /// Gets or sets the title of the displayed window. The example 
         /// maps the Console.Title property to the value of this property.
         /// </summary>
+        [SupportedOSPlatform("windows")]
         public override string WindowTitle
         {
             get
