@@ -1,5 +1,10 @@
-### New in 0.5.0 (Released 2021/01/08)
-* [Improvement] Update to Cake.Core v1.0
+### New in 1.0.1 (Released 2021/04/05)
+* [Improvement] Add cake-addin nuget tag
+* [Bug] not including `System.Management.Automation.dll`
+
+### New in 1.0.0 (Released 2021/02/25)
+* [Improvement] Update to Cake.Core v1.0.0
+* [Feature] Cross platform support
 
 ### New in 0.4.8 (Released 2019/05/12)
 * [Improvement] Update to Cake.Core v0.33

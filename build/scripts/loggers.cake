@@ -160,9 +160,6 @@ public JunitResult GetJunitResult(string name, string message, string inner, str
 		}
 	}
 
-	//Warning("LOCATION === " + location);
-	//Warning("INNER === " + inner);
-
 	return new JunitResult()
 	{
 		Message = message.Trim(),
@@ -402,12 +399,6 @@ public IList<SlackChatMessageAttachment> GetMsBuildAttachments(string path, Exce
 					}
 				}
 			}
-
-
-
-			//Warning("PRETEXT === " + name + "/" + file);
-			//Warning("TITLE === " + source);
-			//Warning("TEXT === " + location);
 
 			// Add Attachment
 			attachments.Add(new SlackChatMessageAttachment()

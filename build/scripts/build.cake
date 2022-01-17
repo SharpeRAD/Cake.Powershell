@@ -6,7 +6,7 @@ Task("Patch-Assembly-Info")
     .IsDependentOn("Restore-Nuget-Packages")
     .Does(() =>
 {
-	// Create Solution Info
+    // Create Solution Info
     var file = "./src/SolutionInfo.cs";
 
     CreateAssemblyInfo(file, new AssemblyInfoSettings
@@ -19,7 +19,7 @@ Task("Patch-Assembly-Info")
 
 
 
-	// Copy Solution Info
+    // Copy Solution Info
     foreach (string project in projectDirs)
     {
         CopyFileToDirectory(file, project + "/Properties");
@@ -34,92 +34,92 @@ Task("Build")
 {
     Information("Building {0}", solution);
 
-	// Check Logger folder
-	if (!DirectoryExists(loggerResultsDir))
-	{
-		CreateDirectory(loggerResultsDir);
-	}
-
-	// Create build settings
-	var buildSettings = new DotNetCoreMSBuildSettings
-	{
-		Verbosity = DotNetCoreVerbosity.Normal,
-		TreatAllWarningsAs = Cake.Common.Tools.DotNetCore.MSBuild.MSBuildTreatAllWarningsAs.Error,
-
-		MaxCpuCount = 3
-	};
-	
-	// Add Logger
-	buildSettings.AddFileLogger(new MSBuildFileLoggerSettings
-	{
-		LogFile = loggerResultsDir + "/build.txt",
-
-		AppendToLogFile = false,
-		ShowTimestamp = false,
-		ShowCommandLine = false,
-		ShowEventId = false,
-		ForceNoAlign = true,
-		HideItemAndPropertyList = true,
-
-		Verbosity = DotNetCoreVerbosity.Minimal
-	});
-
-
-
-	// Build Solution
-	Information("Building {0}", solution);
-
-	DotNetCoreBuild(solution, new DotNetCoreBuildSettings
+    // Check Logger folder
+    if (!DirectoryExists(loggerResultsDir))
     {
-    	Configuration = configuration,
-		
-		NoRestore = true,
-		MSBuildSettings = buildSettings
+        CreateDirectory(loggerResultsDir);
+    }
+
+    // Create build settings
+    var buildSettings = new DotNetCoreMSBuildSettings
+    {
+        Verbosity = DotNetCoreVerbosity.Normal,
+        TreatAllWarningsAs = Cake.Common.Tools.DotNetCore.MSBuild.MSBuildTreatAllWarningsAs.Error,
+
+        MaxCpuCount = 3
+    };
+
+    // Add Logger
+    buildSettings.AddFileLogger(new MSBuildFileLoggerSettings
+    {
+        LogFile = loggerResultsDir + "/build.txt",
+
+        AppendToLogFile = false,
+        ShowTimestamp = false,
+        ShowCommandLine = false,
+        ShowEventId = false,
+        ForceNoAlign = true,
+        HideItemAndPropertyList = true,
+
+        Verbosity = DotNetCoreVerbosity.Minimal
+    });
+
+
+
+    // Build Solution
+    Information("Building {0}", solution);
+
+    DotNetCoreBuild(solution, new DotNetCoreBuildSettings
+    {
+        Configuration = configuration,
+
+        NoRestore = true,
+        MSBuildSettings = buildSettings
     });
 })
 .OnError(exception =>
 {
-	List<SlackChatMessageAttachment> attachments = new List<SlackChatMessageAttachment>();
+    List<SlackChatMessageAttachment> attachments = new List<SlackChatMessageAttachment>();
 
 
 
-	// Get MsBuild Errors
-	var path = loggerResultsDir + "/build.txt";
+    // Get MsBuild Errors
+    var path = loggerResultsDir + "/build.txt";
 
-	if (FileExists(path))
-	{
-		IList<SlackChatMessageAttachment> lstAttachments = GetMsBuildAttachments(path, exception);
-
-		CombineAttachments(attachments, lstAttachments);
-	}
-
-
-
-	// Resolve the API key.
-    var token = EnvironmentVariable("SLACK_TOKEN");
-
-    if (string.IsNullOrEmpty(token))
+    if (FileExists(path))
     {
-        throw new InvalidOperationException("Could not resolve Slack token.");
+        IList<SlackChatMessageAttachment> lstAttachments = GetMsBuildAttachments(path, exception);
+
+        CombineAttachments(attachments, lstAttachments);
     }
 
 
 
-	// Post Message
-	SlackChatMessageSettings settings = new SlackChatMessageSettings()
-	{
-		Token = token,
-		UserName = "Cake",
-		IconUrl = new System.Uri("https://raw.githubusercontent.com/cake-build/graphics/master/png/cake-small.png")
-	};
+    // Resolve the webHook Url.
+    var webHookUrl = EnvironmentVariable("SLACK_WEBHOOK_URL");
 
-	var title = "Build failed for " + appName + " v" + version;
+    if (string.IsNullOrEmpty(webHookUrl))
+    {
+        throw new InvalidOperationException("Could not resolve Slack webHook Url.");
+    }
 
-	SlackChatMessageResult result = Slack.Chat.PostMessage("#code", title, attachments, settings);
 
-	
-	
-	// Check Result
+
+    // Post Message
+    SlackChatMessageSettings settings = new SlackChatMessageSettings()
+    {
+        IncomingWebHookUrl = webHookUrl,
+        UserName = "Cake",
+        IconUrl = new System.Uri("https://cdn.jsdelivr.net/gh/cake-build/graphics/png/cake-small.png")
+    };
+
+    var title = "Build failed for " + appName + " v" + version;
+
+    SlackChatMessageResult result = Slack.Chat.PostMessage("#code", title, attachments, settings);
+
+
+
+    // Check Result
     if (result.Ok)
     {
         // Posted
@@ -131,5 +131,5 @@ Task("Build")
         Error("Failed to send message to Slack: {0}", result.Error);
     }
 
-	throw exception;
+    throw exception;
 });

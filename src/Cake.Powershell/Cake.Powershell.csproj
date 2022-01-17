@@ -5,7 +5,7 @@
         <PackageId>Cake.Powershell</PackageId>
         <OutputType>Library</OutputType>
 
-        <TargetFrameworks>net50;</TargetFrameworks>
+        <TargetFrameworks>net46;netcoreapp3.1;net5.0</TargetFrameworks>
 
         <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
         <GenerateAssemblyVersionAttribute>false</GenerateAssemblyVersionAttribute>
@@ -19,10 +19,10 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Cake.Core" Version="1.0.0-rc0002" PrivateAssets="All" />
+        <PackageReference Include="Cake.Core" Version="0.33.0" PrivateAssets="All" />
         <PackageReference Include="Microsoft.Management.Infrastructure" Version="2.0.0" />
         <PackageReference Include="Microsoft.Management.Infrastructure.Runtime.Win" Version="2.0.0" />
-        <PackageReference Include="Microsoft.PowerShell.SDK" Version="7.1.0" />
-        <PackageReference Include="Microsoft.WSMan.Management" Version="7.1.0" />
+        <PackageReference Include="Microsoft.PowerShell.5.ReferenceAssemblies" Version="1.1.0" />
+        <PackageReference Include="Microsoft.PowerShell.SDK" Version="7.0.5" Condition="'$(TargetFramework)' == 'netcoreapp3.1'" />
     </ItemGroup>
 </Project>
