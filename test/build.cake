@@ -1,4 +1,4 @@
-#addin nuget:?package=Cake.Powershell&version=0.4.5
+#addin nuget:?package=Cake.Powershell
 
 //////////////////////////////////////////////////////////////////////
 // ARGUMENTS

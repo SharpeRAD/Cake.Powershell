@@ -64,7 +64,7 @@ _NCrunch_*
 
 
 # Visual Studio Directory
-src/.vs/
+.vs/
 project.lock.json
 
 SolutionInfo.cs

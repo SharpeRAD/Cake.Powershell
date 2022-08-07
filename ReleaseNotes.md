@@ -1,3 +1,6 @@
+### New in 2.0.0 (Released 2022/08/07)
+* [Improvement] Update to Cake.Core v2.0.0
+
 ### New in 1.0.1 (Released 2021/04/05)
 * [Improvement] Add cake-addin nuget tag
 * [Bug] not including `System.Management.Automation.dll`
