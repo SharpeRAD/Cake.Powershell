@@ -22,7 +22,7 @@ namespace Cake.Powershell.Tests
         {
             var testPath = "Scripts/TestNonWin.ps1";
 
-#if NET5_0
+#if NET5_0 || NET6_0
             if (OperatingSystem.IsWindows())
             {
                 testPath = "Scripts/Test.ps1";
@@ -44,7 +44,7 @@ namespace Cake.Powershell.Tests
         {
             var testPath = "Scripts/TestNonWin.ps1";
 
-#if NET5_0
+#if NET5_0 || NET6_0
             if (OperatingSystem.IsWindows())
             {
                 testPath = "Scripts/Test.ps1";
@@ -75,11 +75,8 @@ namespace Cake.Powershell.Tests
                     .BypassExecutionPolicy());
 
             Assert.True((results != null) && (results.Count == array.Length + 1));
-#if NET5_0 || NETCOREAPP3_1
+
             Assert.Equal(string.Empty, results[0].BaseObject.ToString());
-#else
-            Assert.Equal("0", results[0].BaseObject.ToString());
-#endif
 
             foreach (var item in array)
             {
@@ -102,11 +99,8 @@ namespace Cake.Powershell.Tests
                     .BypassExecutionPolicy());
 
             Assert.True((results != null) && (results.Count == dict.Count + 1));
-#if NET5_0 || NETCOREAPP3_1
+
             Assert.Equal(string.Empty, results[0].BaseObject.ToString());
-#else
-            Assert.Equal("0", results[0].BaseObject.ToString());
-#endif
 
             foreach (var item in dict.ToArray())
             {
@@ -119,7 +113,7 @@ namespace Cake.Powershell.Tests
         {
             var testPath = "Scripts/TestNonWin.ps1";
 
-#if NET5_0
+#if NET5_0 || NET6_0
             if (OperatingSystem.IsWindows())
             {
                 testPath = "Scripts/Test.ps1";
