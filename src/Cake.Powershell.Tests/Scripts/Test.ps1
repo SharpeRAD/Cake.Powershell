@@ -5,7 +5,8 @@
 
 if ($Service -eq "")
 {
-	Get-Service
+	# Get-Service can throw unwanted exception, see https://github.com/PowerShell/PowerShell/issues/10371 
+	Get-Service -ErrorAction SilentlyContinue
 }
 else
 {

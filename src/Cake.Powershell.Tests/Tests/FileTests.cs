@@ -22,17 +22,11 @@ namespace Cake.Powershell.Tests
         {
             var testPath = "Scripts/TestNonWin.ps1";
 
-#if NET5_0 || NET6_0
             if (OperatingSystem.IsWindows())
             {
                 testPath = "Scripts/Test.ps1";
             }
-#else
-            if (Environment.OSVersion.Platform == PlatformID.Win32NT)
-            {
-                testPath = "Scripts/Test.ps1";
-            }
-#endif
+
             Collection<PSObject> results = CakeHelper.CreatePowershellRunner().Start(new FilePath(testPath), 
                 new PowershellSettings().BypassExecutionPolicy());
 
@@ -44,17 +38,10 @@ namespace Cake.Powershell.Tests
         {
             var testPath = "Scripts/TestNonWin.ps1";
 
-#if NET5_0 || NET6_0
             if (OperatingSystem.IsWindows())
             {
                 testPath = "Scripts/Test.ps1";
             }
-#else
-            if (Environment.OSVersion.Platform == PlatformID.Win32NT)
-            {
-                testPath = "Scripts/Test.ps1";
-            }
-#endif
 
             Collection<PSObject> results = CakeHelper.CreatePowershellRunner().Start(new FilePath(testPath),
                 new PowershellSettings()
@@ -113,17 +100,10 @@ namespace Cake.Powershell.Tests
         {
             var testPath = "Scripts/TestNonWin.ps1";
 
-#if NET5_0 || NET6_0
             if (OperatingSystem.IsWindows())
             {
                 testPath = "Scripts/Test.ps1";
             }
-#else
-            if (Environment.OSVersion.Platform == PlatformID.Win32NT)
-            {
-                testPath = "Scripts/Test.ps1";
-            }
-#endif
 
             Collection<PSObject> results = CakeHelper.CreatePowershellRunner().Start(new FilePath(testPath),
                 new PowershellSettings().WithDotSourcing().BypassExecutionPolicy());

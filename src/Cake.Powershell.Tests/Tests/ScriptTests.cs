@@ -30,23 +30,13 @@ namespace Cake.Powershell.Tests
         [Fact]
         public void Start_Service_Script()
         {
-#if NET5_0 || NET6_0
             if (OperatingSystem.IsWindows())
             {
-                Collection<PSObject> results = CakeHelper.CreatePowershellRunner().Start("Get-Service", 
+                Collection<PSObject> results = CakeHelper.CreatePowershellRunner().Start("Get-Service -ErrorAction SilentlyContinue", 
                 new PowershellSettings());
 
                 Assert.True((results != null) && (results.Count > 0), "Check Rights");
             }
-#else
-            if (Environment.OSVersion.Platform == PlatformID.Win32NT)
-            {
-                Collection<PSObject> results = CakeHelper.CreatePowershellRunner().Start("Get-Service", 
-                    new PowershellSettings());
-
-                Assert.True((results != null) && (results.Count > 0), "Check Rights");
-            }
-#endif
             Assert.True(true);
         }
 
