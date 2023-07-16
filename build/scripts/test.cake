@@ -14,24 +14,22 @@ Task("Run-Unit-Tests")
 
         if (isRunningOnTravis)
         {
-            string outputPath1 = testResultsDir + "/" + test.Replace(".Tests", "") + ".3.1.xml";
+            string outputPath1 = testResultsDir + "/" + test.Replace(".Tests", "") + ".6.0.xml";
             outputPath1 = MakeAbsolute(File(outputPath1)).FullPath;
             DotNetCoreTest("./src/" + test + "/" + test + ".csproj", new DotNetCoreTestSettings
             {
                 NoRestore = true,
-                Framework = "netcoreapp3.1",
-                ArgumentCustomization = args => args.AppendSwitch("-a", " ", ".".Quote())
-                                                    .AppendSwitch("-l", " ", ("xunit;LogFilePath=" + outputPath1).Quote())
+                Framework = "net6.0",
+                ArgumentCustomization = args => args.AppendSwitch("-l", " ", ("xunit;LogFilePath=" + outputPath1).Quote())
             });
 
-            string outputPath2 = testResultsDir + "/" + test.Replace(".Tests", "") + ".5.0.xml";
+            string outputPath2 = testResultsDir + "/" + test.Replace(".Tests", "") + ".7.0.xml";
             outputPath2 = MakeAbsolute(File(outputPath2)).FullPath;
             DotNetCoreTest("./src/" + test + "/" + test + ".csproj", new DotNetCoreTestSettings
             {
                 NoRestore = true,
-                Framework = "net5.0",
-                ArgumentCustomization = args => args.AppendSwitch("-a", " ", ".".Quote())
-                                                    .AppendSwitch("-l", " ", ("xunit;LogFilePath=" + outputPath2).Quote())
+                Framework = "net7.0",
+                ArgumentCustomization = args => args.AppendSwitch("-l", " ", ("xunit;LogFilePath=" + outputPath2).Quote())
             });
         }
 		else
@@ -41,8 +39,7 @@ Task("Run-Unit-Tests")
             DotNetCoreTest("./src/" + test + "/" + test + ".csproj", new DotNetCoreTestSettings
             {
                 NoRestore = true,
-                ArgumentCustomization = args => args.AppendSwitch("-a", " ", ".".Quote())
-                                                    .AppendSwitch("-l", " ", ("xunit;LogFilePath=" + outputPath).Quote())
+                ArgumentCustomization = args => args.AppendSwitch("-l", " ", ("xunit;LogFilePath=" + outputPath).Quote())
             });
         }  
     }

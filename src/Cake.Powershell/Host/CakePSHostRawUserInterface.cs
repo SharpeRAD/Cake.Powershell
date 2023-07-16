@@ -55,17 +55,10 @@ namespace Cake.Powershell
             get { return new Size(Console.BufferWidth, Console.BufferHeight); }
             set
             {
-#if NET5_0 || NET6_0
                 if (OperatingSystem.IsWindows())
                 {
                     Console.SetBufferSize(value.Width, value.Height);
                 }
-#else
-                if (Environment.OSVersion.Platform == PlatformID.Win32NT)
-                {
-                    Console.SetBufferSize(value.Width, value.Height);
-                }
-#endif
             }
         }
 
@@ -96,17 +89,10 @@ namespace Cake.Powershell
             get { return Console.CursorSize; }
             set
             {
-#if NET5_0 || NET6_0
                 if (OperatingSystem.IsWindows())
                 {
                     Console.CursorSize = value;
                 }
-#else
-                if (Environment.OSVersion.Platform == PlatformID.Win32NT)
-                {
-                    Console.CursorSize = value;
-                }
-#endif
             }
         }
 
@@ -162,17 +148,10 @@ namespace Cake.Powershell
             get { return new Coordinates(Console.WindowLeft, Console.WindowTop); }
             set
             {
-#if NET5_0 || NET6_0
                 if (OperatingSystem.IsWindows())
                 {
                     Console.SetWindowPosition(value.X, value.Y);
                 }
-#else
-                if (Environment.OSVersion.Platform == PlatformID.Win32NT)
-                {
-                    Console.SetWindowPosition(value.X, value.Y);
-                }
-#endif
             }
         }
 
@@ -186,17 +165,10 @@ namespace Cake.Powershell
             get { return new Size(Console.WindowWidth, Console.WindowHeight); }
             set
             {
-#if NET5_0 || NET6_0
                 if (OperatingSystem.IsWindows())
                 {
                     Console.SetWindowSize(value.Width, value.Height);
                 }
-#else
-                if (Environment.OSVersion.Platform == PlatformID.Win32NT)
-                {
-                    Console.SetWindowSize(value.Width, value.Height);
-                }
-#endif
             }
         }
 
@@ -208,34 +180,19 @@ namespace Cake.Powershell
         {
             get
             {
-#if NET5_0 || NET6_0
                 if (OperatingSystem.IsWindows())
                 {
                     return Console.Title;
                 }
-#else
-                if (Environment.OSVersion.Platform == PlatformID.Win32NT)
-                {
-
-                    return Console.Title;
-                }
-#endif
 
                 return string.Empty;
             }
             set
             {
-#if NET5_0 || NET6_0
                 if (OperatingSystem.IsWindows())
                 {
                     Console.Title = value;
                 }
-#else
-                if (Environment.OSVersion.Platform == PlatformID.Win32NT)
-                {
-                    Console.Title = value;
-                }
-#endif
             }
         }
         #endregion
