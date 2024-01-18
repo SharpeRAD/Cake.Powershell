@@ -8,7 +8,7 @@ Task("Run-Unit-Tests")
     .Does(() =>
 {
     // Run Test
-    foreach(string test in testNames)
+    foreach (string test in testNames)
     {
         Information("Running unit tests: {0}", test);
 
@@ -31,8 +31,17 @@ Task("Run-Unit-Tests")
                 Framework = "net7.0",
                 ArgumentCustomization = args => args.AppendSwitch("-l", " ", ("xunit;LogFilePath=" + outputPath2).Quote())
             });
+
+            string outputPath3 = testResultsDir + "/" + test.Replace(".Tests", "") + ".8.0.xml";
+            outputPath3 = MakeAbsolute(File(outputPath3)).FullPath;
+            DotNetCoreTest("./src/" + test + "/" + test + ".csproj", new DotNetCoreTestSettings
+            {
+                NoRestore = true,
+                Framework = "net8.0",
+                ArgumentCustomization = args => args.AppendSwitch("-l", " ", ("xunit;LogFilePath=" + outputPath3).Quote())
+            });
         }
-		else
+        else
         {
             string outputPath = testResultsDir + "/" + test.Replace(".Tests", "") + ".xml";
             outputPath = MakeAbsolute(File(outputPath)).FullPath;
@@ -41,7 +50,7 @@ Task("Run-Unit-Tests")
                 NoRestore = true,
                 ArgumentCustomization = args => args.AppendSwitch("-l", " ", ("xunit;LogFilePath=" + outputPath).Quote())
             });
-        }  
+        }
     }
 
 
@@ -59,11 +68,11 @@ Task("Run-Unit-Tests")
     // Get Errors
     IList<string> errors = new List<string>();
 
-    foreach(string test in testNames)
+    foreach (string test in testNames)
     {
         IList<XunitResult> testResults = GetXunitResults(testResultsDir + "/" + test.Replace(".Tests", "") + ".xml");
 
-        foreach(XunitResult testResult in testResults)
+        foreach (XunitResult testResult in testResults)
         {
             errors.Add(testResult.Type + " => " + testResult.Method);
             errors.Add(testResult.StackTrace);
