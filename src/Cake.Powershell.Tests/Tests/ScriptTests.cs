@@ -33,7 +33,7 @@ namespace Cake.Powershell.Tests
             if (OperatingSystem.IsWindows())
             {
                 Collection<PSObject> results = CakeHelper.CreatePowershellRunner().Start("Get-Service -ErrorAction SilentlyContinue", 
-                new PowershellSettings());
+                    new PowershellSettings());
 
                 Assert.True((results != null) && (results.Count > 0), "Check Rights");
             }

@@ -17,13 +17,13 @@ Task("Clear-AppData")
         {
             var dirs = dataDir.GetDirectories(project, SearchScope.Current);
 
-            foreach(IDirectory dir in dirs)
+            foreach (IDirectory dir in dirs)
             {
                 DeleteDirectory(dir.Path, new DeleteDirectorySettings()
-				{
-					Force = true,
-					Recursive = true
-				});
+                {
+                    Force = true,
+                    Recursive = true
+                });
             }
         }
     }
@@ -61,32 +61,32 @@ Task("Publish-Local")
 
 Task("Publish-Nuget")
     .IsDependentOn("Create-NuGet-Packages")
-    .WithCriteria(() => isRunningOnAppVeyor || isRunningOnTFS || (target == "Skip-Restore") )
+    .WithCriteria(() => isRunningOnAppVeyor || isRunningOnTFS || (target == "Skip-Restore"))
     .WithCriteria(() => !isPullRequest)
     .Does(() =>
 {
     foreach (string project in projectNames)
     {
-		if (!project.EndsWith(".Tests") && !project.EndsWith(".TestConsole") && !project.EndsWith(".TestSite"))
-		{
-			// Check the API key
-			var apiKey = EnvironmentVariable("NUGET_API_KEY");
+        if (!project.EndsWith(".Tests") && !project.EndsWith(".TestConsole") && !project.EndsWith(".TestSite"))
+        {
+            // Check the API key
+            var apiKey = EnvironmentVariable("NUGET_API_KEY");
 
-			if (string.IsNullOrEmpty(apiKey))
-			{
-				throw new InvalidOperationException("Could not resolve nuget API key.");
-			}
+            if (string.IsNullOrEmpty(apiKey))
+            {
+                throw new InvalidOperationException("Could not resolve nuget API key.");
+            }
 
-		
-		
-			// Push the packages
-			var package = nugetDir + "/" + project + "." + version + ".nupkg";
 
-			NuGetPush(package, new NuGetPushSettings
-			{
-				Source = "https://www.nuget.org/api/v2/package",
-				ApiKey = apiKey
-			});
-		}
+
+            // Push the packages
+            var package = nugetDir + "/" + project + "." + version + ".nupkg";
+
+            NuGetPush(package, new NuGetPushSettings
+            {
+                Source = "https://www.nuget.org/api/v3/index.json",
+                ApiKey = apiKey
+            });
+        }
     }
 });
