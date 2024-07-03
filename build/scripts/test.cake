@@ -60,8 +60,8 @@ Task("Run-Unit-Tests")
 
     if (testNames.Count > 0)
     {
-        Information(testResultsDir);
-        ReportUnit(testResultsDir);
+        string reportPath = System.IO.Path.GetFullPath(testResultsDir);
+        ReportUnit(reportPath);
     }
 })
 .OnError(exception =>
