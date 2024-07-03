@@ -24,4 +24,5 @@ Write-Host "Installing .NET SDK 8.0 ..."
 Invoke-Command -ScriptBlock { ./dotnet-sdk-8.0.302-win-x64.exe /S /v/qn }
 Write-Host "Installation succeeded." -ForegroundColor Green
 
-
+Write-Host "Checking installed version"
+Invoke-Command -ScriptBlock { dotnet --version }
