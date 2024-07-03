@@ -5,7 +5,7 @@
         <PackageId>Cake.Powershell</PackageId>
         <OutputType>Library</OutputType>
 
-		<TargetFrameworks>net6.0;net7.0</TargetFrameworks>
+        <TargetFrameworks>net8.0;net7.0;net6.0</TargetFrameworks>
 
         <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
         <GenerateAssemblyVersionAttribute>false</GenerateAssemblyVersionAttribute>
@@ -13,14 +13,15 @@
         <GenerateAssemblyInformationalVersionAttribute>false</GenerateAssemblyInformationalVersionAttribute>
         <GenerateAssemblyCopyrightAttribute>false</GenerateAssemblyCopyrightAttribute>
     </PropertyGroup>
-    
+
     <PropertyGroup>
-        <DocumentationFile>bin\Debug\netcoreapp3.1\Cake.Powershell.xml</DocumentationFile>
+        <DocumentationFile>bin\Debug\net8.0\Cake.Powershell.xml</DocumentationFile>
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Cake.Core" Version="3.0.0" PrivateAssets="All" />
-	    <PackageReference Include="Microsoft.PowerShell.SDK" Version="7.2.10" Condition="'$(TargetFramework)' == 'net6.0'" />
-		<PackageReference Include="Microsoft.PowerShell.SDK" Version="7.3.3" Condition="'$(TargetFramework)' == 'net7.0'" />
+        <PackageReference Include="Cake.Core" Version="4.0.0" PrivateAssets="All" />
+        <PackageReference Include="Microsoft.PowerShell.SDK" Version="7.2.18" Condition="'$(TargetFramework)' == 'net6.0'" />
+        <PackageReference Include="Microsoft.PowerShell.SDK" Version="7.3.11" Condition="'$(TargetFramework)' == 'net7.0'" />
+        <PackageReference Include="Microsoft.PowerShell.SDK" Version="7.4.3" Condition="'$(TargetFramework)' == 'net8.0'" />
     </ItemGroup>
 </Project>

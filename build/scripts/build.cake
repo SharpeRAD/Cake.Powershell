@@ -41,10 +41,10 @@ Task("Build")
     }
 
     // Create build settings
-    var buildSettings = new DotNetCoreMSBuildSettings
+    var buildSettings = new DotNetMSBuildSettings
     {
-        Verbosity = DotNetCoreVerbosity.Normal,
-        TreatAllWarningsAs = Cake.Common.Tools.DotNetCore.MSBuild.MSBuildTreatAllWarningsAs.Error,
+        Verbosity = DotNetVerbosity.Normal,
+        TreatAllWarningsAs = Cake.Common.Tools.DotNet.MSBuild.MSBuildTreatAllWarningsAs.Error,
 
         MaxCpuCount = 3
     };
@@ -61,7 +61,7 @@ Task("Build")
         ForceNoAlign = true,
         HideItemAndPropertyList = true,
 
-        Verbosity = DotNetCoreVerbosity.Minimal
+        Verbosity = DotNetVerbosity.Minimal
     });
 
 
@@ -69,7 +69,7 @@ Task("Build")
     // Build Solution
     Information("Building {0}", solution);
 
-    DotNetCoreBuild(solution, new DotNetCoreBuildSettings
+    DotNetBuild(solution, new DotNetBuildSettings
     {
         Configuration = configuration,
 
