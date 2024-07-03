@@ -24,5 +24,14 @@ Write-Host "Installing .NET SDK 8.0 ..."
 Invoke-Command -ScriptBlock { ./dotnet-sdk-8.0.302-win-x64.exe /S /v/qn }
 Write-Host "Installation succeeded." -ForegroundColor Green
 
+# Add the .NET SDK to the PATH environment variable
+$dotnetPath = "C:\Program Files\dotnet"
+if (Test-Path $dotnetPath) {
+    [System.Environment]::SetEnvironmentVariable("PATH", $env:PATH + ";$dotnetPath", [System.EnvironmentVariableTarget]::Process)
+} else {
+    Write-Host "Error: .NET SDK installation path not found." -ForegroundColor Red
+    exit 1
+}
+
 Write-Host "Checking installed version"
 Invoke-Command -ScriptBlock { dotnet --version }
