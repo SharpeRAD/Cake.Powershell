@@ -22,6 +22,6 @@
         <PackageReference Include="Cake.Core" Version="4.0.0" PrivateAssets="All" />
         <PackageReference Include="Microsoft.PowerShell.SDK" Version="7.2.18" Condition="'$(TargetFramework)' == 'net6.0'" />
         <PackageReference Include="Microsoft.PowerShell.SDK" Version="7.3.11" Condition="'$(TargetFramework)' == 'net7.0'" />
-        <PackageReference Include="Microsoft.PowerShell.SDK" Version="7.4.1" Condition="'$(TargetFramework)' == 'net8.0'" />
+        <PackageReference Include="Microsoft.PowerShell.SDK" Version="7.4.3" Condition="'$(TargetFramework)' == 'net8.0'" />
     </ItemGroup>
 </Project>

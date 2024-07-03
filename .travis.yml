@@ -22,16 +22,16 @@ matrix:
         - brew tap homebrew/cask
         - brew install --cask powershell
         - brew tap isen-ng/dotnet-sdk-versions
-        - brew install --cask dotnet-sdk6-0-418
-        - brew install --cask dotnet-sdk7-0-405
-        - brew install --cask dotnet-sdk8-0-101
+        - brew install --cask dotnet-sdk6-0-423
+        - brew install --cask dotnet-sdk7-0-410
+        - brew install --cask dotnet-sdk8-0-302
 
   fast_finish: true
 
 mono:
   - latest
 
-dotnet: 8.0.101
+dotnet: 8.0.302
 
 before_install:
   - git fetch --unshallow # Travis always does a shallow clone, but GitVersion needs the full history including branches and tags
