@@ -40,11 +40,11 @@ Task("Restore-Nuget-Packages")
 	{
         if (projectDirs.Contains("./src/" + project))
         {
-    		Information("Restoring {0}", project);
+            Information("Restoring {0}", project);
 
-    		DotNetCoreRestore("./src/" + project, new DotNetCoreRestoreSettings()
+            DotNetRestore("./src/" + project, new DotNetRestoreSettings()
             {
-				Verbosity = DotNetCoreVerbosity.Normal
+				Verbosity = DotNetVerbosity.Normal
             });
         }
 	}
@@ -54,9 +54,9 @@ Task("Restore-Nuget-Packages")
     {
         Information("Restoring: {0}", project);
 
-        DotNetCoreRestore("./src/" + project, new DotNetCoreRestoreSettings()
+        DotNetRestore("./src/" + project, new DotNetRestoreSettings()
         {
-			Verbosity = DotNetCoreVerbosity.Normal
+			Verbosity = DotNetVerbosity.Normal
         });
     }
 });
