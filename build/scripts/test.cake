@@ -8,15 +8,16 @@ Task("Run-Unit-Tests")
     .Does(() =>
 {
     // Run Test
-    foreach(string test in testNames)
+    var lastTestName = string.Empty;
+    foreach (string test in testNames)
     {
         Information("Running unit tests: {0}", test);
-
+        lastTestName = test;
         if (isRunningOnTravis)
         {
             string outputPath1 = testResultsDir + "/" + test.Replace(".Tests", "") + ".6.0.xml";
             outputPath1 = MakeAbsolute(File(outputPath1)).FullPath;
-            DotNetCoreTest("./src/" + test + "/" + test + ".csproj", new DotNetCoreTestSettings
+            DotNetTest("./src/" + test + "/" + test + ".csproj", new DotNetTestSettings
             {
                 NoRestore = true,
                 Framework = "net6.0",
@@ -25,33 +26,77 @@ Task("Run-Unit-Tests")
 
             string outputPath2 = testResultsDir + "/" + test.Replace(".Tests", "") + ".7.0.xml";
             outputPath2 = MakeAbsolute(File(outputPath2)).FullPath;
-            DotNetCoreTest("./src/" + test + "/" + test + ".csproj", new DotNetCoreTestSettings
+            DotNetTest("./src/" + test + "/" + test + ".csproj", new DotNetTestSettings
             {
                 NoRestore = true,
                 Framework = "net7.0",
                 ArgumentCustomization = args => args.AppendSwitch("-l", " ", ("xunit;LogFilePath=" + outputPath2).Quote())
             });
+
+            string outputPath3 = testResultsDir + "/" + test.Replace(".Tests", "") + ".8.0.xml";
+            outputPath3 = MakeAbsolute(File(outputPath3)).FullPath;
+            DotNetTest("./src/" + test + "/" + test + ".csproj", new DotNetTestSettings
+            {
+                NoRestore = true,
+                Framework = "net8.0",
+                ArgumentCustomization = args => args.AppendSwitch("-l", " ", ("xunit;LogFilePath=" + outputPath3).Quote())
+            });
         }
-		else
+        else
         {
             string outputPath = testResultsDir + "/" + test.Replace(".Tests", "") + ".xml";
             outputPath = MakeAbsolute(File(outputPath)).FullPath;
-            DotNetCoreTest("./src/" + test + "/" + test + ".csproj", new DotNetCoreTestSettings
+            DotNetTest("./src/" + test + "/" + test + ".csproj", new DotNetTestSettings
             {
                 NoRestore = true,
                 ArgumentCustomization = args => args.AppendSwitch("-l", " ", ("xunit;LogFilePath=" + outputPath).Quote())
             });
-        }  
+        }
     }
-
-
 
     // Build Report
     Information("Building report");
 
     if (testNames.Count > 0)
     {
-        ReportUnit(testResultsDir);
+        // get path to xunit.console.dll
+        var xunitPath = Context.Tools.Resolve("xunit.console.dll");
+
+        // name of the xslt file in resources
+        var name = "Xunit.ConsoleClient.HTML.xslt";
+
+        // path to the xslt file in the test results directory
+        var xsltOutputPath = new Cake.Core.IO.DirectoryPath(testResultsDir)
+            .CombineWithFilePath(new Cake.Core.IO.FilePath(name))
+            .MakeAbsolute(Context.Environment);
+
+        // extract the xslt file to the test results directory
+        using (var resource = System.Reflection.Assembly.LoadFrom(xunitPath.FullPath).GetManifestResourceStream(name))
+        using (var file = new System.IO.FileStream(xsltOutputPath.FullPath, FileMode.Create, FileAccess.Write))
+        {
+            if (resource is null)
+            {
+                throw new System.ApplicationException();
+            }
+
+            resource.CopyTo(file);
+        }
+
+        var xmlTransformationSettings = new XmlTransformationSettings
+        {
+            Indent = true,
+            IndentChars = "    ",
+            NewLineHandling = System.Xml.NewLineHandling.Replace,
+            NewLineChars = System.Environment.NewLine,
+            Overwrite = true,
+        };
+
+        var pathPart = $"{testResultsDir}/{lastTestName.Replace(".Tests", string.Empty)}";
+        var xmlXunitPath = new Cake.Core.IO.FilePath($"{pathPart}.xml");
+        var htmlPath = new Cake.Core.IO.FilePath($"{pathPart}.html");
+
+        // transform the xml file to html
+        Context.XmlTransform(xsltOutputPath, xmlXunitPath, htmlPath, xmlTransformationSettings);
     }
 })
 .OnError(exception =>
@@ -59,11 +104,11 @@ Task("Run-Unit-Tests")
     // Get Errors
     IList<string> errors = new List<string>();
 
-    foreach(string test in testNames)
+    foreach (string test in testNames)
     {
         IList<XunitResult> testResults = GetXunitResults(testResultsDir + "/" + test.Replace(".Tests", "") + ".xml");
 
-        foreach(XunitResult testResult in testResults)
+        foreach (XunitResult testResult in testResults)
         {
             errors.Add(testResult.Type + " => " + testResult.Method);
             errors.Add(testResult.StackTrace);
