@@ -84,7 +84,7 @@ Task("Publish-Nuget")
 
             NuGetPush(package, new NuGetPushSettings
             {
-                Source = "https://www.nuget.org/api/v3/index.json",
+                Source = "https://api.nuget.org/v3/index.json",
                 ApiKey = apiKey
             });
         }
