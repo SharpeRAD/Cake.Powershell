@@ -1,3 +1,6 @@
+### New in 4.0.0 (Released 2024/07/09)
+* [Improvement] Update to Cake.Core v4.0.0
+
 ### New in 3.0.0 (Released 2023/07/14)
 * [Improvement] Update to Cake.Core v3.0.0
 
