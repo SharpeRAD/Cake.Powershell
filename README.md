@@ -54,7 +54,7 @@ Install-Package Cake.Powershell
 or directly in your build script via a cake addin directive:
 
 ```csharp
-#addin "Cake.Powershell"
+#addin nuget:?package=Cake.Powershell&loaddependencies=true
 ```
 
 

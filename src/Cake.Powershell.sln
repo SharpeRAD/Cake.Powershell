@@ -41,6 +41,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cake.Powershell", "Cake.Pow
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cake.Powershell.Tests", "Cake.Powershell.Tests\Cake.Powershell.Tests.csproj", "{716440BD-3C10-493E-949F-8E94A063F9F8}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{EC1C4490-0EA8-4DCC-BCE8-A87210CE13A5}"
+	ProjectSection(SolutionItems) = preProject
+		..\.github\workflows\build.yml = ..\.github\workflows\build.yml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -62,6 +69,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{ED3901EA-E3D2-488A-A66C-DC318DDC7089} = {EA42D027-E363-4943-ABED-1F3C37FD6CA5}
 		{716440BD-3C10-493E-949F-8E94A063F9F8} = {307216F2-D982-4935-8BF1-842114D14545}
+		{EC1C4490-0EA8-4DCC-BCE8-A87210CE13A5} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7E0AF96A-1AA2-4477-921E-56FC38C8A055}

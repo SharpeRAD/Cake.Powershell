@@ -1,0 +1,72 @@
+name: CI
+
+on:
+  push:
+    branches: [ master, develop ]
+  pull_request:
+    branches: [ master, develop ]
+    types: [opened, synchronize, reopened]
+  workflow_dispatch:
+  
+jobs:
+  build_test:
+    name: Build and Test (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ ubuntu-latest, windows-latest, macos-latest ]
+
+    env:
+      DOTNET_CLI_TELEMETRY_OPTOUT: 1
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          fetch-tags: true
+
+      - name: Setup .NET SDKs (9.0 + 8.0)
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: |
+            9.0.x
+            8.0.x
+
+      - name: Show .NET info
+        run: dotnet --info
+        shell: pwsh
+
+      - name: Cache NuGet packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.nuget/packages
+          key: ${{ runner.os }}-nuget-${{ hashFiles('**/*.csproj', '**/*.fsproj', '**/packages.lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-nuget-
+
+      - name: Cache Cake addins
+        uses: actions/cache@v4
+        with:
+          path: tools/Addins
+          key: ${{ runner.os }}-cake-addins-${{ hashFiles('build.cake') }}
+          restore-keys: |
+            ${{ runner.os }}-cake-addins-
+
+      - name: Make build.sh executable (non-Windows)
+        if: runner.os != 'Windows'
+        run: chmod +x ./build.sh
+        shell: bash
+
+      # Mirror Travis behavior on non-Windows
+      - name: Build via build.sh (Travis target)
+        if: runner.os != 'Windows'
+        run: ./build.sh --target Travis --verbosity diagnostic
+        shell: bash
+
+      # Mirror AppVeyor behavior on Windows
+      - name: Build via build.ps1 (AppVeyor target)
+        if: runner.os == 'Windows'
+        run: ./build.ps1 -Target AppVeyor -Verbosity Diagnostic
+        shell: pwsh

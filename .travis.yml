@@ -12,9 +12,8 @@ matrix:
               key_url: "https://packages.microsoft.com/keys/microsoft.asc"
           packages:
             - powershell
-            - dotnet-sdk-6.0
-            - dotnet-sdk-7.0
-            - dotnet-sdk-8.0 
+            - dotnet-sdk-8.0
+            - dotnet-sdk-9.0 
 
     - os: osx
       osx_image: xcode12.2
@@ -22,16 +21,15 @@ matrix:
         - brew tap homebrew/cask
         - brew install --cask powershell
         - brew tap isen-ng/dotnet-sdk-versions
-        - brew install --cask dotnet-sdk6-0-423
-        - brew install --cask dotnet-sdk7-0-410
-        - brew install --cask dotnet-sdk8-0-302
+        - brew install --cask dotnet-sdk8-0-415
+        - brew install --cask dotnet-sdk9-0-306
 
   fast_finish: true
 
 mono:
   - latest
 
-dotnet: 8.0.302
+dotnet: 9.0.306
 
 before_install:
   - git fetch --unshallow # Travis always does a shallow clone, but GitVersion needs the full history including branches and tags

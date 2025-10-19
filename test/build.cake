@@ -1,4 +1,4 @@
-#addin nuget:?package=Cake.Powershell
+#addin nuget:?package=Cake.Powershell&loaddependencies=true
 
 //////////////////////////////////////////////////////////////////////
 // ARGUMENTS

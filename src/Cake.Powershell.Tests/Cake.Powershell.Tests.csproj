@@ -5,7 +5,7 @@
         <PackageId>Cake.Powershell.Tests</PackageId>
         <OutputType>Library</OutputType>
 
-        <TargetFrameworks>net8.0;net7.0;net6.0</TargetFrameworks>
+        <TargetFrameworks>net9.0;net8.0</TargetFrameworks>
 
         <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
         <GenerateAssemblyVersionAttribute>false</GenerateAssemblyVersionAttribute>
@@ -19,21 +19,20 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Cake.Core" Version="4.0.0" />
-        <PackageReference Include="Cake.Testing" Version="4.0.0" />
+        <PackageReference Include="Cake.Core" Version="5.1.0" />
+        <PackageReference Include="Cake.Testing" Version="5.1.0" />
 
-        <PackageReference Include="Microsoft.PowerShell.SDK" Version="7.2.18" Condition="'$(TargetFramework)' == 'net6.0'" />
-        <PackageReference Include="Microsoft.PowerShell.SDK" Version="7.3.11" Condition="'$(TargetFramework)' == 'net7.0'" />
-        <PackageReference Include="Microsoft.PowerShell.SDK" Version="7.4.3" Condition="'$(TargetFramework)' == 'net8.0'" />
+		<PackageReference Include="Microsoft.PowerShell.SDK" Version="7.4.12" Condition="'$(TargetFramework)' == 'net8.0'" />
+        <PackageReference Include="Microsoft.PowerShell.SDK" Version="7.5.3" Condition="'$(TargetFramework)' == 'net9.0'" />
 
-        <PackageReference Include="xunit" Version="2.8.1" />
-        <PackageReference Include="xunit.runner.visualstudio" Version="2.8.1">
+        <PackageReference Include="xunit" Version="2.9.3" />
+        <PackageReference Include="xunit.runner.visualstudio" Version="3.1.5">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
-        <PackageReference Include="Shouldly" Version="4.2.1" />
-        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.10.0" />
-        <PackageReference Include="XunitXml.TestLogger" Version="3.1.20" />
+        <PackageReference Include="Shouldly" Version="4.3.0" />
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.0.0" />
+        <PackageReference Include="XunitXml.TestLogger" Version="7.0.2" />
     </ItemGroup>
 </Project>
 
